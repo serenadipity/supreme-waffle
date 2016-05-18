@@ -31,7 +31,7 @@ def authenticate(username, password):
     return -1
 
 
-def register(username, password, repeat_password, first_name, last_name, email):
+def register(username, password, school_name):
     #set up connection
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
@@ -43,7 +43,7 @@ def register(username, password, repeat_password, first_name, last_name, email):
     #check data is valid
     q = 'SELECT username FROM users'
     users = c.execute(q)
-    valid_data = utils.valid_data(username, password, repeat_password, users)
+    valid_data = validator.valid_user(username, password, repeat_password, users)
     if not valid_data[0]:
         conn.close()
         return valid_data
@@ -58,3 +58,29 @@ def register(username, password, repeat_password, first_name, last_name, email):
         conn.commit()
         conn.close()
         return [True, "Successful Account Creation"]
+
+
+def create_school(school_name, street_address, borough, zipcode, team, division, coach, manager, gender):
+    #set up connection
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    #create users table
+    q = 'CREATE TABLE IF NOT EXISTS schools (school_name TEXT, street_address TEXT, borough TEXT, zipcode TEXT, team TEXT, division TEXT, coach TEXT, manager TEXT, gender TEXT)'
+    c.execute(q)
+
+    #check data is valid
+    q = 'SELECT school_name
+         IF (school = ?, gender = ?)
+         FROM schools'
+    new  = c.execute(q, (school_name, gender))
+    if len(new) > 0:
+        conn.close()
+        return [False, "School and gender already exists"]
+    else:
+        q = 'INSERT INTO schools (school_name, street_address, borough, zipcode, team, division, coach, manager, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        c.execute(q, (school_name, street_address, borough, zipcode, team, division, coach, manager, gender))
+        conn.commit()
+        conn.close()
+        return [True, "Successful School Creation"]
+
