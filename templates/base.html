@@ -18,6 +18,26 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </head>
 
-    {% block contents %}{% endblock %}  
-  
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+	<div>
+	  <ul class="nav navbar-nav navbar-left">
+	    <li><a href="/home"><b>Supreme-Waffle</b></a></li>
+	  </ul>
+	  <ul class="nav navbar-nav navbar-right">
+	    <li><a href="/about"><b>About</b></a></li>
+            <li><a href="/login"><b>Login</b></a></li>
+	  </ul>
+	</div>
+      </div>
+    </nav>
+
+
+
+    {% block contents %} 
+    {% endblock %}  
+    
+  </body>
 </html>
