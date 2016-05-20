@@ -30,6 +30,7 @@ def authenticate(username, password):
     conn.close()
     return -1
 
+######## REGISTER ########
 
 def register(username, password, school_name):
     #set up connection
@@ -59,6 +60,7 @@ def register(username, password, school_name):
         conn.close()
         return [True, "Successful Account Creation"]
 
+######## CREATE SCHOOL ########
 
 def create_school(school_name, street_address, borough, zipcode, team, division, coach, manager, gender):
     #set up connection
@@ -84,3 +86,69 @@ def create_school(school_name, street_address, borough, zipcode, team, division,
         conn.close()
         return [True, "Successful School Creation"]
 
+######## CREATE EVENT ########
+
+def create_event(school_home, home_score, school_away, away_score, date, time, game_id, status, address):
+    #set up connection
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    #create events table
+    q = 'CREATE TABLE IF NOT EXISTS events (school_home TEXT, home_score INT, school_away TEXT, away_score INT, date TEXT, time TEXT, game_id INT, status TEXT, address TEXT)'
+    c.execute(q)
+
+    #check data is valid
+    q = 'SELECT game_id
+         IF (game_id = ?)
+         FROM events'
+    new  = c.execute(q, (game_id))
+    if len(new) > 0:
+        conn.close()
+        return [False, "Event already exists"]
+    else:
+        q = 'INSERT INTO schools (school_home, home_score, school_away, away_score, date, time, game_id, status, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        c.execute(q, (school_home, home_score, school_away, away_score, date, time, game_id, status, address))
+        conn.commit()
+        conn.close()
+        return [True, "Successful Event Creation"]
+
+######## CREATE PLAYER ########
+
+def create_player(year, first_name, last_name, school, grad_year, player_type, game_id, matches, win, loss, touch, position):
+    #set up connection
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    #create players table
+    q = 'CREATE TABLE IF NOT EXISTS ?_players (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, grad_year INT, player_type TEXT, game_id INT, matches INT, win INT, loss INT, touch INT, position TEXT)'
+    c.execute(q, str(year))
+
+    q = 'SELECT COUNT(*) FROM ?_players'
+    num_players = c.execute(q, str(year)).fetchone()[0]
+    
+    #need to check that player doesn't already exist
+
+    #add player
+    q = 'INSERT INTO players (year, player_id, first_name, last_name, school, grad_year, player_type, game_id, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+    c.execute(q, (year, num_players + 1, first_name, last_name, school, grad_year, player_type, game_id, matches, win, loss, touch, position))
+    conn.commit()
+    conn.close()
+    return [True, "Successful Player Creation"]
+
+######## ADD ADDITIONAL INFO ########
+
+def create_info(school, title, description, date):
+    #set up connection
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    #create info table
+    q = 'CREATE TABLE IF NOT EXISTS info (school TEXT, title TEXT, description TEXT, date TEXT)'
+    c.execute(q)
+
+    #add info
+    q = 'INSERT INTO info (school, title, description, date) VALUES (?, ?)'
+    c.execute(q, (school, title, description, date))
+    conn.commit()
+    conn.close()
+    return [True, "Successful Info Creation"]
