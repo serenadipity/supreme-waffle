@@ -8,3 +8,5 @@ Fencing Statistics Website
 |05/16/2016| We began basic website design and learned more about the subject. |
 |05/17/2016| We planned out the timeline of the project, created the color scheme, worked on databases, and went on an immersive tour of the subject. |
 |05/18/2016| We presented our plan for the website and the toolkits we are using. We also made a font shortlist.|
+|05/19/2016| We did more planning for database.|
+|05/20/2016| We worked on creating the databases.|
