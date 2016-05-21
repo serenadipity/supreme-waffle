@@ -11,9 +11,31 @@ def home():
 def about():
     return render_template("about.html")
 
+@app.route("/signup")
+def signup():
+    return render_template("signup.html")
+
 @app.route("/login")
 def login():
     return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    return url_for("home")
+
+@app.route("/school/<school>")
+def show_school_profile(school):
+    #look up school
+    return render_template("school.html") #add some more params
+
+@app.route("/plater/<player>")
+def show_player_profile(player):
+    #look up player
+    return render_template("player.html") #add some params
+
+@app.route("directory/<letter>")
+def display_directory(letter):
+    return render_template("letter.html") #add some params
 
 if __name__ == "__main__":
     app.debug = True
