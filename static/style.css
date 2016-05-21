@@ -1,1 +1,42 @@
 /* CSS Stylesheet */
+
+body {
+    padding-top:80px;
+    background-color: #AFC2D5;
+}
+
+.nav {
+    font-size: 150% !important;
+}
+
+.header{
+    background-color: white;
+    
+}
+
+div.header > h1 {
+    font-size: 50px !important;
+    text-align: center;
+}
+
+.container {
+    padding-bottom: 20px;
+    background-color:white;
+    width: 90%;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    body {
+	padding-top: 170px;
+    }
+    .nav {
+	text-align: center;
+	font-size: 100% !important;
+    }
+    .navbar-nav > li > a {
+	padding-top:5px !important;
+	padding-bottom:5px !important;
+    }
+}

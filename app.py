@@ -11,9 +11,10 @@ def home():
 def about():
     return render_template("about.html")
 
-@app.route("/signup")
-def signup():
-    return render_template("signup.html")
+@app.route("/create", methods=['GET','POST'])
+def create():
+    #if request.method == "GET":
+    return render_template("create.html")
 
 @app.route("/login")
 def login():
@@ -33,7 +34,7 @@ def show_player_profile(player):
     #look up player
     return render_template("player.html") #add some params
 
-@app.route("directory/<letter>")
+@app.route("/directory/<letter>")
 def display_directory(letter):
     return render_template("letter.html") #add some params
 
