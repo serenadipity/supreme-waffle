@@ -1,22 +1,31 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 
-from datas import register
+from datas import *
 
 app = Flask(__name__)
 
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template("home.html")
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
+    return render_template("home.html", user = user)
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    if 'user' not in session:
+        session['user'] = "0"
+    user = session['user']
+    return render_template("about.html", user = user)
 
 @app.route("/create", methods=['GET','POST'])
 def create():
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
     if request.method == "GET":
-        pass
+        return render_template("create.html", user=user)
     else:
         username = request.form['username']
         password = request.form['password']
@@ -28,30 +37,50 @@ def create():
             return redirect("home")
         else:
             message = result[1]
-            return render_template("create.html",error = True, message = message)
-    return render_template("create.html")
+            return render_template("create.html",user = user, error = True, message = message)
 
-@app.route("/login")
+@app.route("/login", methods=['GET','POST'])
 def login():
-    return render_template("login.html")
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
+    if request.method == "GET":
+        return render_template("login.html", user=user)
+    else:
+        username = request.form['username']
+        password = request.form['password']
+        result = authenticate(username, password)
+        if result != -1:
+            session['user'] = username
+            return redirect("home")
+        else:
+            return render_template("login.html", user = user, error = True)
 
 @app.route("/logout")
 def logout():
-    return url_for("home")
+    session['user'] = 0
+    return redirect("home")
 
 @app.route("/school/<school>")
 def show_school_profile(school):
     #look up school
     return render_template("school.html") #add some more params
 
-@app.route("/plater/<player>")
+@app.route("/player/<player>")
 def show_player_profile(player):
     #look up player
     return render_template("player.html") #add some params
 
+@app.route("/directory")
+def default_directory():
+    return redirect("directory/A")
+
 @app.route("/directory/<letter>")
 def display_directory(letter):
-    return render_template("letter.html") #add some params
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
+    return render_template("letter.html", letter = letter, user = user) #add some params
 
 if __name__ == "__main__":
     app.debug = True

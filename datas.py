@@ -25,9 +25,9 @@ def authenticate(username, password):
     if pepper_and_salt and sha512((password + pepper_and_salt[1]) * 10000).hexdigest() == pepper_and_salt[0]:
         q = "SELECT id FROM users WHERE username = ?"
         id = c.execute(q, (username,)).fetchone()
-        conn.close()
+        db.close()
         return id[0]
-    conn.close()
+    db.close()
     return -1
 
 ######## REGISTER ########

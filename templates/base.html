@@ -24,9 +24,15 @@
 	    <li><a href="/home"><b>Supreme-Waffle</b></a></li>
 	  </ul>
 	  <ul class="nav navbar-nav navbar-right">
+	    <li><a href="/directory">Directory</a></li>
 	    <li><a href="/about">About</a></li>
+	    {% if user == 0 %}
             <li><a href="/create">Create an Account</a></li>
 	    <li><a href="/login">Login</a></li>
+	    {% else %}
+	    <li><a href="/">{{user}}</a></li>
+	    <li><a href="/logout">Logout</a></li>
+	    {% endif %}
 	  </ul>
 	</div>
       </div>
