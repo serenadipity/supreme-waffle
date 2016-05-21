@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %} L {% endblock %}
+
+{% block contents %}
+<div class="container">  
+  <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+    <form role="form" method="POST">
+      {% if error %}
+      <div class="alert alert-danger">
+	<p id="error">{{message}}</p>
+      </div>
+      {% endif %}
+      <div>
+	<h1 class="center2">Create an Account</h1>
+      </div>
+      <hr>
+      <div class="form-group">
+	<input type="text" name="username" id="username" class="form-control input-lg" placeholder="Username" tabindex="1" required>
+      </div>
+      <div class="form-group">
+	<input type="text" name="school_name" id="school_name" class="form-control input-lg" placeholder="Name of School" tabindex="2" required>
+      </div>
+      <!--<div class="form-group">
+	<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="2" required>
+      </div>
+      MAYBE LATER
+      -->
+      <div class="row">
+	<div class="col-xs-12 col-sm-6 col-md-6">
+	  <div class="form-group">
+	    <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="3" required>
+	  </div>
+	</div>
+	<div class="col-xs-12 col-sm-6 col-md-6">
+	  <div class="form-group">
+	    <input type="password" name="repeat_password" id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="4" required>
+	  </div>
+	</div>
+      </div>
+      
+      <hr>
+      <div class="row">
+	<div class="col-xs-12 col-md-12"><input type="submit" value="Register" class="btn btn-success btn-block btn-lg" tabindex="5"></div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
