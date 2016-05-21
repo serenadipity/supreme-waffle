@@ -125,9 +125,16 @@ def create_player(year, first_name, last_name, school, grad_year, player_type, g
     #checks that player exists
     q = 'SELECT player IF (first_name = ?, last_name = ?, school = ?) FROM ?_players'
     new = c.execute(q, (first_name, last_name, school))
-    #still need confirmation fn 
     if len(new) > 0:
-        return [False, "Player may already exist"]
+        #confirms same name isnt a mistake 
+        if(confirmtest.confirm(prompt="Player of the same name already exists at this school. Proceed anyways?")): 
+            q = 'INSERT INTO players (year, player_id, first_name, last_name, school, grad_year, player_type, game_id, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+            c.execute(q, (year, num_players + 1, first_name, last_name, school, grad_year, player_type, game_id, matches, win, loss, touch, position))
+            conn.commit()
+            conn.close()
+            return [True, "Successful Player Creation"]
+        else: 
+            return [False, "Player not created"]
 
     #add player
     q = 'INSERT INTO players (year, player_id, first_name, last_name, school, grad_year, player_type, game_id, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
