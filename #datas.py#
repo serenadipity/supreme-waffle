@@ -130,7 +130,8 @@ def create_player(year, first_name, last_name, school, grad_year, player_type, g
         return [False, "Player may already exist"]
 
     #add player
-    q = 'INSERT INTO players (year, player_id, first_name, last_name, school, grad_year, player_type, game_id, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+    q = 'INSERT INTO players (year, player_id, first_name, last_name, school, grad_year, player_type, gam
+e_id, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
     c.execute(q, (year, num_players + 1, first_name, last_name, school, grad_year, player_type, game_id, matches, win, loss, touch, position))
     conn.commit()
     conn.close()

@@ -15,7 +15,7 @@ def authenticate(username, password):
     #finds user database
     q = 'SELECT name FROM sqlite_master WHERE TYPE = "table" AND NAME = "users"'
     c.execute(q)
-    if not c.fetchone():
+    if not c.fetchone()
         conn.close()
         return -1
 
@@ -72,7 +72,9 @@ def create_school(school_name, street_address, borough, zipcode, team, division,
     c.execute(q)
 
     #check data is valid
-    q = 'SELECT school_name IF (school = ?, gender = ?) FROM schools'
+    q = 'SELECT school_name
+         IF (school = ?, gender = ?)
+         FROM schools'
     new  = c.execute(q, (school_name, gender))
     if len(new) > 0:
         conn.close()
@@ -96,7 +98,9 @@ def create_event(school_home, home_score, school_away, away_score, date, time, g
     c.execute(q)
 
     #check data is valid
-    q = 'SELECT game_id IF (game_id = ?) FROM events'
+    q = 'SELECT game_id
+         IF (game_id = ?)
+         FROM events'
     new  = c.execute(q, (game_id))
     if len(new) > 0:
         conn.close()
@@ -122,12 +126,7 @@ def create_player(year, first_name, last_name, school, grad_year, player_type, g
     q = 'SELECT COUNT(*) FROM ?_players'
     num_players = c.execute(q, str(year)).fetchone()[0]
     
-    #checks that player exists
-    q = 'SELECT player IF (first_name = ?, last_name = ?, school = ?) FROM ?_players'
-    new = c.execute(q, (first_name, last_name, school))
-    #still need confirmation fn 
-    if len(new) > 0:
-        return [False, "Player may already exist"]
+    #need to check that player doesn't already exist
 
     #add player
     q = 'INSERT INTO players (year, player_id, first_name, last_name, school, grad_year, player_type, game_id, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
