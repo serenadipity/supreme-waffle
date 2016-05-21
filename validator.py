@@ -1,15 +1,11 @@
 from re import search
 
-def valid_data(username, password, repeat_password, email, users):
+def valid_user(username, password, repeat_password, users):
     usernames = []
-    emails = []
     for user in users:
         usernames.append(user[0])
-        emails.append(user[1])
     if username in usernames:
         return [False, "Username is already taken."]
-    if email in emails:
-        return [False, "Email is already used."]
     if password != repeat_password:
         return [False, "Passwords do not match."]
     if len(password) < 8:

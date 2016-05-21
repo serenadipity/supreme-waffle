@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 
+from datas import register
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -13,7 +15,20 @@ def about():
 
 @app.route("/create", methods=['GET','POST'])
 def create():
-    #if request.method == "GET":
+    if request.method == "GET":
+        pass
+    else:
+        username = request.form['username']
+        password = request.form['password']
+        repeat_password = request.form['repeat_password']
+        school_name = request.form['school_name']
+        result = register(username, password, repeat_password, school_name)
+        if result[0]:
+            session['user'] = username;
+            return redirect("home")
+        else:
+            message = result[1]
+            return render_template("create.html",error = True, message = message)
     return render_template("create.html")
 
 @app.route("/login")

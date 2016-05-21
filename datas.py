@@ -1,5 +1,5 @@
-import sqlite3 
-import utils
+import sqlite3
+from validator import valid_user
 
 from hashlib import sha512
 from uuid import uuid4 
@@ -32,7 +32,7 @@ def authenticate(username, password):
 
 ######## REGISTER ########
 
-def register(username, password, school_name):
+def register(username, password,repeat_password, school_name):
     #set up connection
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
@@ -44,7 +44,7 @@ def register(username, password, school_name):
     #check data is valid
     q = 'SELECT username FROM users'
     users = c.execute(q)
-    valid_data = validator.valid_user(username, password, repeat_password, users)
+    valid_data = valid_user(username, password, repeat_password, users)
     if not valid_data[0]:
         conn.close()
         return valid_data
@@ -55,7 +55,7 @@ def register(username, password, school_name):
         q = 'SELECT COUNT(*) FROM users'
         num_rows = c.execute(q).fetchone()[0]
         q = 'INSERT INTO users (id, username, password, salt, school_name) VALUES (?, ?, ?, ?, ?)'
-        c.execute(q, (num_rows + 1, username, hash_password, salt, first_name, last_name, email))
+        c.execute(q, (num_rows + 1, username, hash_password, salt, school_name))
         conn.commit()
         conn.close()
         return [True, "Successful Account Creation"]
