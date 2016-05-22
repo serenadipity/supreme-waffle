@@ -69,7 +69,7 @@ def register_school():
     if request.method == "GET":
         return render_template("register_school.html", user=user)
     else:
-        school_name = request.form['school_name']
+        school_name = get_user_school(user)
         street_address = request.form['street_address']
         borough = request.form['borough']
         zipcode = request.form['zipcode']
@@ -82,7 +82,8 @@ def register_school():
         if result[0] == False:
             return redirect("school.html", school = school_name)
         else:
-            return render_template("register_school.html", error = True, message = result[1])
+            return render_template("register_school.html", user = user, error = True, message = result[1])
+    return "success"
 
 @app.route("/register_player", methods=['GET','POST'])
 def register_player():
@@ -95,7 +96,7 @@ def register_player():
         year = request.form['year']
         first_name = request.form['fname']
         last_name = request.form['lname']
-        school = request.form['school']
+        school = get_user_school(user)
         gender = request.form['gender']
         grad_year = request.form['grad_year']
         player_type = request.form['player_type']

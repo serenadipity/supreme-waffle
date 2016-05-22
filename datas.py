@@ -180,3 +180,17 @@ def get_school(school_name):
         conn.commit()
         conn.close()
         return [False, new] 
+
+######## GET USER'S SCHOOl ########
+def get_user_school(username):
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    #find user's school
+    q = """SELECT school_name 
+           FROM users
+           WHERE username = ?"""
+    school = c.execute(q, (username, )).fetchone()
+    return school[0]
+
+print get_user_school("hi")
