@@ -79,18 +79,16 @@ def input():
         manager = request.form['manager']
         gender = request.form['gender']
         result = create_school(school_name, street_address, borough, zipcode, team, division, coach, manager, gender)
-        if result[0] == True:
-            print result[1]
-            return redirect("school.html", school_name = school_name)
+        if result[0] == False:
+            return redirect("school.html", school = school_name)
         else:
-            print result[1]
             return render_template("input.html", error = True, message = result[1])
 
 
 @app.route("/school/<school>")
 def show_school_profile(school):
-    #look up school
-    return render_template("school.html") #add some more params
+    result = get_school(school)
+    return render_template("school.html", error = result[0], data = result[1]) 
 
 @app.route("/player/<player>")
 def show_player_profile(player):

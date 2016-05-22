@@ -4,10 +4,30 @@
 
 {% block contents %}
 
+
 <div class="container">
-<br><br><br><br><br><br>
-  <center>
-    <h1>School</h1>
-  </center>
+  <br><br>
+  {% if error %}
+  <div class="alert alert-danger">
+    <p id="error">{{data}}</p>
+  </div>
+  {% endif %}
+  <div>
+    <h1 class="center2">{{data[0][0]}}</h1>
+  </div>
+  <hr>
+  <p>Address: {{data[0][1]}}</p>
+  <p>Zipcode: {{data[0][3]}}</p>
+  <p>Borough: {{data[0][2]}}</p>
+  <p>Division: {{data[0][5]}}</p>
+  
+  {% for i in range(0,data|length) %}
+  <hr>
+  <p>{{data[i][8]}}' Team {{data[i][4]}}</p>
+  <p>Coach: {{data[i][6]}}</p>
+  <p>Manager: {{data[i][7]}}</p>
+  {% endfor %}
 </div>
+
+
 {% endblock %}

@@ -74,15 +74,16 @@ def create_school(school_name, street_address, borough, zipcode, team, division,
     #check data is valid
     q = 'SELECT school_name FROM schools WHERE school_name = ? AND gender = ?'
     new  = c.execute(q, (school_name, gender)).fetchone()
-    if new is not None:
+    print new
+    if new is None:
         conn.close()
-        return [False, "The " + gender + "' Team from " + school_name + " already exists."]
+        return [True, "The " + gender + "' Team from " + school_name + " already exists."]
     else:
         q = 'INSERT INTO schools (school_name, street_address, borough, zipcode, team, division, coach, manager, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
         c.execute(q, (school_name, street_address, borough, zipcode, team, division, coach, manager, gender))
         conn.commit()
         conn.close()
-        return [True, "Successful School Creation"]
+        return [False, "Successful School Creation"]
 
 ######## CREATE EVENT ########
 
@@ -168,17 +169,13 @@ def get_school(school_name):
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
-    #create users table
-    q = 'CREATE TABLE IF NOT EXISTS schools (school_name TEXT, street_address TEXT, borough TEXT, zipcode TEXT, team TEXT, division TEXT, coach TEXT, manager TEXT, gender TEXT)'
-    c.execute(q)
-
     #check data is valid
-    q = 'SELECT school_name FROM schools WHERE school_name = ?'
-    new  = c.execute(q, (school_name)).fetchone()
-    if new is not None:
+    q = 'SELECT * FROM schools WHERE school_name = ?'
+    new  = c.execute(q, (school_name, )).fetchall()
+    if len(new) == 0:
         conn.close()
-        return [False, "School is not registered"]
+        return [True, school_name + " is not registered."]
     else:
         conn.commit()
         conn.close()
-        return new.fetchone()
+        return [False, new] 
