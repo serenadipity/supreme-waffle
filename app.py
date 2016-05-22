@@ -61,6 +61,32 @@ def logout():
     session['user'] = 0
     return redirect("home")
 
+@app.route("/input", methods=['GET','POST'])
+def input():
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
+    if request.method == "GET":
+        return render_template("input.html", user=user)
+    else:
+        school_name = request.form['school_name']
+        street_address = request.form['street_address']
+        borough = request.form['borough']
+        zipcode = request.form['zipcode']
+        team = request.form['team']
+        division = request.form['division']
+        coach = request.form['coach']
+        manager = request.form['manager']
+        gender = request.form['gender']
+        result = create_school(school_name, street_address, borough, zipcode, team, division, coach, manager, gender)
+        if result[0] == True:
+            print result[1]
+            return redirect("school.html", school_name = school_name)
+        else:
+            print result[1]
+            return render_template("input.html", error = True, message = result[1])
+
+
 @app.route("/school/<school>")
 def show_school_profile(school):
     #look up school

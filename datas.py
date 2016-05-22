@@ -70,13 +70,13 @@ def create_school(school_name, street_address, borough, zipcode, team, division,
     #create users table
     q = 'CREATE TABLE IF NOT EXISTS schools (school_name TEXT, street_address TEXT, borough TEXT, zipcode TEXT, team TEXT, division TEXT, coach TEXT, manager TEXT, gender TEXT)'
     c.execute(q)
-
+    
     #check data is valid
-    q = 'SELECT school_name IF (school = ?, gender = ?) FROM schools'
-    new  = c.execute(q, (school_name, gender))
-    if len(new) > 0:
+    q = 'SELECT school_name FROM schools WHERE school_name = ? AND gender = ?'
+    new  = c.execute(q, (school_name, gender)).fetchone()
+    if new is not None:
         conn.close()
-        return [False, "School and gender already exists"]
+        return [False, "The " + gender + "' Team from " + school_name + " already exists."]
     else:
         q = 'INSERT INTO schools (school_name, street_address, borough, zipcode, team, division, coach, manager, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
         c.execute(q, (school_name, street_address, borough, zipcode, team, division, coach, manager, gender))
@@ -160,3 +160,25 @@ def create_info(school, title, description, date):
     conn.commit()
     conn.close()
     return [True, "Successful Info Creation"]
+
+######## GET SCHOOL ########
+
+def get_school(school_name):
+    #set up connection
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    #create users table
+    q = 'CREATE TABLE IF NOT EXISTS schools (school_name TEXT, street_address TEXT, borough TEXT, zipcode TEXT, team TEXT, division TEXT, coach TEXT, manager TEXT, gender TEXT)'
+    c.execute(q)
+
+    #check data is valid
+    q = 'SELECT school_name FROM schools WHERE school_name = ?'
+    new  = c.execute(q, (school_name)).fetchone()
+    if new is not None:
+        conn.close()
+        return [False, "School is not registered"]
+    else:
+        conn.commit()
+        conn.close()
+        return new.fetchone()
