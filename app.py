@@ -61,13 +61,13 @@ def logout():
     session['user'] = 0
     return redirect("home")
 
-@app.route("/input", methods=['GET','POST'])
-def input():
+@app.route("/register_school", methods=['GET','POST'])
+def register_school():
     if 'user' not in session:
         session['user'] = 0
     user = session['user']
     if request.method == "GET":
-        return render_template("input.html", user=user)
+        return render_template("register_school.html", user=user)
     else:
         school_name = request.form['school_name']
         street_address = request.form['street_address']
@@ -82,7 +82,34 @@ def input():
         if result[0] == False:
             return redirect("school.html", school = school_name)
         else:
-            return render_template("input.html", error = True, message = result[1])
+            return render_template("register_school.html", error = True, message = result[1])
+
+@app.route("/register_player", methods=['GET','POST'])
+def register_player():
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
+    if request.method == "GET":
+        return render_template("register_player.html", user=user)
+    else:
+        year = request.form['year']
+        first_name = request.form['fname']
+        last_name = request.form['lname']
+        school = request.form['school']
+        gender = request.form['gender']
+        grad_year = request.form['grad_year']
+        player_type = request.form['player_type']
+        game_id = request.form['game_id']
+        matches = request.form['matches']
+        win = request.form['win']
+        loss = request.form['loss']
+        touch = request.form['touch']
+        position = request.form['position']
+        result = create_player(year, first_name, last_name, school, gender, grad_year, player_type, game_id, matches, win, loss, touch, position)
+        if result[0] == False:
+            return redirect("player.html", player_id = player_id)
+        else:
+            return render_template("register_player.html", error = True, message = result[1])
 
 
 @app.route("/school/<school>")
