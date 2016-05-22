@@ -145,10 +145,6 @@ def create_player(year, first_name, last_name, school, gender, grad_year, player
     conn.close()
     return [True, "Successful Player Creation"]
 
-#tests 
-#print create_player(2016, "Kevin", "Li", "Stuyvesant High School", "Male", 2018, "Epee", 1, 6, 3, 3, 40, "Starter")
-#print create_player(2016, "Kevin", "Li", "Stuyvesant High School", "Male", 2017, "Foil", 4, 8, 5, 3, 65, "Sub")
-
 ######## ADD ADDITIONAL INFO ########
 
 def create_info(school, title, description, date):
