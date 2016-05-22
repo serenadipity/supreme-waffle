@@ -10,3 +10,5 @@ Fencing Statistics Website
 |05/18/2016| We presented our plan for the website and the toolkits we are using. We also made a font shortlist.|
 |05/19/2016| We did more planning for database.|
 |05/20/2016| We worked on creating the databases.|
+|05/21/2016| We completed user registration and login, as well as school registration.|
+|05/22/2016| We completed school profile presentation and worked on player registration and profiles.|
