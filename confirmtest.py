@@ -19,9 +19,3 @@ def confirm(prompt=None, resp=False):
         if ans == 'n' or ans == 'N':
             return False
 
-confirm(prompt="Make player?")
-#print confirm(prompt="Make player?")
-
-
-if(confirm(prompt="Make player?")): 
-    print "Relative success."
