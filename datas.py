@@ -118,10 +118,19 @@ def create_player(year, first_name, last_name, school, gender, grad_year, player
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
-
     #create players table
     q = 'CREATE TABLE IF NOT EXISTS players_' + str(year) + ' (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, gender TEXT, grad_year INT, player_type TEXT, matches INT, win INT, loss INT, touch INT, position TEXT)'
     c.execute(q)
+
+    q = 'CREATE TABLE IF NOT EXISTS years (year INT)'
+    c.execute(q)
+
+    q = 'SELECT year FROM years'
+    all_years = c.execute(q).fetchall()
+
+    if (year not in all_years):
+        q = 'INSERT INTO years (year) VALUES (?)'
+        c.execute(q, (year, ))
 
     q = 'SELECT COUNT(*) FROM players_' + str(year) 
     num_players = c.execute(q).fetchone()[0]
@@ -129,7 +138,7 @@ def create_player(year, first_name, last_name, school, gender, grad_year, player
     #checks that player exists
     q = 'SELECT * FROM players_' + str(year) + ' WHERE first_name = ? AND last_name = ? AND school = ?'
     new = c.execute(q, (first_name, last_name, school)).fetchone()
-    if new == None: 
+    if new != None: 
         #confirms same name isnt a mistake
         #this doesn't help the user confirm since it's a terminal thing
         if(confirm(prompt="Player of the same name already exists at this school. Proceed anyways?")): 
@@ -137,15 +146,15 @@ def create_player(year, first_name, last_name, school, gender, grad_year, player
             c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position))
             conn.commit()
             conn.close()
-            return [True, "Successful Player Creation"]
+            return [False, "Successful Player Creation", num_players + 1]
         else: 
-            return [False, "Player not created"]
+            return [True, "Player not created"]
     #add player
     q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
     c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position))
     conn.commit()
     conn.close()
-    return [True, "Successful Player Creation"]
+    return [False, "Successful Player Creation", num_players + 1]
 
 ######## ADD ADDITIONAL INFO ########
 
@@ -196,3 +205,32 @@ def get_user_school(username):
     conn.close()
     return school[0]
 
+######## GET PLAYER ########
+def get_player(year, id):
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    q = """SELECT * 
+           FROM players_""" + str(year) + """
+           WHERE player_id = ?"""
+    player = c.execute(q, (id,)).fetchone()
+    conn.close()
+    return player
+           
+
+
+######## GET PLAYERS BY YEAR ########
+def get_players_by_year_and_gender(year, gender):
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    q = """SELECT * 
+           from players_""" + str(year) + """
+           WHERE gender = ?"""
+    players = c.execute(q, (gender,)).fetchone()
+    conn.close()
+    return players
+
+
+#print get_player(2014,1)
+#print get_players_by_year_and_gender(2014, "Girls Team")

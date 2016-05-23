@@ -80,10 +80,10 @@ def register_school():
         gender = request.form['gender']
         result = create_school(school_name, street_address, borough, zipcode, team, division, coach, manager, gender)
         if result[0] == False:
-            redirect("/home")
+            return redirect("/home")
         else:
             return render_template("register_school.html", user = user, error = True, message = result[1])
-    return "success"
+
 
 @app.route("/register_player", methods=['GET','POST'])
 def register_player():
@@ -106,9 +106,9 @@ def register_player():
         touch = request.form['touch']
         position = request.form['position']
         result = create_player(year, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position)
-        print "SUCCES"
         if result[0] == False:
-            return redirect("player.html", player_id = player_id)
+            player_id = result[2]
+            return redirect(str(year) + "/player/"+ str(player_id))
         else:
             return render_template("register_player.html", error = True, message = result[1])
 
@@ -118,8 +118,8 @@ def show_school_profile(school):
     result = get_school(school)
     return render_template("school.html", error = result[0], data = result[1]) 
 
-@app.route("/player/<player>")
-def show_player_profile(player):
+@app.route("/player/<year>/<player>")
+def show_player_profile(year, player):
     #look up player
     return render_template("player.html") #add some params
 

@@ -11,7 +11,7 @@
   <div class="alert alert-danger">
     <p id="error">{{data}}</p>
   </div>
-  {% endif %}
+  {% else %}
   <div>
     <h1 class="center2">{{data[0][0]}}</h1>
   </div>
@@ -27,6 +27,7 @@
   <p>Coach: {{data[i][6]}}</p>
   <p>Manager: {{data[i][7]}}</p>
   {% endfor %}
+  {% endif %}
 </div>
 
 
