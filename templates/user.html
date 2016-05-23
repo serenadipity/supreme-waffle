@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %} {{user}} || Profile {% endblock %}
+
+{% block contents %}
+
+<div class="container">
+  <center>
+    <h1>User Profile for: {{user}}</h1>
+  </center>
+  {% if error %}
+  <center>
+    <h1> No Teams Have Been Registered </h1>
+    <h1> Please create one <a href="/register_school">here</a>.</h1>
+  </center>
+  {% else %}
+  {% for school, street, borough, zip, team, manager, division, coach, gender in teams %}
+  <div class="col-md-6">
+    <table class="table">
+      <tr>
+	<td>Team Name:</td><td>{{team}}</td>
+      </tr>
+      <tr>
+	<td>Gender</td><td>{{gender}}</td>
+      </tr>
+      <tr>
+	<td>Division</td><td>{{division}}</td>
+      </tr>
+      <tr>
+	<td>Coach</td><td>{{coach}}</td>
+      </tr>
+      <tr>
+	<td>Manager</td><td>{{manager}}</td>
+      </tr>
+    </table>
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
+{% endblock %}
