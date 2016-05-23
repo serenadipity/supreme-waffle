@@ -112,14 +112,14 @@ def create_event(school_home, home_score, school_away, away_score, date, time, g
 
 ######## CREATE PLAYER ########
 
-def create_player(year, first_name, last_name, school, gender, grad_year, player_type, game_id, matches, win, loss, touch, position):
+def create_player(year, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position):
     #set up connection
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
 
     #create players table
-    q = 'CREATE TABLE IF NOT EXISTS players_' + str(year) + ' (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, gender TEXT, grad_year INT, player_type TEXT, game_id INT, matches INT, win INT, loss INT, touch INT, position TEXT)'
+    q = 'CREATE TABLE IF NOT EXISTS players_' + str(year) + ' (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, gender TEXT, grad_year INT, player_type TEXT, matches INT, win INT, loss INT, touch INT, position TEXT)'
     c.execute(q)
 
     q = 'SELECT COUNT(*) FROM players_' + str(year) 
@@ -129,18 +129,19 @@ def create_player(year, first_name, last_name, school, gender, grad_year, player
     q = 'SELECT * FROM players_' + str(year) + ' WHERE first_name = ? AND last_name = ? AND school = ?'
     new = c.execute(q, (first_name, last_name, school)).fetchone()
     if new == None: 
-        #confirms same name isnt a mistake 
+        #confirms same name isnt a mistake
+        #this doesn't help the user confirm since it's a terminal thing
         if(confirm(prompt="Player of the same name already exists at this school. Proceed anyways?")): 
-            q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, game_id, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-            c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, game_id, matches, win, loss, touch, position))
+            q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?)'
+            c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position))
             conn.commit()
             conn.close()
             return [True, "Successful Player Creation"]
         else: 
             return [False, "Player not created"]
     #add player
-    q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, game_id, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-    c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, game_id, matches, win, loss, touch, position))
+    q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+    c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position))
     conn.commit()
     conn.close()
     return [True, "Successful Player Creation"]

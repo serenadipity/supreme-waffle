@@ -100,13 +100,13 @@ def register_player():
         gender = request.form['gender']
         grad_year = request.form['grad_year']
         player_type = request.form['player_type']
-        game_id = request.form['game_id']
         matches = request.form['matches']
         win = request.form['win']
         loss = request.form['loss']
         touch = request.form['touch']
         position = request.form['position']
-        result = create_player(year, first_name, last_name, school, gender, grad_year, player_type, game_id, matches, win, loss, touch, position)
+        result = create_player(year, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position)
+        print "SUCCES"
         if result[0] == False:
             return redirect("player.html", player_id = player_id)
         else:
