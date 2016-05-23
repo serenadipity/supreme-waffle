@@ -174,6 +174,19 @@ def create_info(school, title, description, date):
     conn.close()
     return [True, "Successful Info Creation"]
 
+######## GET ALL SCHOOLS ##########
+def get_distinct_schools():
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    q = 'SELECT DISTINCT school_name FROM schools'
+    distinct = c.execute(q)
+    distinct = [str(x[0]) for x in distinct]
+    print distinct
+    return distinct
+
+#print get_distinct_schools()
+
 ######## GET SCHOOL ########
 
 def get_school(school_name):
@@ -215,7 +228,10 @@ def get_player(year, id):
            WHERE player_id = ?"""
     player = c.execute(q, (id,)).fetchone()
     conn.close()
-    return player
+    stringified = []
+    for item in player:
+        stringified.append(str(item))
+    return stringified
            
 
 

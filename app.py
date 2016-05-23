@@ -108,7 +108,7 @@ def register_player():
         result = create_player(year, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position)
         if result[0] == False:
             player_id = result[2]
-            return redirect(str(year) + "/player/"+ str(player_id))
+            return redirect("player/"+str(year) + "/"+ str(player_id))
         else:
             return render_template("register_player.html", error = True, message = result[1])
 
@@ -118,10 +118,18 @@ def show_school_profile(school):
     result = get_school(school)
     return render_template("school.html", error = result[0], data = result[1]) 
 
-@app.route("/player/<year>/<player>")
-def show_player_profile(year, player):
+@app.route("/player/<year>/<id>")
+def show_player_profile(year, id):
     #look up player
-    return render_template("player.html") #add some params
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
+    print "HERE"
+    players = get_player(year,id)
+    print "\n\n"
+    print players
+    print "\n\n"
+    return render_template("player.html", user = user, error = False, players = players) #add some params
 
 @app.route("/user/<username>")
 def show_schools(username):
@@ -140,7 +148,9 @@ def show_schools(username):
 
 @app.route("/directory")
 def default_directory():
-    return redirect("directory/A")
+    all_schools = get_distinct_schools()
+    return render_template("directory.html", schools = all_schools)
+    #return redirect("directory/")
 
 @app.route("/directory/<letter>")
 def display_directory(letter):
@@ -153,3 +163,4 @@ if __name__ == "__main__":
     app.debug = True
     app.secret_key = "Password"
     app.run(host='0.0.0.0', port=8000)
+
