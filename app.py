@@ -80,7 +80,7 @@ def register_school():
         gender = request.form['gender']
         result = create_school(school_name, street_address, borough, zipcode, team, division, coach, manager, gender)
         if result[0] == False:
-            return redirect("school.html", school = school_name)
+            redirect("/home")
         else:
             return render_template("register_school.html", user = user, error = True, message = result[1])
     return "success"
@@ -122,6 +122,21 @@ def show_school_profile(school):
 def show_player_profile(player):
     #look up player
     return render_template("player.html") #add some params
+
+@app.route("/user/<username>")
+def show_schools(username):
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
+    if user == 0 or user != username:
+        return redirect("home")
+    else:
+        result = get_school(get_user_school(user))
+        teams = result[1:][0]
+        error = result[0]
+        print teams
+        
+        return render_template("user.html", user = user, teams = teams, error = error)
 
 @app.route("/directory")
 def default_directory():

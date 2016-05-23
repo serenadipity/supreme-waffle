@@ -67,7 +67,7 @@ def create_school(school_name, street_address, borough, zipcode, team, division,
     #set up connection
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
-
+    print "SCHOOL NAME" + school_name
     #create users table
     q = 'CREATE TABLE IF NOT EXISTS schools (school_name TEXT, street_address TEXT, borough TEXT, zipcode TEXT, team TEXT, division TEXT, coach TEXT, manager TEXT, gender TEXT)'
     c.execute(q)
@@ -76,7 +76,7 @@ def create_school(school_name, street_address, borough, zipcode, team, division,
     q = 'SELECT school_name FROM schools WHERE school_name = ? AND gender = ?'
     new  = c.execute(q, (school_name, gender)).fetchone()
     print new
-    if new is None:
+    if not(new is None):
         conn.close()
         return [True, "The " + gender + "' Team from " + school_name + " already exists."]
     else:
@@ -85,6 +85,7 @@ def create_school(school_name, street_address, borough, zipcode, team, division,
         conn.commit()
         conn.close()
         return [False, "Successful School Creation"]
+
 
 ######## CREATE EVENT ########
 
@@ -192,6 +193,7 @@ def get_user_school(username):
            FROM users
            WHERE username = ?"""
     school = c.execute(q, (username, )).fetchone()
+    conn.close()
     return school[0]
 
-print get_user_school("hi")
+print get_school("stuy")
