@@ -196,4 +196,3 @@ def get_user_school(username):
     conn.close()
     return school[0]
 
-print get_school("stuy")
