@@ -12,3 +12,4 @@ Fencing Statistics Website
 |05/20/2016| We worked on creating the databases.|
 |05/21/2016| We completed user registration and login, as well as school registration.|
 |05/22/2016| We completed school profile presentation and worked on player registration and profiles.|
+|05/23/2016| We worked on improving functionality of registration and getting basic ideas up. |
