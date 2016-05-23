@@ -6,7 +6,7 @@ body {
 }
 
 .nav {
-    font-size: 150% !important;
+    font-size: 120% !important;
 }
 
 .header{
@@ -21,11 +21,21 @@ div.header > h1 {
 
 .container {
     padding-bottom: 20px;
-    background-color:white;
+    background-color: transparent;
     width: 90%;
 }
 
+#bg1 {
+    background: url(static/images/fencing1.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 
+#font1 {
+    color: white;
+}
 
 @media screen and (max-width: 768px) {
     body {
