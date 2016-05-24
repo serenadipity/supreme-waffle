@@ -20,6 +20,6 @@ Fencing Statistics Website
 |05/19/2016|Group| We did more planning for database.|
 |05/20/2016|KW| We worked on creating the databases.|
 |05/21/2016|KW,SWL AX| We completed user registration and login, as well as school registration. (func: register, authenticate, valid_user, create_player, create_school)|
-|05/22/2016|SWL| We completed school profile presentation and worked on player registration and profiles. (func: get_school, get_distinct_school, get_players*|
+|05/22/2016|SWL| We completed school profile presentation and worked on player registration and profiles. (func: get_school, get_distinct_school, get_players*)|
 |05/22/2016|SC|We worked on the look and feel of the user interface on the login/registration pages|
-|05/23/2016|SWL| We worked on improving functionality of registration and getting basic ideas up. |
+|05/23/2016|SWL| We worked on improving functionality of registration and getting basic ideas up. (route: directory)|
