@@ -151,7 +151,7 @@ def get_ind_scores(school, player, game_id):
     conn.close()
 
     #calculate total
-    total_score = 0;
+    total_score = 0
     scores = home_scores + away_scores
     num_bouts = len(scores)
     for bout in scores:
@@ -160,9 +160,39 @@ def get_ind_scores(school, player, game_id):
 
 ######## CALCULATE INDICATOR #######
 def get_indicator(school, player):
-    # num touches made - num touches against
-    return []
+    #set up connection
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
 
+    #find num touches player made
+    q = "SELECT p1touches from individual WHERE school_home = ? AND player1 = ?"
+    home_scores = c.execute(q, (school, player)).fetchall()
+    q = "SELECT p2touches from individual WHERE school_away = ? AND player2 = ?"
+    away_scores = c.execute(q, (school, player)).fetchall()
+
+    #sum up player's touches-for
+    total_for = 0
+    scores_for = home_scores + away_scores
+    num_bouts = len(scores_for)
+    for bout in scores_for:
+        total_for += bout[0]
+    
+    #find num touches against player
+    q = "SELECT p2touches from individual WHERE school_home = ? AND player1 = ?"
+    away_against = c.execute(q, (school, player)).fetchall()
+    q = "SELECT p1touches from individual WHERE school_away = ? AND player2 = ?"
+    home_against = c.execute(q, (school, player)).fetchall()
+
+    #sum up player's touches-against
+    total_against = 0
+    scores_against = home_against + away_against
+    num_bouts = len(scores_against)
+    for bout in scores_against:
+        total_against += bout[0]
+
+    #return final product!
+    conn.close()
+    return total_for - total_against
 
     
 ######## CREATE PLAYER ########
