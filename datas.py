@@ -111,6 +111,60 @@ def create_event(school_home, home_score, school_away, away_score, date, time, g
         conn.close()
         return [True, "Successful Event Creation"]
 
+######## CREATE INDIVIDUAL SCORELOGS ########
+
+def create_ind(school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address):
+    #set up connection
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    #create table for individual scores
+    q = 'CREATE TABLE IF NOT EXISTS individual (school_home TEXT, player1 TEXT, p1id INT, p1touches INT, school_away TEXT, player2 TEXT, p2id INT, p2touches INT, date TEXT, time TEXT, gametype TEXT, game_id INT, address TEXT)'
+    c.execute(q)
+
+    #validation
+    q = 'SELECT * FROM individual WHERE school_home = ? AND school_away = ? AND p1id = ? AND p2id = ?'
+    new = c.execute(q, (school_home, school_away, p1id, p2id)).fetchone()
+    if new != None:
+        conn.close()
+        return [False, "Duplicate bout."]
+
+    #adding individual score
+    else:
+        q = 'INSERT INTO individual (school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        c.execute(q, (school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address))
+        conn.commit()
+        conn.close()
+        return [True, "Individual Bout Scores Added."]
+
+######## GET SCORES PER INDIVIDUAL IN 1 GAME ########
+def get_ind_scores(school, player, game_id):
+    #set up connection
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    #find number touches made among all bouts
+    q = "SELECT p1touches from individual WHERE school_home = ? AND player1 = ? AND game_id = ?"
+    home_scores = c.execute(q, (school, player, game_id)).fetchall()
+    q = "SELECT p2touches from individual WHERE school_away = ? AND player2 = ? AND game_id = ?"
+    away_scores = c.execute(q, (school, player, game_id)).fetchall()
+    conn.close()
+
+    #calculate total
+    total_score = 0;
+    scores = home_scores + away_scores
+    num_bouts = len(scores)
+    for bout in scores:
+        total_score += bout[0]
+    return [num_bouts, total_score]
+
+######## CALCULATE INDICATOR #######
+def get_indicator(school, player):
+    # num touches made - num touches against
+    return []
+
+
+    
 ######## CREATE PLAYER ########
 
 def create_player(year, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position):
@@ -141,6 +195,7 @@ def create_player(year, first_name, last_name, school, gender, grad_year, player
     if new != None: 
         #confirms same name isnt a mistake
         #this doesn't help the user confirm since it's a terminal thing
+        #i know it's just a placeholder! 
         if(confirm(prompt="Player of the same name already exists at this school. Proceed anyways?")): 
             q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?)'
             c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position))
