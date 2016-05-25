@@ -99,13 +99,13 @@ def create_event(school_home, home_score, school_away, away_score, date, time, g
     c.execute(q)
 
     #check data is valid
-    q = 'SELECT game_id IF (game_id = ?) FROM events'
-    new  = c.execute(q, (game_id))
+    q = 'SELECT game_id FROM events WHERE game_id = ?'
+    new = c.execute(q, (game_id, )).fetchall()
     if len(new) > 0:
         conn.close()
         return [False, "Event already exists"]
     else:
-        q = 'INSERT INTO schools (school_home, home_score, school_away, away_score, date, time, game_id, status, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        q = 'INSERT INTO events (school_home, home_score, school_away, away_score, date, time, game_id, status, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
         c.execute(q, (school_home, home_score, school_away, away_score, date, time, game_id, status, address))
         conn.commit()
         conn.close()
@@ -250,4 +250,44 @@ def get_players_by_year_and_gender(year, gender):
 
 #print get_player(2014,1)
 #print get_players_by_year_and_gender(2014, "Girls Team")
+
+
+######## GET PLAYERS BY YEAR AND SCHOOL ########
+def get_players_by_year_and_school(year, school):
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    q = """SELECT * 
+           from players_""" + str(year) + """
+           WHERE school = ?"""
+    players = c.execute(q, (school,)).fetchall()
+    conn.close()
+    return players
+
+#print get_players_by_year_and_school(2016, "Stuyvesant High School")
+
+
+######## GET GAMESCORES BY SCHOOL ########
+def get_gamescores_by_school(school):
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    q = "SELECT home_score from events WHERE school_home = ?"
+    home_scores = c.execute(q, (school,)).fetchall()
+    q = "SELECT away_score from events WHERE school_away = ?"
+    away_scores = c.execute(q, (school,)).fetchall()
+    conn.close()
+
+    total_score = 0;
+    scores = home_scores + away_scores
+    num_games = len(scores)
+    for game in scores:
+        total_score += game[0]
+    return [num_games, total_score]
+
+create_event("Stuyvesant High School", 20, "Bronx Science", 15, "02/15/2016", "4:00pm", 22745, "", "345 Chambers Street")
+
+create_event("Brooklyn Tech", 35, "Stuyvesant High School", 20, "04/25/2016", "5:30pm", 36375, "", "345 Chambers Street")
+
+print get_gamescores_by_school("Stuyvesant High School")
 
