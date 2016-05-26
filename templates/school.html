@@ -28,6 +28,24 @@
   <p>Manager: {{data[i][7]}}</p>
   {% endfor %}
   {% endif %}
+  
+  <hr>
+  <h3>Boys Team</h3>
+  <p> Number of Games: {{boys_scores[0]}}</p>
+  <p> Total Score: {{boys_scores[1]}}</p>
+  <hr>
+  {% for player in boys %}
+  <p><a href="/player/{{player[0]}}/{{player[1]}}">{{player[2]}} {{player[3]}}</a> - Class of {{player[6]}}, {{player[7]}}</p>
+  {% endfor %}
+
+  <h3>Girls Team</h3>
+  <p> Number of Games: {{girls_scores[0]}}</p>
+  <p> Total Score: {{girls_scores[1]}}</p>
+  <hr>
+  {% for player in girls %}
+  <hr>
+  <p><a href="/player/{{player[0]}}/{{player[1]}}">{{player[2]}} {{player[3]}}</a> - Class of {{player[6]}}, {{player[7]}}</p>
+  {% endfor %}
 </div>
 
 

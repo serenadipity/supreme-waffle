@@ -89,13 +89,13 @@ def create_school(school_name, street_address, borough, zipcode, team, division,
 
 ######## CREATE EVENT ########
 
-def create_event(school_home, home_score, school_away, away_score, date, time, game_id, status, address):
+def create_event(school_home, home_score, school_away, away_score, date, time, game_id, status, address, gender):
     #set up connection
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
     #create events table
-    q = 'CREATE TABLE IF NOT EXISTS events (school_home TEXT, home_score INT, school_away TEXT, away_score INT, date TEXT, time TEXT, game_id INT, status TEXT, address TEXT)'
+    q = 'CREATE TABLE IF NOT EXISTS events (school_home TEXT, home_score INT, school_away TEXT, away_score INT, date TEXT, time TEXT, game_id INT, status TEXT, address TEXT, gender TEXT)'
     c.execute(q)
 
     #check data is valid
@@ -105,8 +105,8 @@ def create_event(school_home, home_score, school_away, away_score, date, time, g
         conn.close()
         return [False, "Event already exists"]
     else:
-        q = 'INSERT INTO events (school_home, home_score, school_away, away_score, date, time, game_id, status, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
-        c.execute(q, (school_home, home_score, school_away, away_score, date, time, game_id, status, address))
+        q = 'INSERT INTO events (school_home, home_score, school_away, away_score, date, time, game_id, status, address, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        c.execute(q, (school_home, home_score, school_away, away_score, date, time, game_id, status, address, gender))
         conn.commit()
         conn.close()
         return [True, "Successful Event Creation"]
@@ -353,30 +353,30 @@ def get_players_by_year_and_gender(year, gender):
 #print get_players_by_year_and_gender(2014, "Girls Team")
 
 
-######## GET PLAYERS BY YEAR AND SCHOOL ########
-def get_players_by_year_and_school(year, school):
+######## GET PLAYERS BY YEAR, SCHOOL, and GENDER ########
+def get_players_by_year_and_school_and_gender(year, school, gender):
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
     q = """SELECT * 
            from players_""" + str(year) + """
-           WHERE school = ?"""
-    players = c.execute(q, (school,)).fetchall()
+           WHERE school = ? AND gender = ?"""
+    players = c.execute(q, (school, gender)).fetchall()
     conn.close()
     return players
 
-#print get_players_by_year_and_school(2016, "Stuyvesant High School")
+# print get_players_by_year_and_school(2016, "Stuyvesant High School", "Girls Team")
 
 
 ######## GET GAMESCORES BY SCHOOL ########
-def get_gamescores_by_school(school):
+def get_gamescores_by_school_and_gender(school, gender):
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
-    q = "SELECT home_score from events WHERE school_home = ?"
-    home_scores = c.execute(q, (school,)).fetchall()
-    q = "SELECT away_score from events WHERE school_away = ?"
-    away_scores = c.execute(q, (school,)).fetchall()
+    q = "SELECT home_score from events WHERE school_home = ? AND gender = ?"
+    home_scores = c.execute(q, (school, gender)).fetchall()
+    q = "SELECT away_score from events WHERE school_away = ? AND gender = ?"
+    away_scores = c.execute(q, (school, gender)).fetchall()
     conn.close()
 
     total_score = 0;
@@ -386,7 +386,13 @@ def get_gamescores_by_school(school):
         total_score += game[0]
     return [num_games, total_score]
 
-#create_event("Stuyvesant High School", 20, "Bronx Science", 15, "02/15/2016", "4:00pm", 22745, "", "345 Chambers Street")
-#create_event("Brooklyn Tech", 35, "Stuyvesant High School", 20, "04/25/2016", "5:30pm", 36375, "", "345 Chambers Street")
-#print get_gamescores_by_school("Stuyvesant High School")
+#create_event("Stuyvesant High School", 20, "Bronx Science", 15, "02/15/2016", "4:00pm", 22745, "", "345 Chambers Street","Girls Team")
+#create_event("Brooklyn Tech", 35, "Stuyvesant High School", 20, "04/25/2016", "5:30pm", 36375, "", "345 Chambers Street","Girls Team")
+
+#create_event("Stuyvesant High School", 20, "Bronx Science", 30, "01/15/2016", "4:00pm", 22365, "", "345 Chambers Street","Boys Team")
+#create_event("Brooklyn Tech", 35, "Stuyvesant High School", 40, "03/25/2016", "5:30pm", 35325, "", "345 Chambers Street","Boys Team")
+
+#print get_gamescores_by_school_and_gender("Stuyvesant High School","Girls Team")
+#print get_gamescores_by_school_and_gender("Stuyvesant High School","Boys Team")
+
 
