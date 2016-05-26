@@ -25,3 +25,4 @@ Fencing Statistics Website
 |05/23/2016|SWL| We worked on improving functionality of registration and getting basic ideas up. (route: directory)|
 |05/24/2016|AX| We worked on get data from the database. (func: get_players_by_year_and_school, get_gamescores_by_school)|
 |05/25/2016|KW, AX| We worked on logging individual touches, recording scores from each bout, and calculating player indicators. We also worked on displaying player information and scores in school profiles.|
+|05/25/2016|SWL| We worked on getting bar charts to work w/ D3.|
