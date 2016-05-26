@@ -131,11 +131,20 @@ def create_ind(school_home, player1, p1id, p1touches, school_away, player2, p2id
 
     #adding individual score
     else:
-        q = 'INSERT INTO individual (school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        q = 'INSERT INTO individual (school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
         c.execute(q, (school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address))
         conn.commit()
         conn.close()
         return [True, "Individual Bout Scores Added."]
+
+#test cases
+#print create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Fake Fencer", 2, 3, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.")
+#create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Other Fake Fencer", 4, 4, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.")
+#create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Super Fake Fencer", 3, 3, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.")
+#create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Absolutely Fake Fencer", 7, 2, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.")
+#create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Very Fake Fencer", 5, 0, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.")
+
+
 
 ######## GET SCORES PER INDIVIDUAL IN 1 GAME ########
 def get_ind_scores(school, player, game_id):
@@ -157,6 +166,10 @@ def get_ind_scores(school, player, game_id):
     for bout in scores:
         total_score += bout[0]
     return [num_bouts, total_score]
+
+#test cases
+#print get_ind_scores("Stuyvesant High School", "Kevin Li", 2)
+#print "predicted: 25"
 
 ######## CALCULATE INDICATOR #######
 def get_indicator(school, player):
@@ -194,6 +207,9 @@ def get_indicator(school, player):
     conn.close()
     return total_for - total_against
 
+#test case
+#print get_indicator("Stuyvesant High School", "Kevin Li")
+#print "predicted: 13"
     
 ######## CREATE PLAYER ########
 
