@@ -116,7 +116,14 @@ def register_player():
 @app.route("/school/<school>")
 def show_school_profile(school):
     result = get_school(school)
-    return render_template("school.html", error = result[0], data = result[1]) 
+    #### need to get current year
+    boys = get_players_by_year_and_school_and_gender(2016, school, "Boys Team")
+    girls = get_players_by_year_and_school_and_gender(2016, school, "Girls Team")
+    
+    boys_scores = get_gamescores_by_school_and_gender(school, "Boys Team")
+    girls_scores = get_gamescores_by_school_and_gender(school, "Girls Team")
+
+    return render_template("school.html", error = result[0], data = result[1], boys = boys, boys_scores = boys_scores, girls = girls, girls_scores = girls_scores) 
 
 @app.route("/player/<year>/<id>")
 def show_player_profile(year, id):
@@ -129,7 +136,7 @@ def show_player_profile(year, id):
     print "\n\n"
     print players
     print "\n\n"
-    return render_template("player.html", user = user, error = False, players = players) #add some params
+    return render_template("player.html", user = user, error = False, players = players)
 
 @app.route("/user/<username>")
 def show_schools(username):
