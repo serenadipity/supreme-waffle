@@ -9,6 +9,10 @@ Fencing Statistics Website
 | Sammi Wu Leung | [@sammiwl](https://github.com/sammiWL)           | middle-front |
 | Alice Xue      | [@alicexue](https://github.com/alicexue)         | middle-back  |
 
+#Things To Install
+* Flask
+* SQL
+
 #Log
 |   Date   | Who | Description  |
 |----------|-----|--------------|
