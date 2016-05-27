@@ -12,7 +12,7 @@ Fencing Statistics Website
 #Log
 |   Date   | Who | Description  |
 |----------|-----|--------------|
-|05/12/2016|Group|We met with our client. |
+|05/12/2016|Group|We met with our client, Nicholas Yang. |
 |05/13/2016|Group| We looked at the PSAL website to develop ideas. |
 |05/16/2016|Group|We began basic website design and learned more about the subject. |
 |05/17/2016|Group| We planned out the timeline of the project, created the color scheme, worked on databases, and went on an immersive tour of the subject. |
@@ -26,3 +26,7 @@ Fencing Statistics Website
 |05/24/2016|AX| We worked on get data from the database. (func: get_players_by_year_and_school, get_gamescores_by_school)|
 |05/25/2016|KW, AX| We worked on logging individual touches, recording scores from each bout, and calculating player indicators. We also worked on displaying player information and scores in school profiles.|
 |05/25/2016|SWL| We worked on getting bar charts to work w/ D3.|
+|05/26/2016|Group| We met with Nicholas Yang to have our second client meeting. We resolved issues such as who gets to control the data being inputted. We concluded that the data would be based on the honor system or a Super User may edit that data. | 
+|05/26/2016|KW| We finished editing and testing the individual functions that were made. |
+|05/26/2016|SWL| We modified the player registration to fit our purposes.|
+
