@@ -100,12 +100,12 @@ def register_player():
         gender = request.form['gender']
         grad_year = request.form['grad_year']
         player_type = request.form['player_type']
-        matches = request.form['matches']
-        win = request.form['win']
-        loss = request.form['loss']
-        touch = request.form['touch']
+        matches = 0
+        win = 0
+        loss = 0
+        touch = 0
         position = request.form['position']
-        result = create_player(year, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position)
+        result = create_player(year, first_name, last_name, school, gender, grad_year, player_type, position)
         if result[0] == False:
             player_id = result[2]
             return redirect("player/"+str(year) + "/"+ str(player_id))
@@ -159,15 +159,9 @@ def default_directory():
     return render_template("directory.html", schools = all_schools)
     #return redirect("directory/")
 
-@app.route("/directory/<letter>")
-def display_directory(letter):
-    if 'user' not in session:
-        session['user'] = 0
-    user = session['user']
-    return render_template("letter.html", letter = letter, user = user) #add some params
-
 if __name__ == "__main__":
     app.debug = True
     app.secret_key = "Password"
+    create_all_tables()
     app.run(host='0.0.0.0', port=8000)
 

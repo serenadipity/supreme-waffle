@@ -5,6 +5,27 @@ from confirmtest import confirm
 from hashlib import sha512
 from uuid import uuid4 
 
+#####CREATE ALL THE TABLES#########
+def create_all_tables():
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+    
+    q = 'CREATE TABLE IF NOT EXISTS users (id INT, username TEXT, password INT, salt INT, school_name TEXT)'
+    c.execute(q)
+    q = 'CREATE TABLE IF NOT EXISTS schools (school_name TEXT, street_address TEXT, borough TEXT, zipcode TEXT, team TEXT, division TEXT, coach TEXT, manager TEXT, gender TEXT)'
+    c.execute(q)
+    q = 'CREATE TABLE IF NOT EXISTS events (school_home TEXT, home_score INT, school_away TEXT, away_score INT, date TEXT, time TEXT, game_id INT, status TEXT, address TEXT, gender TEXT)'
+    c.execute(q)
+    q = 'CREATE TABLE IF NOT EXISTS individual (school_home TEXT, player1 TEXT, p1id INT, p1touches INT, school_away TEXT, player2 TEXT, p2id INT, p2touches INT, date TEXT, time TEXT, gametype TEXT, game_id INT, address TEXT)'
+    c.execute(q)
+    q = 'CREATE TABLE IF NOT EXISTS info (school TEXT, title TEXT, description TEXT, date TEXT)'
+    c.execute(q)
+    for year in range(100):
+        q = 'CREATE TABLE IF NOT EXISTS players_' + str(year + 1950) + ' (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, gender TEXT, grad_year INT, player_type TEXT, position TEXT)'
+        c.execute(q)
+    conn.close()
+    
+        
 
 ######## LOGIN ########
 
@@ -213,13 +234,13 @@ def get_indicator(school, player):
     
 ######## CREATE PLAYER ########
 
-def create_player(year, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position):
+def create_player(year, first_name, last_name, school, gender, grad_year, player_type, position):
     #set up connection
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
     #create players table
-    q = 'CREATE TABLE IF NOT EXISTS players_' + str(year) + ' (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, gender TEXT, grad_year INT, player_type TEXT, matches INT, win INT, loss INT, touch INT, position TEXT)'
+    q = 'CREATE TABLE IF NOT EXISTS players_' + str(year) + ' (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, gender TEXT, grad_year INT, player_type TEXT, position TEXT)'
     c.execute(q)
 
     q = 'CREATE TABLE IF NOT EXISTS years (year INT)'
@@ -243,16 +264,16 @@ def create_player(year, first_name, last_name, school, gender, grad_year, player
         #this doesn't help the user confirm since it's a terminal thing
         #i know it's just a placeholder! 
         if(confirm(prompt="Player of the same name already exists at this school. Proceed anyways?")): 
-            q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?)'
-            c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position))
+            q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+            c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, position))
             conn.commit()
             conn.close()
             return [False, "Successful Player Creation", num_players + 1]
         else: 
             return [True, "Player not created"]
     #add player
-    q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-    c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position))
+    q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+    c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, position))
     conn.commit()
     conn.close()
     return [False, "Successful Player Creation", num_players + 1]
