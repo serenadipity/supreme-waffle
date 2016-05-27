@@ -27,6 +27,6 @@ Fencing Statistics Website
 |05/25/2016|KW, AX| We worked on logging individual touches, recording scores from each bout, and calculating player indicators. We also worked on displaying player information and scores in school profiles.|
 |05/25/2016|SWL| We worked on getting bar charts to work w/ D3.|
 |05/26/2016|Group| We met with Nicholas Yang to have our second client meeting. We resolved issues such as who gets to control the data being inputted. We concluded that the data would be based on the honor system or a Super User may edit that data. | 
-|05/26/2016|KW| We finished editing and testing the individual functions that were made. |
+|05/26/2016|KW| We finished editing and testing the individual functions that were made and began working on line graphs. |
 |05/26/2016|SWL| We modified the player registration to fit our purposes.|
 
