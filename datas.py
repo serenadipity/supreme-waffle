@@ -20,6 +20,10 @@ def create_all_tables():
     c.execute(q)
     q = 'CREATE TABLE IF NOT EXISTS info (school TEXT, title TEXT, description TEXT, date TEXT)'
     c.execute(q)
+    q = 'CREATE TABLE IF NOT EXISTS images_schools (school_name TEXT, gender TEXT, filepath TEXT)'
+    c.execute(q)
+    q = 'CREATE TABLE IF NOT EXISTS images_players (player_id INT, year INT, filepath TEXT)'
+    c.execute(q)
     for year in range(100):
         q = 'CREATE TABLE IF NOT EXISTS players_' + str(year + 1950) + ' (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, gender TEXT, grad_year INT, player_type TEXT, position TEXT)'
         c.execute(q)
@@ -107,6 +111,67 @@ def create_school(school_name, street_address, borough, zipcode, team, division,
         conn.close()
         return [False, "Successful School Creation"]
 
+###### ADD SCHOOL IMAGE NAMES #######
+def add_school_image(school_name, gender, filename):
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    q = 'CREATE TABLE IF NOT EXISTS images_schools (school_name TEXT, gender TEXT, filepath TEXT)'
+    c.execute(q)
+
+    filepath = "images/" + filename
+    
+    q = 'INSERT INTO images_schools (school_name, gender, filepath) VALUES (?, ?, ?)'
+    print q
+    c.execute(q, (school_name, gender, filepath))
+    conn.commit()
+    conn.close()
+    return "Success"
+
+###### GET SCHOOL IMAGE NAMES #####
+def get_school_image(school_name):
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    print school_name
+    q = 'SELECT filepath FROM images_schools WHERE school_name = ? and gender = "Girls"'
+    girls = c.execute(q, (school_name, )).fetchone()
+    print "GIRLS\n\n"
+    print girls
+    images = []
+    if girls != None:
+        images.append(girls[0])
+    else:
+        images.append("nope")
+
+    q = 'SELECT filepath FROM images_schools WHERE school_name = ? and gender = "Boys"'
+    boys = c.execute(q, (school_name, )).fetchone()
+    print boys
+    if boys != None:
+        images.append(boys[0])
+    else:
+        images.append("nope")
+
+    print images
+    conn.close()
+    return images
+
+    
+    
+###### PLAYER IMAGE NAMES ########
+def add_player_image_names(player_id, year, filename):
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    q = 'CREATE TABLE IF NOT EXISTS images_players (player_id INT, year INT, filename TEXT)'
+    c.execute(q)
+
+    q = 'INSERT INTO images_players (player_id, year, filename) VALUES (?, ?, ?)'
+    c.execute(q, (player_id, year, filename))
+    conn.commit()
+    conn.close()
+    return "SUCCESS"
+    
 
 ######## CREATE EVENT ########
 
