@@ -28,9 +28,12 @@
   <p>Manager: {{data[i][7]}}</p>
   {% endfor %}
   {% endif %}
-  
+  <h2>PLACEHOLDER</h2>
+  <canvas id="myChart" width="300" height="300"></canvas>
   <hr>
   <h3>Boys Team</h3>
+  {{images[1]}}
+  <img src="{{url_for('static', filename='school/images/images[1]')}}" height="400"> 
   <p> Number of Games: {{boys_scores[0]}}</p>
   <p> Total Score: {{boys_scores[1]}}</p>
   <hr>
@@ -39,6 +42,7 @@
   {% endfor %}
 
   <h3>Girls Team</h3>
+  <img src="{{url_for('static', filename='school/images/images[0]')}}" height="400">
   <p> Number of Games: {{girls_scores[0]}}</p>
   <p> Total Score: {{girls_scores[1]}}</p>
   <hr>
@@ -49,4 +53,49 @@
 </div>
 
 
+{% endblock %}
+
+{% block script %}
+<script>
+  console.log("Hello");
+  var ctx = document.getElementById("myChart").getContext("2d");
+  var options = {
+  responsive: false,
+  maintainAspectRatio: true
+  }
+  var data = {
+  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  datasets: [
+  {
+  label: "Best School",
+  fill: false,
+  lineTension: 0.1,
+  backgroundColor: "rgba(75,192,192,0.4)",
+  borderColor: "rgba(75,192,192,1)",
+  borderCapStyle: 'butt',
+  borderDash: [],
+  borderDashOffset: 0.0,
+  borderJoinStyle: 'miter',
+  pointBorderColor: "rgba(75,192,192,1)",
+  pointBackgroundColor: "#fff",
+  pointBorderWidth: 1,
+  pointHoverRadius: 5,
+  pointHoverBackgroundColor: "rgba(75,192,192,1)",
+  pointHoverBorderColor: "rgba(220,220,220,1)",
+  pointHoverBorderWidth: 2,
+  pointRadius: 1,
+  pointHitRadius: 10,
+  data: [65, 59, 80, 81, 56, 55, 40],
+  }
+  ]
+  }
+  //console.log(data.datasets[0].data);
+  //data.datasets[0].data = [0,0,0,0];
+  //console.log(data.datasets.data);
+  var myLineChart = new Chart(ctx, {
+  type: 'line',
+  data: data,
+  options: options
+  });
+</script>
 {% endblock %}

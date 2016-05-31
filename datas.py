@@ -5,6 +5,31 @@ from confirmtest import confirm
 from hashlib import sha512
 from uuid import uuid4 
 
+#####CREATE ALL THE TABLES#########
+def create_all_tables():
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+    
+    q = 'CREATE TABLE IF NOT EXISTS users (id INT, username TEXT, password INT, salt INT, school_name TEXT)'
+    c.execute(q)
+    q = 'CREATE TABLE IF NOT EXISTS schools (school_name TEXT, street_address TEXT, borough TEXT, zipcode TEXT, team TEXT, division TEXT, coach TEXT, manager TEXT, gender TEXT)'
+    c.execute(q)
+    q = 'CREATE TABLE IF NOT EXISTS events (school_home TEXT, home_score INT, school_away TEXT, away_score INT, date TEXT, time TEXT, game_id INT, status TEXT, address TEXT, gender TEXT)'
+    c.execute(q)
+    q = 'CREATE TABLE IF NOT EXISTS individual (school_home TEXT, player1 TEXT, p1id INT, p1touches INT, school_away TEXT, player2 TEXT, p2id INT, p2touches INT, date TEXT, time TEXT, gametype TEXT, game_id INT, address TEXT)'
+    c.execute(q)
+    q = 'CREATE TABLE IF NOT EXISTS info (school TEXT, title TEXT, description TEXT, date TEXT)'
+    c.execute(q)
+    q = 'CREATE TABLE IF NOT EXISTS images_schools (school_name TEXT, gender TEXT, filename TEXT)'
+    c.execute(q)
+    q = 'CREATE TABLE IF NOT EXISTS images_players (player_id INT, year INT, filename TEXT)'
+    c.execute(q)
+    for year in range(100):
+        q = 'CREATE TABLE IF NOT EXISTS players_' + str(year + 1950) + ' (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, gender TEXT, grad_year INT, player_type TEXT, position TEXT)'
+        c.execute(q)
+    conn.close()
+    
+        
 
 ######## LOGIN ########
 
@@ -86,6 +111,66 @@ def create_school(school_name, street_address, borough, zipcode, team, division,
         conn.close()
         return [False, "Successful School Creation"]
 
+###### ADD SCHOOL IMAGE NAMES #######
+def add_school_image(school_name, gender, filename):
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    q = 'CREATE TABLE IF NOT EXISTS images_schools (school_name TEXT, gender TEXT, filename TEXT)'
+    c.execute(q)
+
+    
+    q = 'INSERT INTO images_schools (school_name, gender, filename) VALUES (?, ?, ?)'
+    print q
+    c.execute(q, (school_name, gender, filename))
+    conn.commit()
+    conn.close()
+    return "Success"
+
+###### GET SCHOOL IMAGE NAMES #####
+def get_school_image(school_name):
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    print school_name
+    q = 'SELECT filename FROM images_schools WHERE school_name = ? and gender = "Girls"'
+    girls = c.execute(q, (school_name, )).fetchone()
+    print "GIRLS\n\n"
+    print girls
+    images = []
+    if girls != None:
+        images.append(girls[0])
+    else:
+        images.append("nope")
+
+    q = 'SELECT filename FROM images_schools WHERE school_name = ? and gender = "Boys"'
+    boys = c.execute(q, (school_name, )).fetchone()
+    print boys
+    if boys != None:
+        images.append(boys[0])
+    else:
+        images.append("nope")
+
+    print images
+    conn.close()
+    return images
+
+    
+    
+###### PLAYER IMAGE NAMES ########
+def add_player_image_names(player_id, year, filename):
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    q = 'CREATE TABLE IF NOT EXISTS images_players (player_id INT, year INT, filename TEXT)'
+    c.execute(q)
+
+    q = 'INSERT INTO images_players (player_id, year, filename) VALUES (?, ?, ?)'
+    c.execute(q, (player_id, year, filename))
+    conn.commit()
+    conn.close()
+    return "SUCCESS"
+    
 
 ######## CREATE EVENT ########
 
@@ -113,13 +198,13 @@ def create_event(school_home, home_score, school_away, away_score, date, time, g
 
 ######## CREATE INDIVIDUAL SCORELOGS ########
 
-def create_ind(school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address):
+def create_ind(school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address, year):
     #set up connection
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
     #create table for individual scores
-    q = 'CREATE TABLE IF NOT EXISTS individual (school_home TEXT, player1 TEXT, p1id INT, p1touches INT, school_away TEXT, player2 TEXT, p2id INT, p2touches INT, date TEXT, time TEXT, gametype TEXT, game_id INT, address TEXT)'
+    q = 'CREATE TABLE IF NOT EXISTS individual (school_home TEXT, player1 TEXT, p1id INT, p1touches INT, school_away TEXT, player2 TEXT, p2id INT, p2touches INT, date TEXT, time TEXT, gametype TEXT, game_id INT, address TEXT, year INT)'
     c.execute(q)
 
     #validation
@@ -131,11 +216,20 @@ def create_ind(school_home, player1, p1id, p1touches, school_away, player2, p2id
 
     #adding individual score
     else:
-        q = 'INSERT INTO individual (school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-        c.execute(q, (school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address))
+        q = 'INSERT INTO individual (school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        c.execute(q, (school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address, year))
         conn.commit()
         conn.close()
         return [True, "Individual Bout Scores Added."]
+
+#test cases
+#print create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Fake Fencer", 2, 3, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.")
+#create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Other Fake Fencer", 4, 4, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.")
+#create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Super Fake Fencer", 3, 3, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.")
+#create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Absolutely Fake Fencer", 7, 2, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.")
+#create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Very Fake Fencer", 5, 0, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.")
+
+
 
 ######## GET SCORES PER INDIVIDUAL IN 1 GAME ########
 def get_ind_scores(school, player, game_id):
@@ -158,17 +252,21 @@ def get_ind_scores(school, player, game_id):
         total_score += bout[0]
     return [num_bouts, total_score]
 
-######## CALCULATE INDICATOR #######
-def get_indicator(school, player):
+#test cases
+#print get_ind_scores("Stuyvesant High School", "Kevin Li", 2)
+#print "predicted: 25"
+
+######## CALCULATE PLAYER INDICATOR #######
+def get_player_indicator(school, player, year):
     #set up connection
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
     #find num touches player made
-    q = "SELECT p1touches from individual WHERE school_home = ? AND player1 = ?"
-    home_scores = c.execute(q, (school, player)).fetchall()
-    q = "SELECT p2touches from individual WHERE school_away = ? AND player2 = ?"
-    away_scores = c.execute(q, (school, player)).fetchall()
+    q = "SELECT p1touches from individual WHERE school_home = ? AND player1 = ? AND year = ?"
+    home_scores = c.execute(q, (school, player, year)).fetchall()
+    q = "SELECT p2touches from individual WHERE school_away = ? AND player2 = ? AND year = ?"
+    away_scores = c.execute(q, (school, player, year)).fetchall()
 
     #sum up player's touches-for
     total_for = 0
@@ -178,10 +276,10 @@ def get_indicator(school, player):
         total_for += bout[0]
     
     #find num touches against player
-    q = "SELECT p2touches from individual WHERE school_home = ? AND player1 = ?"
-    away_against = c.execute(q, (school, player)).fetchall()
-    q = "SELECT p1touches from individual WHERE school_away = ? AND player2 = ?"
-    home_against = c.execute(q, (school, player)).fetchall()
+    q = "SELECT p2touches from individual WHERE school_home = ? AND player1 = ? AND year = ?"
+    away_against = c.execute(q, (school, player, year)).fetchall()
+    q = "SELECT p1touches from individual WHERE school_away = ? AND player2 = ? AND year = ?"
+    home_against = c.execute(q, (school, player, year)).fetchall()
 
     #sum up player's touches-against
     total_against = 0
@@ -194,16 +292,31 @@ def get_indicator(school, player):
     conn.close()
     return total_for - total_against
 
-    
+#test case
+#print get_indicator("Stuyvesant High School", "Kevin Li")
+#print "predicted: 13"
+
+######## CALCULATE SCHOOL INDICATOR ########
+def get_school_indicator(year, school, gender):
+    total_indicator = 0
+
+    #get array of players 
+    players = get_players_by_year_and_school_and_gender(year, school, gender)
+    for player in players:
+        total_indicator += get_player_indicator(school, player, year)
+
+    return total_indicator
+
+
 ######## CREATE PLAYER ########
 
-def create_player(year, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position):
+def create_player(year, first_name, last_name, school, gender, grad_year, player_type, position):
     #set up connection
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
     #create players table
-    q = 'CREATE TABLE IF NOT EXISTS players_' + str(year) + ' (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, gender TEXT, grad_year INT, player_type TEXT, matches INT, win INT, loss INT, touch INT, position TEXT)'
+    q = 'CREATE TABLE IF NOT EXISTS players_' + str(year) + ' (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, gender TEXT, grad_year INT, player_type TEXT, position TEXT)'
     c.execute(q)
 
     q = 'CREATE TABLE IF NOT EXISTS years (year INT)'
@@ -227,16 +340,16 @@ def create_player(year, first_name, last_name, school, gender, grad_year, player
         #this doesn't help the user confirm since it's a terminal thing
         #i know it's just a placeholder! 
         if(confirm(prompt="Player of the same name already exists at this school. Proceed anyways?")): 
-            q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?)'
-            c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position))
+            q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+            c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, position))
             conn.commit()
             conn.close()
             return [False, "Successful Player Creation", num_players + 1]
         else: 
             return [True, "Player not created"]
     #add player
-    q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-    c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position))
+    q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+    c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, position))
     conn.commit()
     conn.close()
     return [False, "Successful Player Creation", num_players + 1]

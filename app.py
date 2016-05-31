@@ -1,8 +1,12 @@
 from flask import Flask, render_template, request, session, redirect, url_for
+import os
+from werkzeug import secure_filename
 
 from datas import *
 
 app = Flask(__name__)
+
+ALLOWED_EXTENSIONS = set(['png','jpeg','jpg','gif'])
 
 @app.route("/")
 @app.route("/home")
@@ -79,6 +83,20 @@ def register_school():
         manager = request.form['manager']
         gender = request.form['gender']
         result = create_school(school_name, street_address, borough, zipcode, team, division, coach, manager, gender)
+        
+        if not request.files.get('file', None):
+            pass
+        elif result[0] == False:
+            file = request.files['file']
+            if file and ('.' in file.filename and file.filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS):
+                if not secure_filename(file.filename):
+                    return render_template("register_school.html", user = user, error = True, message = "Please upload a secure file.")
+                else:
+                    filename = school_name + "_" + gender + "." + file.filename.rsplit(".",1)[1]
+                    filename = "_".join(filename.split(" "))
+                file.save(os.path.join("static/school/images/", filename))
+                add_school_image(school_name, gender, filename)
+                
         if result[0] == False:
             return redirect("/home")
         else:
@@ -100,30 +118,48 @@ def register_player():
         gender = request.form['gender']
         grad_year = request.form['grad_year']
         player_type = request.form['player_type']
-        matches = request.form['matches']
-        win = request.form['win']
-        loss = request.form['loss']
-        touch = request.form['touch']
+        matches = 0
+        win = 0
+        loss = 0
+        touch = 0
         position = request.form['position']
-        result = create_player(year, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position)
+        result = create_player(year, first_name, last_name, school, gender, grad_year, player_type, position)
+        
+        if not request.files.get('file', None):
+            pass
+        elif result[0] == False:
+            file = request.files['file']
+            if file and ('.' in file.filename and file.filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS):
+                if not secure_filename(file.filename):
+                    return render_template("register_player.html", user = user, error = True, message = "Please upload a secure file.")
+                else:
+                    filename = year + "_" + result[2]  +  "." + file.filename.rsplit(".",1)[1]
+                file.save(os.path.join("images/player/", filename))
+                
         if result[0] == False:
             player_id = result[2]
             return redirect("player/"+str(year) + "/"+ str(player_id))
         else:
-            return render_template("register_player.html", error = True, message = result[1])
+            return render_template("register_player.html", user = user, error = True, message = result[1])
 
 
-@app.route("/school/<school>")
-def show_school_profile(school):
-    result = get_school(school)
+@app.route("/school/<school_name>")
+def show_school_profile(school_name):
+    print "SCHOOL" + school_name
+    result = get_school(school_name)
     #### need to get current year
-    boys = get_players_by_year_and_school_and_gender(2016, school, "Boys Team")
-    girls = get_players_by_year_and_school_and_gender(2016, school, "Girls Team")
+    boys = get_players_by_year_and_school_and_gender(2016, school_name, "Boys Team")
+    girls = get_players_by_year_and_school_and_gender(2016, school_name, "Girls Team")
     
-    boys_scores = get_gamescores_by_school_and_gender(school, "Boys Team")
-    girls_scores = get_gamescores_by_school_and_gender(school, "Girls Team")
+    boys_scores = get_gamescores_by_school_and_gender(school_name, "Boys Team")
+    girls_scores = get_gamescores_by_school_and_gender(school_name, "Girls Team")
 
-    return render_template("school.html", error = result[0], data = result[1], boys = boys, boys_scores = boys_scores, girls = girls, girls_scores = girls_scores) 
+    print school_name
+    print "THIS IS THE SCHOOL"
+    images = get_school_image(school_name)
+    print images
+    #images = []
+    return render_template("school.html", error = result[0], data = result[1], boys = boys, boys_scores = boys_scores, girls = girls, girls_scores = girls_scores, images = images) 
 
 @app.route("/edit_school/<username>", methods=['GET','POST'])
 def edit_school_profile(username):
@@ -172,19 +208,16 @@ def show_schools(username):
 
 @app.route("/directory")
 def default_directory():
-    all_schools = get_distinct_schools()
-    return render_template("directory.html", schools = all_schools)
-    #return redirect("directory/")
-
-@app.route("/directory/<letter>")
-def display_directory(letter):
     if 'user' not in session:
         session['user'] = 0
     user = session['user']
-    return render_template("letter.html", letter = letter, user = user) #add some params
+    all_schools = get_distinct_schools()
+    return render_template("directory.html", schools = all_schools, user=user)
+    #return redirect("directory/")
 
 if __name__ == "__main__":
     app.debug = True
     app.secret_key = "Password"
+    create_all_tables()
     app.run(host='0.0.0.0', port=8000)
 
