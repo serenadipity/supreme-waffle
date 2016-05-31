@@ -125,6 +125,23 @@ def show_school_profile(school):
 
     return render_template("school.html", error = result[0], data = result[1], boys = boys, boys_scores = boys_scores, girls = girls, girls_scores = girls_scores) 
 
+@app.route("/edit_school/<username>", methods=['GET','POST'])
+def edit_school_profile(username):
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
+    if user == 0 or user != username:
+        return redirect("home")
+    else:
+        result = get_user_school(user)
+        if request.method == "GET":
+            school = get_school(get_user_school(username))
+            print school
+            return render_template("edit_school.html", user=user, school=school)
+        else:
+            return redirect("/school"+school)
+
+
 @app.route("/player/<year>/<id>")
 def show_player_profile(year, id):
     #look up player

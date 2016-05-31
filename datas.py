@@ -380,3 +380,22 @@ def get_gamescores_by_school_and_gender(school, gender):
 #print get_gamescores_by_school_and_gender("Stuyvesant High School","Boys Team")
 
 
+
+######## EDIT SCHOOL ########
+
+def edit_school(school_name, street_address, borough, zipcode, girls_teamname, boys_teamname, division, coach, manager):
+    #set up connection
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+    
+    #update table
+    q = 'UPDATE schools SET street_address = ?, borough = ?, zipcode = ?, division = ?, coach = ?, manager = ?, team = ? WHERE school_name = ? AND gender = "Girls Team"'
+    new  = c.execute(q, (street_address, borough, zipcode, division, coach, manager, girls_teamname, school_name)).fetchone()
+    q = 'UPDATE schools SET street_address = ?, borough = ?, zipcode = ?, division = ?, coach = ?, manager = ?, team = ? WHERE school_name = ? AND gender = "Boys Team"'
+    new  = c.execute(q, (street_address, borough, zipcode, division, coach, manager, boys_teamname, school_name)).fetchone()
+    conn.commit()
+    conn.close()
+    return 
+
+edit_school("Stuyvesant High School","345 Chambers Street","Manhattan",10282,"Vipers","",2,"Joel Winston","Max Chan")
+#create_school("Stuyvesant High School","345 Chambers St","Manhattan",10282,"Vipers",2,"Joel Winston","Max Chan","Girls Team")
