@@ -155,8 +155,11 @@ def show_schools(username):
 
 @app.route("/directory")
 def default_directory():
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
     all_schools = get_distinct_schools()
-    return render_template("directory.html", schools = all_schools)
+    return render_template("directory.html", schools = all_schools, user=user)
     #return redirect("directory/")
 
 if __name__ == "__main__":
