@@ -94,7 +94,7 @@ def register_school():
                 else:
                     filename = school_name + "_" + gender + "." + file.filename.rsplit(".",1)[1]
                     filename = "_".join(filename.split(" "))
-                file.save(os.path.join("school/images/", filename))
+                file.save(os.path.join("static/school/images/", filename))
                 add_school_image(school_name, gender, filename)
                 
         if result[0] == False:

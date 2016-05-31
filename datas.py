@@ -20,9 +20,9 @@ def create_all_tables():
     c.execute(q)
     q = 'CREATE TABLE IF NOT EXISTS info (school TEXT, title TEXT, description TEXT, date TEXT)'
     c.execute(q)
-    q = 'CREATE TABLE IF NOT EXISTS images_schools (school_name TEXT, gender TEXT, filepath TEXT)'
+    q = 'CREATE TABLE IF NOT EXISTS images_schools (school_name TEXT, gender TEXT, filename TEXT)'
     c.execute(q)
-    q = 'CREATE TABLE IF NOT EXISTS images_players (player_id INT, year INT, filepath TEXT)'
+    q = 'CREATE TABLE IF NOT EXISTS images_players (player_id INT, year INT, filename TEXT)'
     c.execute(q)
     for year in range(100):
         q = 'CREATE TABLE IF NOT EXISTS players_' + str(year + 1950) + ' (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, gender TEXT, grad_year INT, player_type TEXT, position TEXT)'
@@ -116,14 +116,13 @@ def add_school_image(school_name, gender, filename):
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
-    q = 'CREATE TABLE IF NOT EXISTS images_schools (school_name TEXT, gender TEXT, filepath TEXT)'
+    q = 'CREATE TABLE IF NOT EXISTS images_schools (school_name TEXT, gender TEXT, filename TEXT)'
     c.execute(q)
 
-    filepath = "images/" + filename
     
-    q = 'INSERT INTO images_schools (school_name, gender, filepath) VALUES (?, ?, ?)'
+    q = 'INSERT INTO images_schools (school_name, gender, filename) VALUES (?, ?, ?)'
     print q
-    c.execute(q, (school_name, gender, filepath))
+    c.execute(q, (school_name, gender, filename))
     conn.commit()
     conn.close()
     return "Success"
@@ -134,7 +133,7 @@ def get_school_image(school_name):
     c = conn.cursor()
 
     print school_name
-    q = 'SELECT filepath FROM images_schools WHERE school_name = ? and gender = "Girls"'
+    q = 'SELECT filename FROM images_schools WHERE school_name = ? and gender = "Girls"'
     girls = c.execute(q, (school_name, )).fetchone()
     print "GIRLS\n\n"
     print girls
@@ -144,7 +143,7 @@ def get_school_image(school_name):
     else:
         images.append("nope")
 
-    q = 'SELECT filepath FROM images_schools WHERE school_name = ? and gender = "Boys"'
+    q = 'SELECT filename FROM images_schools WHERE school_name = ? and gender = "Boys"'
     boys = c.execute(q, (school_name, )).fetchone()
     print boys
     if boys != None:
