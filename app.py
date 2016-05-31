@@ -134,8 +134,10 @@ def register_player():
                 if not secure_filename(file.filename):
                     return render_template("register_player.html", user = user, error = True, message = "Please upload a secure file.")
                 else:
-                    filename = year + "_" + result[2]  +  "." + file.filename.rsplit(".",1)[1]
-                file.save(os.path.join("images/player/", filename))
+                    filename = str(year) + "_" + str(result[2])  +  "." + file.filename.rsplit(".",1)[1]
+                print filename
+                file.save(os.path.join("static/player/images", filename))
+                add_player_image_names(result[2], year, filename)
                 
         if result[0] == False:
             player_id = result[2]
@@ -146,6 +148,9 @@ def register_player():
 
 @app.route("/school/<school_name>")
 def show_school_profile(school_name):
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
     print "SCHOOL" + school_name
     result = get_school(school_name)
     #### need to get current year
@@ -160,7 +165,7 @@ def show_school_profile(school_name):
     images = get_school_image(school_name)
     print images
     #images = []
-    return render_template("school.html", error = result[0], data = result[1], boys = boys, boys_scores = boys_scores, girls = girls, girls_scores = girls_scores, images = images) 
+    return render_template("school.html", error = result[0], user = user, data = result[1], boys = boys, boys_scores = boys_scores, girls = girls, girls_scores = girls_scores, images = images) 
 
 @app.route("/player/<year>/<id>")
 def show_player_profile(year, id):
@@ -173,7 +178,8 @@ def show_player_profile(year, id):
     print "\n\n"
     print players
     print "\n\n"
-    return render_template("player.html", user = user, error = False, players = players)
+    image = get_player_image(id, year)
+    return render_template("player.html", user = user, error = False, players = players, image = image)
 
 @app.route("/user/<username>")
 def show_schools(username):
