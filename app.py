@@ -4,7 +4,8 @@ from werkzeug import secure_filename
 
 from datas import *
 
-app = Flask(__name__)
+#app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 ALLOWED_EXTENSIONS = set(['png','jpeg','jpg','gif'])
 
