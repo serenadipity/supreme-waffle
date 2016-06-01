@@ -173,7 +173,7 @@ def edit_school_profile():
         session['user'] = 0
     user = session['user']
     if user == 0:
-        return redirect("home")
+        return redirect("login")
     else:
         result = get_user_school(user)
         if request.method == "GET":
@@ -211,6 +211,28 @@ def show_player_profile(year, id):
     print "\n\n"
     image = get_player_image(id, year)
     return render_template("player.html", user = user, error = False, players = players, image = image)
+
+@app.route("/edit_player/<year>/<id>", methods=['GET','POST'])
+def edit_player_profile(year,id):
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
+    if user == 0:
+        return redirect("login")
+    else:
+        player = get_player(year, id)
+        if request.method == "GET":
+            return render_template("edit_player.html", user=user, player=player)
+        else:
+            first_name = request.form['fname']
+            last_name = request.form['lname']
+            school = get_user_school(user)
+            gender = request.form['gender']
+            grad_year = request.form['grad_year']
+            player_type = request.form['player_type']
+            position = request.form['position']
+            edit_player(year, id, first_name, last_name, school, gender, grad_year, player_type, position)
+            return redirect("/player/"+year+"/"+id)
 
 @app.route("/user/<username>")
 def show_schools(username):

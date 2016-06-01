@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %} Input Form {% endblock %}
+
+{% block contents %}
+
+<div class="container">
+<br><br>
+  <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+    <form role="form" method="POST" enctype="multipart/form-data">
+      <div>
+	<h1 class="center2">Edit Profile for {{player[2]}} {{player[3]}}</h1>
+      </div>
+      <hr>
+      <div class="row">	
+      	<div class="col-xs-12 col-sm-6 col-md-6">
+	  <div class="form-group">
+	    <input type="text" name="fname" id="fname" class="form-control input-lg" value="{{player[2]}}" tabindex="3" required>
+	  </div>
+	</div>
+	<div class="col-xs-12 col-sm-6 col-md-6">
+	  <div class="form-group">
+	    <input type="text" name="lname" id="lname" class="form-control input-lg" value="{{player[3]}}" tabindex="4" required>
+	  </div>
+	</div>
+      </div>
+      <div class="radio">
+	{% if player[5] == "Girls Team" %}
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls' Team" checked="checked">Girls' Team</label>
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys Team">Boys Team</label>
+	{% else %}
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls' Team">Girls Team</label>
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys Team" checked="checked">Boys Team</label>
+	{% endif %}
+      </div>
+      <div class="form-group">
+	<input type="text" name="grad_year" id="grad_year" class="form-control input-lg" value="{{player[6]}}" tabindex="2" required>
+      </div>
+      <div class="radio">
+	{% if player[7] == "Foil" %}
+	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Foil" checked="checked">Foil</label>
+	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Epee">Epee</label>
+	{% else %}
+	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Foil">Foil</label>
+	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Epee" checked="checked">Epee</label>
+	{% endif %}
+      </div>
+      <div class="form-group">
+	<input type="text" name="position" id="position" class="form-control input-lg" value="{{player[12]}}" tabindex="2">
+      </div>
+      <input type="file" id="fileupload" name="file">
+      <hr>
+      <div class="row">
+	<div class="col-xs-12 col-md-12"><input type="submit" value="Update" class="btn btn-success btn-block btn-lg" tabindex="5"></div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

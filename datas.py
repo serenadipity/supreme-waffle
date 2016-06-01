@@ -524,7 +524,21 @@ def edit_school(school_name, street_address, borough, zipcode, girls_teamname, b
     new  = c.execute(q, (street_address, borough, zipcode, division, coach, manager, boys_teamname, school_name)).fetchone()
     conn.commit()
     conn.close()
-    return 
+    return new
 
-edit_school("Stuyvesant High School","345 Chambers Street","Manhattan",10282,"Vipers","",2,"Joel Winston","Max Chan")
+#edit_school("Stuyvesant High School","345 Chambers Street","Manhattan",10282,"Vipers","",2,"Joel Winston","Max Chan")
 #create_school("Stuyvesant High School","345 Chambers St","Manhattan",10282,"Vipers",2,"Joel Winston","Max Chan","Girls Team")
+
+######## EDIT PLAYER ########
+
+def edit_player(year, id, first_name, last_name, school, gender, grad_year, player_type, position):
+    #set up connection
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+    
+    #update table
+    q = 'UPDATE players_' + str(year) + ' SET first_name = ?, last_name = ?, gender = ?, grad_year = ?, player_type = ?, position = ? WHERE school = ? AND player_id = ?'
+    new  = c.execute(q, (first_name, last_name, gender, grad_year, player_type, position, school, id)).fetchone()
+    conn.commit()
+    conn.close()
+    return new
