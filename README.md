@@ -33,4 +33,5 @@ Fencing Statistics Website
 |05/26/2016|Group| We met with Nicholas Yang to have our second client meeting. We resolved issues such as who gets to control the data being inputted. We concluded that the data would be based on the honor system or a Super User may edit that data. | 
 |05/26/2016|KW| We finished editing and testing the individual functions that were made and began working on line graphs. |
 |05/26/2016|SWL| We modified the player registration to fit our purposes.|
-
+|05/27/2016|AX| We began writing functions to edit school profiles.|
+|05/31/2016|AX| We are able to edit school and player profiles.|
