@@ -161,21 +161,35 @@ def show_school_profile(school_name):
     #images = []
     return render_template("school.html", error = result[0], data = result[1], boys = boys, boys_scores = boys_scores, girls = girls, girls_scores = girls_scores, images = images) 
 
-@app.route("/edit_school/<username>", methods=['GET','POST'])
-def edit_school_profile(username):
+@app.route("/edit_school", methods=['GET','POST'])
+def edit_school_profile():
     if 'user' not in session:
         session['user'] = 0
     user = session['user']
-    if user == 0 or user != username:
+    if user == 0:
         return redirect("home")
     else:
         result = get_user_school(user)
         if request.method == "GET":
-            school = get_school(get_user_school(username))
-            print school
-            return render_template("edit_school.html", user=user, school=school)
+            school = get_school(get_user_school(user))
+            girls = school[1][0]
+            boys = school[1][1]
+            if school[1][0][8] == "Boys Team":
+                boys = school[1][0]
+                girls = school[1][1]
+            return render_template("edit_school.html", user=user, boys = boys, girls = girls)
         else:
-            return redirect("/school"+school)
+            school_name = get_user_school(user)
+            street_address = request.form['street_address']
+            borough = request.form['borough']
+            zipcode = request.form['zipcode']
+            girls_teamname = request.form['girls_teamname']
+            boys_teamname = request.form['boys_teamname']
+            division = request.form['division']
+            coach = request.form['coach']
+            manager = request.form['manager']
+            edit_school(school_name, street_address, borough, zipcode, girls_teamname, boys_teamname, division, coach, manager)
+            return redirect("/school/"+result)
 
 
 @app.route("/player/<year>/<id>")
