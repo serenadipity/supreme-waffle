@@ -132,11 +132,11 @@ def get_school_image(school_name):
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
-    print school_name
+   
     q = 'SELECT filename FROM images_schools WHERE school_name = ? and gender = "Girls"'
     girls = c.execute(q, (school_name, )).fetchone()
-    print "GIRLS\n\n"
-    print girls
+    
+    
     images = []
     if girls != None:
         images.append(girls[0])
@@ -145,19 +145,19 @@ def get_school_image(school_name):
 
     q = 'SELECT filename FROM images_schools WHERE school_name = ? and gender = "Boys"'
     boys = c.execute(q, (school_name, )).fetchone()
-    print boys
+    
     if boys != None:
         images.append(boys[0])
     else:
         images.append("nope")
 
-    print images
+    
     conn.close()
     return images
 
     
     
-###### PLAYER IMAGE NAMES ########
+###### ADD PLAYER IMAGE NAMES ########
 def add_player_image_names(player_id, year, filename):
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
@@ -167,10 +167,26 @@ def add_player_image_names(player_id, year, filename):
 
     q = 'INSERT INTO images_players (player_id, year, filename) VALUES (?, ?, ?)'
     c.execute(q, (player_id, year, filename))
+    
     conn.commit()
     conn.close()
     return "SUCCESS"
+
+######## GET PLAYER IMAGE #######
+def get_player_image(player_id, year):
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    q = 'SELECT filename FROM images_players WHERE player_id = ? and year = ?'
+    image = c.execute(q, (player_id, year)).fetchone()
+    print image
+    conn.close()
     
+    if image != None:
+        return image[0]
+    else:
+        return "nope"
+
 
 ######## CREATE EVENT ########
 
@@ -340,7 +356,7 @@ def create_player(year, first_name, last_name, school, gender, grad_year, player
         #this doesn't help the user confirm since it's a terminal thing
         #i know it's just a placeholder! 
         if(confirm(prompt="Player of the same name already exists at this school. Proceed anyways?")): 
-            q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, matches, win, loss, touch, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+            q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
             c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, position))
             conn.commit()
             conn.close()
