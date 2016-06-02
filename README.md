@@ -34,4 +34,6 @@ Fencing Statistics Website
 |05/26/2016|KW| We finished editing and testing the individual functions that were made and began working on line graphs. |
 |05/26/2016|SWL| We modified the player registration to fit our purposes.|
 |05/27/2016|AX| We began writing functions to edit school profiles.|
+|05/30/2016|SWL| We got the uploading/displaying of pictures to work by directly linking it to the file system instead of storing it in a database since the pictures would be large and no high security is needed.|
+|05/30/2016|SC | We further improved the look of the user interface. |
 |05/31/2016|AX| We are able to edit school and player profiles.|
