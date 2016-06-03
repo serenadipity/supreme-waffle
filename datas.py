@@ -239,11 +239,11 @@ def create_ind(school_home, player1, p1id, p1touches, school_away, player2, p2id
         return [True, "Individual Bout Scores Added."]
 
 #test cases
-print create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Fake Fencer", 2, 3, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", 2016)
+"""print create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Fake Fencer", 2, 3, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", 2016)
 create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Other Fake Fencer", 4, 4, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", 2016)
 create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Super Fake Fencer", 3, 3, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", 2016)
 create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Absolutely Fake Fencer", 7, 2, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", 2016)
-create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Very Fake Fencer", 5, 0, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", 2016)
+create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Very Fake Fencer", 5, 0, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", 2016)"""
 
 
 
@@ -358,8 +358,8 @@ def get_player_touches(school, player, year):
 
     return touches
 
-print get_player_touches("Stuyvesant High School", "Kevin Li", 2016)
-print "expected: idk like 25???"
+#print get_player_touches("Stuyvesant High School", "Kevin Li", 2016)
+#print "expected: idk like 25???"
 
 ######## CREATE PLAYER ########
 
