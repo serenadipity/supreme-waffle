@@ -156,13 +156,13 @@ def show_school_profile(school_name):
     print "SCHOOL" + school_name
     result = get_school(school_name)
     #### need to get current year
-    boys = get_players_by_year_and_school_and_gender(now.year, school_name, "Boys Team")
-    girls = get_players_by_year_and_school_and_gender(now.year, school_name, "Girls Team")
+    boys = get_players_by_year_and_school_and_gender(now.year, school_name, "Boys")
+    girls = get_players_by_year_and_school_and_gender(now.year, school_name, "Girls")
     print school_name
     print boys
     print girls
-    boys_scores = get_gamescores_by_school_and_gender(school_name, "Boys Team")
-    girls_scores = get_gamescores_by_school_and_gender(school_name, "Girls Team")
+    boys_scores = get_gamescores_by_school_and_gender(school_name, "Boys")
+    girls_scores = get_gamescores_by_school_and_gender(school_name, "Girls")
 
     print school_name
     print "THIS IS THE SCHOOL"
@@ -184,7 +184,7 @@ def edit_school_profile():
             school = get_school(get_user_school(user))
             girls = school[1][0]
             boys = school[1][1]
-            if school[1][0][8] == "Boys Team":
+            if school[1][0][8] == "Boys":
                 boys = school[1][0]
                 girls = school[1][1]
             return render_template("edit_school.html", user=user, boys = boys, girls = girls)
