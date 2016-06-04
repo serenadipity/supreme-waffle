@@ -273,16 +273,16 @@ def get_ind_scores(school, player, game_id):
 #print "predicted: 25"
 
 ######## CALCULATE PLAYER INDICATOR #######
-def get_player_indicator(school, player, year):
+def get_player_indicator(school, player, year, gametype):
     #set up connection
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
     #find num touches player made
-    q = "SELECT p1touches from individual WHERE school_home = ? AND player1 = ? AND year = ?"
-    home_scores = c.execute(q, (school, player, year)).fetchall()
-    q = "SELECT p2touches from individual WHERE school_away = ? AND player2 = ? AND year = ?"
-    away_scores = c.execute(q, (school, player, year)).fetchall()
+    q = "SELECT p1touches from individual WHERE school_home = ? AND player1 = ? AND year = ? AND gametype = ?"
+    home_scores = c.execute(q, (school, player, year, gametype)).fetchall()
+    q = "SELECT p2touches from individual WHERE school_away = ? AND player2 = ? AND year = ? AND gametype = ?"
+    away_scores = c.execute(q, (school, player, year, gametype)).fetchall()
 
     #sum up player's touches-for
     total_for = 0
@@ -292,10 +292,10 @@ def get_player_indicator(school, player, year):
         total_for += bout[0]
     
     #find num touches against player
-    q = "SELECT p2touches from individual WHERE school_home = ? AND player1 = ? AND year = ?"
-    away_against = c.execute(q, (school, player, year)).fetchall()
-    q = "SELECT p1touches from individual WHERE school_away = ? AND player2 = ? AND year = ?"
-    home_against = c.execute(q, (school, player, year)).fetchall()
+    q = "SELECT p2touches from individual WHERE school_home = ? AND player1 = ? AND year = ? AND type = ?"
+    away_against = c.execute(q, (school, player, year, type)).fetchall()
+    q = "SELECT p1touches from individual WHERE school_away = ? AND player2 = ? AND year = ? AND type = ?"
+    home_against = c.execute(q, (school, player, year, type)).fetchall()
 
     #sum up player's touches-against
     total_against = 0
@@ -311,6 +311,28 @@ def get_player_indicator(school, player, year):
 #test case
 #print get_player_indicator("Stuyvesant High School", "Kevin Li", 2016)
 #print "predicted: 13"
+
+
+######## GET ALL SCHOOL GAMES #########
+def get_school_games(school):
+    #set up connection
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    #get array of each game 
+    q = "SELECT * from events WHERE school_home = ?"
+    home_games = c.execute(q, (school,)).fetchall()
+    q = "SELECT * from events where school_away = ?"
+    away_games = c.execute(q, (school,)).fetchall()
+
+    return home_games + away_games
+
+######## GET ALL BOUTS ########
+def get_all_bouts(school):
+    #set up connection
+    conn = sqlite3.connect("data.db")
+    c = 
+
 
 ######## CALCULATE SCHOOL INDICATOR ########
 def get_school_indicator(year, school):
