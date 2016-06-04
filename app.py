@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 import os
 from werkzeug import secure_filename
+import datetime
+now = datetime.datetime.now()
 
 from datas import *
 
@@ -154,9 +156,11 @@ def show_school_profile(school_name):
     print "SCHOOL" + school_name
     result = get_school(school_name)
     #### need to get current year
-    boys = get_players_by_year_and_school_and_gender(2016, school_name, "Boys Team")
-    girls = get_players_by_year_and_school_and_gender(2016, school_name, "Girls Team")
-    
+    boys = get_players_by_year_and_school_and_gender(now.year, school_name, "Boys Team")
+    girls = get_players_by_year_and_school_and_gender(now.year, school_name, "Girls Team")
+    print school_name
+    print boys
+    print girls
     boys_scores = get_gamescores_by_school_and_gender(school_name, "Boys Team")
     girls_scores = get_gamescores_by_school_and_gender(school_name, "Girls Team")
 
@@ -248,6 +252,56 @@ def show_schools(username):
         print teams
         
         return render_template("user.html", user = user, teams = teams, error = error)
+
+@app.route("/input_stats/<username>", methods=['GET','POST'])
+def input_stats(username):
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
+    if user == 0 or user != username:
+        return redirect("login")
+    else:
+        schools = get_distinct_schools()
+        user_school = get_user_school(username)
+        if request.method == "GET":
+            return render_template("input_stats.html",schools=schools)
+        else:
+            school_home = request.form['school_home']
+            school_away = request.form['school_away']
+            weapon = request.form['weapon']
+            gender = request.form['gender']
+            error = False
+            if school_home == school_away:
+                error = True
+                message = "Home School and Away School cannot be the same"
+            if school_home != user_school and school_away != user_school:
+                error = True
+                message = "You can only input data for events your school participated in"
+            if error == True:
+                return redirect("input_stats.html")
+            else:
+                home_players = get_players_by_year_and_school_and_gender(now.year,school_home,gender)
+                away_players = get_players_by_year_and_school_and_gender(now.year,school_away,gender)
+                return render_template("input_stats2.html",school_home=school_home,school_away=school_away,home_players=home_players,away_players=away_players,weapon=weapon)
+
+
+@app.route("/input_stats2.html", methods=['POST'])
+def input_stats2(username):
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
+    if user == 0:
+        return redirect("login")
+    else:
+        if request.method == "POST":
+            home_starter1 = request.method['home_starter1']
+            home_starter2 = request.method['home_starter2']
+            home_starter3 = request.method['home_starter3']
+            away_starter1 = request.method['away_starter1']            
+            away_starter2 = request.method['away_starter2']
+            away_starter3 = request.method['away_starter3']
+            return render_template("input_stats3.html",home_starter1=home_starter1,home_starter2=home_starter2,home_starter3=home_starter3,away_starter1=away_starter1,away_starter2=away_starter2,away_starter3=away_starter3)
+
 
 @app.route("/directory")
 def default_directory():

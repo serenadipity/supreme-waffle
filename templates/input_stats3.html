@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %} Input Form {% endblock %}
+
+{% block contents %}
+
+<div class="container">
+<br><br>
+  <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+    <form role="form" method="POST" enctype="multipart/form-data">
+      <div>	
+	<h1 class="center2">Input Players for Event</h1>
+      </div>
+      <hr> 
+      <h3>Bout 1</h3>
+
+      <p>{{home_starter3}}</p>
+      <div class="form-group">
+	<input type="number" name="bout1_home_starter3_touches" id="bout1_home_starter3_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout1_home_starter3_score" id="bout1_home_starter3_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <p>{{away_starter3}}</p>
+      <div class="form-group">
+	<input type="number" name="bout1_away_starter3_touches" id="bout1_away_starter3_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout1_away_starter3_score" id="bout1_away_starter3_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <h3>Bout 2</h3>
+      <p>{{home_starter1}}</p>
+      <div class="form-group">
+	<input type="number" name="bout1_home_starter1_touches" id="bout2_home_starter2_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout1_home_starter1_score" id="bout2_home_starter1_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <p>{{away_starter2}}</p>
+      <div class="form-group">
+	<input type="number" name="bout2_away_starter2_touches" id="bout2_away_start2_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout2_away_starter2_score" id="bout2_home_away2_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <h3>Bout 3</h3>
+      <p>{{home_starter2}}</p>
+      <div class="form-group">
+	<input type="number" name="bout3_home_starter2_touches" id="bout3_home_starter2_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout3_home_starter2_score" id="bout3_home_starter2_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <p>{{away_starter1}}</p>
+      <div class="form-group">
+	<input type="number" name="bout3_away_starter1_touches" id="bout3_away_starter1_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout3_away_starter1_score" id="bout3_home_starter1_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <h3>Bout 4</h3>
+      <p>{{home_starter1}}</p>
+      <div class="form-group">
+	<input type="number" name="bout4_home_starter1_touches" id="bout4_home_starter1_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout4_home_starter1_score" id="bout4_home_starter1_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <p>{{away_starter3}}</p>
+      <div class="form-group">
+	<input type="number" name="bout4_away_starter3_touches" id="bout4_away_starter4_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout4_away_starter3_score" id="bout4_away_starter3_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <h3>Bout 5</h3>
+      <p>{{home_starter3}}</p>
+      <div class="form-group">
+	<input type="number" name="bout5_home_starter3_touches" id="bout5_home_starter2_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout5_home_starter3_score" id="bout5_home_starter3_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <p>{{away_starter1}}</p>
+      <div class="form-group">
+	<input type="number" name="bout5_away_starter1_touches" id="bout3_away_starter1_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout5_away_starter1_score" id="bout5_away_starter1_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <h3>Bout 6</h3>
+      <p>{{home_starter2}}</p>
+      <div class="form-group">
+	<input type="number" name="bout6_home_starter2_touches" id="bout6_home_starter2_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout6_home_starter2_score" id="bout6_home_starter2_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <p>{{away_starter2}}</p>
+      <div class="form-group">
+	<input type="number" name="bout6_away_starter2_touches" id="bout6_away_starter2_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout6_away_starter2_score" id="bout6_away_starter2_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <h3>Bout 7</h3>
+      <p>{{home_starter1}}</p>
+      <div class="form-group">
+	<input type="number" name="bout7_home_starter1_touches" id="bout7_home_starter1_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout7_home_starter1_score" id="bout7_home_starter1_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <p>{{away_starter1}}</p>
+      <div class="form-group">
+	<input type="number" name="bout7_away_starter1_touches" id="bout7_away_starter1_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout7_away_starter1_score" id="bout7_away_starter1_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <h3>Bout 8</h3>
+      <p>{{home_starter3}}</p>
+      <div class="form-group">
+	<input type="number" name="bout8_home_starter3_touches" id="bout8_home_starter3_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout8_home_starter3_score" id="bout8_home_starter3_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <p>{{away_starter3}}</p>
+      <div class="form-group">
+	<input type="number" name="bout8_away_starter3_touches" id="bout8_away_starter3_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout8_away_starter3_score" id="bout8_away_starter3_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <h3>Bout 9</h3>
+      <p>{{home_starter3}}</p>
+      <div class="form-group">
+	<input type="number" name="bout9_home_starter3_touches" id="bout9_home_starter3_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout9_home_starter3_score" id="bout9_home_starter3_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <p>{{away_starter2}}</p>
+      <div class="form-group">
+	<input type="number" name="bout9_away_starter2_touches" id="bout9_away_starter2_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="bout9_away_starter2_score" id="bout9_away_starter2_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+     
+
+      <div class="row">
+	<div class="col-xs-12 col-md-12"><input type="submit" value="Submit" class="btn btn-default btn-block btn-lg" tabindex="5"></div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

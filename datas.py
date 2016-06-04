@@ -380,37 +380,36 @@ def create_event(school_home, home_score, school_away, away_score, date, time, g
 
 ######## CREATE INDIVIDUAL SCORELOGS ########
 
-def create_ind(school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address, year):
+def create_ind(school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address, year, gender):
     #set up connection
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
     #create table for individual scores
-    q = 'CREATE TABLE IF NOT EXISTS individual (school_home TEXT, player1 TEXT, p1id INT, p1touches INT, school_away TEXT, player2 TEXT, p2id INT, p2touches INT, date TEXT, time TEXT, gametype TEXT, game_id INT, address TEXT, year INT)'
+    q = 'CREATE TABLE IF NOT EXISTS individual (school_home TEXT, player1 TEXT, p1id INT, p1touches INT, school_away TEXT, player2 TEXT, p2id INT, p2touches INT, date TEXT, time TEXT, gametype TEXT, game_id INT, address TEXT, year INT, gender TEXT)'
     c.execute(q)
 
     #validation
-    q = 'SELECT * FROM individual WHERE school_home = ? AND school_away = ? AND p1id = ? AND p2id = ?'
-    new = c.execute(q, (school_home, school_away, p1id, p2id)).fetchone()
+    q = 'SELECT * FROM individual WHERE school_home = ? AND school_away = ? AND p1id = ? AND p2id = ? AND gender = ?'
+    new = c.execute(q, (school_home, school_away, p1id, p2id, gender)).fetchone()
     if new != None:
         conn.close()
         return [False, "Duplicate bout."]
 
     #adding individual score
     else:
-        q = 'INSERT INTO individual (school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-        c.execute(q, (school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address, year))
+        q = 'INSERT INTO individual (school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address, year, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        c.execute(q, (school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address, year, gender))
         conn.commit()
         conn.close()
         return [True, "Individual Bout Scores Added."]
 
 #test cases
-"""print create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Fake Fencer", 2, 3, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", 2016)
-create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Other Fake Fencer", 4, 4, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", 2016)
-create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Super Fake Fencer", 3, 3, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", 2016)
-create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Absolutely Fake Fencer", 7, 2, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", 2016)
-create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Very Fake Fencer", 5, 0, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", 2016)"""
-
+#print create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Fake Fencer", 2, 3, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", "Boys Team")
+#create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Other Fake Fencer", 4, 4, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", "Boys Team")
+#create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Super Fake Fencer", 3, 3, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", "Boys Team")
+#create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Absolutely Fake Fencer", 7, 2, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", "Boys Team")
+#create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Very Fake Fencer", 5, 0, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", "Boys Team")
 
 
 
