@@ -246,7 +246,6 @@ def create_ind(school_home, player1, p1id, p1touches, school_away, player2, p2id
 #create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Very Fake Fencer", 5, 0, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", "Boys Team")
 
 
-
 ######## GET SCORES PER INDIVIDUAL IN 1 GAME ########
 def get_ind_scores(school, player, game_id):
     #set up connection
@@ -309,20 +308,57 @@ def get_player_indicator(school, player, year):
     return total_for - total_against
 
 #test case
-#print get_indicator("Stuyvesant High School", "Kevin Li")
+#print get_player_indicator("Stuyvesant High School", "Kevin Li", 2016)
 #print "predicted: 13"
 
 ######## CALCULATE SCHOOL INDICATOR ########
-def get_school_indicator(year, school, gender):
+def get_school_indicator(year, school):
     total_indicator = 0
 
-    #get array of players 
-    players = get_players_by_year_and_school_and_gender(year, school, gender)
-    for player in players:
-        total_indicator += get_player_indicator(school, player, year)
+    #set up connection
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+    
+    #get array of players
+    q = "SELECT player1 from individual WHERE school_home = ? AND year = ?"
+    home_players = c.execute(q, (school, year)).fetchall()
+    q = "SELECT player2 from individual WHERE school_away = ? AND year = ?"
+    away_players = c.execute(q, (school, year)).fetchall() 
 
+    total_players = home_players + away_players
+    
+    for player in total_players:
+        total_indicator += get_player_indicator(school, str(player[0]), year)
+        
     return total_indicator
 
+#NOTE TO KATHY: ACCOMODATE GENDER TEAM IN IND
+#print get_school_indicator(2016, "Stuyvesant High School")
+
+
+######## CALCULATE NO. TOUCHES ########
+def get_player_touches(school, player, year):
+    touches = 0
+
+    #set up connection
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    #get all instances of player on home and away
+    q = "SELECT p1touches from individual WHERE school_home = ? AND player1 = ? AND year = ?"
+    home_touches = c.execute(q, (school, player, year)).fetchall() 
+    q = "SELECT p2touches from individual WHERE school_away = ? AND player2 = ? AND year = ?"
+    away_touches = c.execute(q, (school, player, year)).fetchall()
+
+    total_touches = home_touches + away_touches
+
+    for bout in total_touches:
+        touches += bout[0]
+
+    return touches
+
+#print get_player_touches("Stuyvesant High School", "Kevin Li", 2016)
+#print "expected: idk like 25???"
 
 ######## CREATE PLAYER ########
 
