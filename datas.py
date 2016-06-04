@@ -331,7 +331,8 @@ def get_school_games(school):
 def get_all_bouts(school):
     #set up connection
     conn = sqlite3.connect("data.db")
-    c = 
+    c = conn.cursor()
+    return "" 
 
 
 ######## CALCULATE SCHOOL INDICATOR ########
