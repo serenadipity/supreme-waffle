@@ -112,9 +112,6 @@ def register(username, password,repeat_password, school_name):
 
 
 
-    
-
-
 
 
 ###########################
@@ -634,7 +631,16 @@ def create_player(year, first_name, last_name, school, gender, grad_year, player
     conn.close()
     return [False, "Successful Player Creation", num_players + 1]
 
+######## GET PLAYER BY YEAR, SCHOOL, TYPE, GENDER #######
+def get_team_players(year, school, gametype, gender):
+    #set up connection..... again.....
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
 
+    q = "SELECT * FROM players_" + str(year) + "WHERE school = ? AND player_type = ? AND gender = ?"
+    players = c.execute(q, (school, gametype, gender)).fetchall()
+
+    return players
 
 ######## GET PLAYER ########
 def get_player(year, id):
@@ -651,7 +657,6 @@ def get_player(year, id):
         stringified.append(str(item))
     return stringified
            
-
 
 ######## GET PLAYERS BY YEAR ########
 def get_players_by_year_and_gender(year, gender):
