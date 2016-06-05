@@ -71,3 +71,15 @@ div.header > h1 {
     cursor: inherit;
     display: block;
 }
+
+.img-thumbnail {
+    width: 200px; /* whatever set width */
+    height: 230px;
+    display: inline-block; /* or you could float them */
+    overflow: hidden;
+}
+
+#aboutimgs {
+    padding-right: 50px;
+    padding-left: 50px;
+}
