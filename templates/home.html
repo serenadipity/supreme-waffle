@@ -26,8 +26,44 @@
   <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">School Rankings By Indicator</div>
-  <!-- Table -->
-  <table class="table">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#overall" aria-controls="overall" role="tab" data-toggle="tab">Overall</a></li>
+    <li role="presentation"><a href="#foil" aria-controls="foil" role="tab" data-toggle="tab">Foil</a></li>
+    <li role="presentation"><a href="#epee" aria-controls="epee" role="tab" data-toggle="tab">Epee</a></li>
+  </ul>
+<!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="overall">
+
+      <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>School</th>
+        <th>Indicator</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Stuyvesant High School</td>
+        <td>250</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Brooklyn Technical High School</td>
+        <td>200</td>
+      </tr>
+    </tbody>
+
+  </table>
+
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="foil">
+
+      <table class="table">
     <thead>
       <tr>
         <th>#</th>
@@ -49,6 +85,37 @@
     </tbody>
 
   </table>
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="epee">
+
+      <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>School</th>
+        <th>Indicator</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Stuyvesant High School</td>
+        <td>175</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Brooklyn Technical High School</td>
+        <td>120</td>
+      </tr>
+    </tbody>
+
+  </table>
+
+    </div>
+  </div>
+
+  
 </div>
     </div>
     <div class="col-md-4">
@@ -91,31 +158,59 @@
   <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">Events</div>
+      <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#upcoming" aria-controls="upcoming" role="tab" data-toggle="tab">Upcoming</a></li>
+    <li role="presentation"><a href="#past" aria-controls="past" role="tab" data-toggle="tab">Past</a></li>
+  </ul>
+
+  <div class="tab-content">
+  <div role="tabpanel" class="tab-pane" id="upcoming">
   <!-- Table -->
-  <!--
-  <table class="table">
+    <table class="table">
     <thead>
       <tr>
-        <th>#</th>
-        <th>School</th>
-        <th>Indicator</th>
+        <th>Date</th>
+        <th>Event</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th scope="row">1</th>
-        <td>Stuyvesant High School</td>
-        <td>150</td>
+        <th scope="row">4/5</th>
+        <td>Stuyvesant HS vs. Info Tech</td>
       </tr>
       <tr>
-        <th scope="row">2</th>
-        <td>Brooklyn Technical High School</td>
-        <td>100</td>
+        <th scope="row">5/6</th>
+        <td>Bronx Sci vs. LaGuardia</td>
       </tr>
     </tbody>
 
   </table>
--->
+</div>
+
+<div role="tabpanel" class="tab-pane" id="past">
+  <!-- Table -->
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Event</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">3/4</th>
+        <td>Stuyvesant HS vs. Info Tech</td>
+      </tr>
+      <tr>
+        <th scope="row">3/2</th>
+        <td>Bronx Sci vs. LaGuardia</td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>
+
 </div>
     </div>
 
