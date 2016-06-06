@@ -5,7 +5,7 @@
 {% block contents %}
 
 
-<div class="container">
+<div class="container" id="font2">
   <br><br>
   {% if error %}
   <div class="alert alert-danger">
@@ -13,10 +13,10 @@
   </div>
   {% endif %}
   <div>
-    <h1 class="center2">Player Profile</h1>
+    <h1>Player Profile</h1>
     <a href="/edit_player/{{players[0]}}/{{players[1]}}" class="btn btn-default" role="button">Edit Profile</a>
   </div>
-   <img src="/static/player/images/{{image}}" onerror="this.style.display='none';" height="400">
+   <img src="/static/player/images/{{image}}" onerror="this.style.display='none';" class="img-thumbnail" height="200">
   <table class="table">
     <tr>
       <td>Year</td><td>{{players[0]}}</td>
