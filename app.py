@@ -327,12 +327,6 @@ def input_stats(username):
                 date = request.form['date']
                 address = request.form['address']
                 year = now.year
-                
-                conn = sqlite3.connect("data.db")
-                c = conn.cursor()
-                c.execute("DROP TABLE individual")
-                conn.commit()
-                conn.close()
 
                 create_ind(school_home, h_s3, request.form['bout1_home_starter3_touches'], request.form['bout1_home_starter3_score'], school_away, a_s3, request.form['bout1_away_starter3_touches'], request.form['bout1_away_starter3_score'], date, gametype, game_id, 1, address, year, gender)
                 
