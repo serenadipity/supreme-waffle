@@ -87,3 +87,21 @@ div.header > h1 {
 #font2 {
     font-family: 'Noticia Text', serif;
 }
+
+.panel-heading {background-color: }
+
+tr:nth-child(even) {
+    background-color: #ADD8E6;
+}
+
+/*
+thead {
+    background-color: #ADD8E6;
+}
+*/
+
+/*
+tr:nth-child(even) {
+    background-color: #000000;
+}
+*/
