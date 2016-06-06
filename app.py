@@ -377,18 +377,15 @@ def default_directory():
     if 'user' not in session:
         session['user'] = 0
     user = session['user']
-    all_schools = get_distinct_schools()
+    all_schools = sorted(get_distinct_schools(), key = lambda item : item)
     return render_template("directory.html", schools = all_schools, user=user)
 
 @app.route("/roster")
 def current_roster():
     school = request.args.get("school")
-    print school
-    print "\n\n\n\n"
     boys = get_players_by_year_and_school_and_gender(2016, school, "Boys")
     girls = get_players_by_year_and_school_and_gender(2016, school, "Girls")
     roster = {'boys': boys, 'girls': girls}
-    print roster
     return json.dumps(roster)
 
 

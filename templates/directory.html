@@ -20,6 +20,7 @@
     </div>
     <div class="col-sm-9 col-md-6 col-lg-8">
       <h2 id = "current_school">Please Select a School from the Left</h2>
+      <a id="more"></a>
       <!--<div class="btn-group">
 	<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	  Select a Year <span class="caret"></span>
@@ -33,15 +34,15 @@
       </div>-->
       <h3 class="gender" style="visibility:hidden;">Boys</h3>
       <div class="col-sm-9 col-md-8 col-lg-12" style="overflow-y: auto; height: 150px;">
-	<ul class="boys">
+	<ul class="list-group boys">
 	</uk>
       </div>
       <hr>
-      <hr>
-      <hr>
+      <br>
+      <br>
       <h3 class="gender" style="visibility:hidden;">Girls</h3>
       <div class="col-sm-9 col-md-8 col-lg-12" style="overflow-y: auto; height: 150px;">
-	<ul class="girls">
+	<ul class="list-group girls">
 	</ul>
       </div>
     </div>
@@ -60,16 +61,18 @@
     var school_name = this.id;
     $('.boys').text("");
     $('.girls').text("");
+    $('#more').attr("href", "school/" + school_name);
+    $('#more').text("More Information");
     $.getJSON("/roster", {school : school_name }, function(r) {
        $('#current_school').text(school_name);
        $('.gender').attr("style", "visibility:visibile;");
        boys = r["boys"];
        for (i = 0; i < boys.length; i++) {
-	 $('.boys').append("<li><a href='/player/" + boys[i][0] + "/" + boys[i][1] + "'>" + boys[i][2] + " " + boys[i][3] + "</a></li>");
+	 $('.boys').append("<li class='list-group-item'><a href='/player/" + boys[i][0] + "/" + boys[i][1] + "'>" + boys[i][2] + " " + boys[i][3] + "</a></li>");
        };
        girls = r["girls"];
        for (i = 0; i < girls.length; i++) {
-	 $('.girls').append("<li><a href='/player/" + girls[i][0] + "/" + girls[i][1] + "'>" + girls[i][2] + " " + girls[i][3] + "</a></li>");
+	 $('.girls').append("<li class='list-group-item'><a href='/player/" + girls[i][0] + "/" + girls[i][1] + "'>" + girls[i][2] + " " + girls[i][3] + "</a></li>");
        };		       
 		         
     });
