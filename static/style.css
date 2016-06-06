@@ -112,9 +112,9 @@ tr:nth-child(even) {
 }
 */
 
-thead, tbody { display: block; }
+.homepage thead, .homepage tbody { display: block; }
 
-tbody {
+.homepage tbody {
     height: 120px;       
     overflow-y: auto;    /* Trigger vertical scroll    */
     overflow-x: hidden;  /* Hide the horizontal scroll */
