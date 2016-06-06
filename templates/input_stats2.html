@@ -61,10 +61,21 @@
 	  <option value="{{player[1]}}">{{player[2]}} {{player[3]}}</option>
 	  {% endfor %}
 	</select>
-      </div>
+     </div>
       <hr>
+
+      <input type="hidden" name="input_page_num" value="2">
+      <input type="hidden" name="school_home" value="{{school_home}}">
+      <input type="hidden" name="school_away" value="{{school_away}}">
+      <input type="hidden" name="gender" value="{{gender}}">
+      <input type="hidden" name="weapon" value="{{weapon}}">
+      <input type="hidden" name="date" value="{{date}}">
+      <input type="hidden" name="address" value="{{address}}">
+      <input type="hidden" name="game_id" value="{{game_id}}">
+
+
       <div class="row">
-	<div class="col-xs-12 col-md-12"><input type="submit" value="Submit" class="btn btn-default btn-block btn-lg" tabindex="5"></div>
+	<div class="col-xs-12 col-md-12"><input type="submit" value="Next" class="btn btn-default btn-block btn-lg" tabindex="5"></div>
       </div>
     </form>
   </div>
