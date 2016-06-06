@@ -111,3 +111,11 @@ tr:nth-child(even) {
     background-color: #000000;
 }
 */
+
+thead, tbody { display: block; }
+
+tbody {
+    height: 120px;       
+    overflow-y: auto;    /* Trigger vertical scroll    */
+    overflow-x: hidden;  /* Hide the horizontal scroll */
+}
