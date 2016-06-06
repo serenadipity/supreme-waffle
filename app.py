@@ -264,7 +264,7 @@ def input_stats(username):
         schools = get_distinct_schools()
         user_school = get_user_school(username)
         if request.method == "GET":
-            return render_template("input_stats.html",schools=schools)
+            return render_template("input_stats.html",schools=schools, user = user)
         else:
             current_page = request.form['input_page_num'] 
             if current_page == "1":
@@ -287,6 +287,8 @@ def input_stats(username):
                 else:
                     home_players = get_players_by_year_and_school_and_gender(now.year,school_home,gender)
                     away_players = get_players_by_year_and_school_and_gender(now.year,school_away,gender)
+                    print home_players
+                    print away_players
                     return render_template("input_stats2.html",school_home=school_home,school_away=school_away,home_players=home_players,away_players=away_players,gender=gender,weapon=weapon,game_id=game_id,address=address)
             elif current_page == "2":
                 home_starter1 = request.form['home_starter1']
