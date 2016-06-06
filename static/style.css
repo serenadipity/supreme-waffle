@@ -79,6 +79,11 @@ div.header > h1 {
     overflow: hidden;
 }
 
+#thumbnail1 {
+    width: 250px;
+    height:280px;
+}
+
 #aboutimgs {
     padding-right: 50px;
     padding-left: 50px;

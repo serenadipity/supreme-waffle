@@ -4,7 +4,7 @@
 
 {% block contents %}
 
-<div class="container">
+<div class="container" id="font2">
   <center>
     <h1>Directory</h1>
   </center>
@@ -12,11 +12,11 @@
     <div class="row">
       <div class="col-sm-3 col-md-6 col-lg-4" style="overflow-y: auto; height: 475px;">
 	<h2>Select a School</h2>
-	    <ul>
+	    <div class="list-group">
 	      {% for school in schools %}
-	      <li><a href="/school/{{school}}">{{school}}</a> </li>
+	      <a href="/school/{{school}}" class="list-group-item"><b>{{school}}</b></a> </li>
 	      {% endfor %}
-	    </ul>
+	    </div>
 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fringilla, justo eu volutpat ornare, nibh tellus sollicitudin enim, quis posuere velit mi quis odio. Proin id tempor nibh. Maecenas quis faucibus ligula, eu sagittis turpis. In aliquet ultricies sollicitudin. Aenean tempor facilisis leo, in elementum magna venenatis sed. Phasellus tincidunt turpis vel lacus iaculis euismod. Proin at mollis felis. Integer maximus elit dolor, vel imperdiet erat malesuada ultricies. Nullam consequat sit amet neque id volutpat.
 
 Curabitur pulvinar, erat imperdiet cursus venenatis, metus lorem venenatis dui, vitae bibendum eros nisl et risus. Praesent suscipit metus in nisi consequat aliquet. Proin sit amet condimentum ante. Fusce eu augue eu nisl mattis ultrices. Nam vestibulum velit viverra, sagittis est id, porta nulla. Morbi ac turpis sapien. Vestibulum rhoncus efficitur diam, non efficitur nisi pretium ut. Suspendisse non nibh et diam malesuada varius. Nam et porttitor augue.

@@ -6,7 +6,7 @@
 
 
 <div class="container" id="font2">
-  <br><br>
+  <br>
   {% if error %}
   <div class="alert alert-danger">
     <p id="error">{{data}}</p>
@@ -14,16 +14,20 @@
   {% endif %}
   <div>
     <h1>Player Profile</h1>
+    <div class="row">
+    <div class="col-md-4">
+   <img src="/static/player/images/{{image}}" onerror="this.style.display='none';" class="img-thumbnail" id="thumbnail1" height="300">
+   <br>
+   <a href="/edit_player/{{players[0]}}/{{players[1]}}" class="btn btn-default" role="button">Edit Profile</a>
+ </div>
+ <div class="col-md-8">
 
-    <a href="/edit_player/{{players[0]}}/{{players[1]}}" class="btn btn-default" role="button">Edit Profile</a>
-  </div>
-   <img src="/static/player/images/{{image}}" onerror="this.style.display='none';" class="img-thumbnail" height="200">
   <table class="table">
     <tr>
-      <td>Year</td><td>{{players[0]}}</td>
+      <td>Name</td><td>{{players[2]}} {{players[3]}}</td>
     </tr>
     <tr>
-      <td>Name</td><td>{{players[2]}} {{players[3]}}</td>
+      <td>Year</td><td>{{players[0]}}</td>
     </tr>
     <tr>
       <td>Class of</td><td>{{players[6]}}</td>
@@ -48,6 +52,8 @@
     </tr>
   </table>
   <hr>
+</div>
+</div>
 </div>
 
 

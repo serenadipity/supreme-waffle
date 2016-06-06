@@ -12,10 +12,12 @@
     <p id="error">{{data}}</p>
   </div>
   {% else %}
+  <center>
   <div>
-    <h1 class="center2">{{data[0][0]}}</h1>
+    <h1 class="">{{data[0][0]}}</h1>
   </div>
   <a href="/edit_school" class="btn btn-default" role="button">Edit Profile</a>
+</center>
   <hr>
   <p>Address: {{data[0][1]}}</p>
   <p>Zipcode: {{data[0][3]}}</p>
@@ -33,7 +35,7 @@
   <canvas id="myChart" width="300" height="300"></canvas>
   <hr>
   <h3>Boys Team</h3>
-  <img src="/static/school/images/{{images[1]}}" onerror="this.style.display='none';"  height="400">
+  <img src="/static/school/images/{{images[1]}}" onerror="this.style.display='none';" height="200" class="img-thumbnail">
   <p> Number of Games: {{boys_scores[0]}}</p>
   <p> Total Score: {{boys_scores[1]}}</p>
   <hr>
