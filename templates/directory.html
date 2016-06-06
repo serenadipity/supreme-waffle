@@ -8,56 +8,75 @@
   <center>
     <h1>Directory</h1>
   </center>
-<hr>
-    <div class="row">
-      <div class="col-sm-3 col-md-6 col-lg-4" style="overflow-y: auto; height: 475px;">
-	<h2>Select a School</h2>
-	    <div class="list-group">
-	      {% for school in schools %}
-	      <a href="/school/{{school}}" class="list-group-item"><b>{{school}}</b></a> </li>
-	      {% endfor %}
-	    </div>
-<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fringilla, justo eu volutpat ornare, nibh tellus sollicitudin enim, quis posuere velit mi quis odio. Proin id tempor nibh. Maecenas quis faucibus ligula, eu sagittis turpis. In aliquet ultricies sollicitudin. Aenean tempor facilisis leo, in elementum magna venenatis sed. Phasellus tincidunt turpis vel lacus iaculis euismod. Proin at mollis felis. Integer maximus elit dolor, vel imperdiet erat malesuada ultricies. Nullam consequat sit amet neque id volutpat.
-
-Curabitur pulvinar, erat imperdiet cursus venenatis, metus lorem venenatis dui, vitae bibendum eros nisl et risus. Praesent suscipit metus in nisi consequat aliquet. Proin sit amet condimentum ante. Fusce eu augue eu nisl mattis ultrices. Nam vestibulum velit viverra, sagittis est id, porta nulla. Morbi ac turpis sapien. Vestibulum rhoncus efficitur diam, non efficitur nisi pretium ut. Suspendisse non nibh et diam malesuada varius. Nam et porttitor augue.
-
-Nam turpis sem, porttitor a cursus quis, feugiat et arcu. Maecenas laoreet, nisl porta accumsan molestie, neque eros rhoncus risus, a porta lacus ipsum sed augue. In mollis elementum nisl, id vestibulum tellus vulputate eget. Vestibulum dictum ligula ut nisi scelerisque maximus. Donec laoreet, ligula et vulputate tempus, erat est elementum lectus, vehicula posuere felis tellus in neque. Praesent dictum justo sapien, et lacinia justo ornare a. Sed sit amet ligula ut tellus maximus tincidunt. Maecenas ornare posuere urna.
-
-Morbi odio leo, sagittis sit amet mattis vitae, luctus nec nunc. Sed laoreet quam eu mattis ornare. Donec pharetra iaculis turpis, id interdum augue facilisis pulvinar. Cras eleifend dui vitae congue pellentesque. Nulla nec aliquet orci. Aliquam erat volutpat. Praesent condimentum facilisis purus id faucibus. Donec lacus purus, faucibus at risus sed, vulputate ultrices turpis. Fusce fringilla molestie ante, vel egestas risus sagittis quis. Praesent venenatis rhoncus ipsum sed faucibus. Vivamus sit amet turpis arcu. Curabitur lacinia iaculis mollis. Aliquam id venenatis tortor. Maecenas imperdiet felis at convallis condimentum.</p>
+  <hr>
+  <div class="row">
+    <div class="col-sm-3 col-md-6 col-lg-4" style="overflow-y: auto; height: 475px;">
+      <h2>Select a School</h2>
+      <div class="list-group">
+	{% for school in schools %}
+	<p id="{{school}}" class="list-group-item schools">{{school}}</p> 
+        {% endfor %}
       </div>
-      <div class="col-sm-9 col-md-6 col-lg-8">
-	<h2>Roster</h2>
-	<div class="btn-group">
-	  <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	    Select a Year <span class="caret"></span>
-	  </button>
-	  <ul class="dropdown-menu">
-	    <li><a class="dropdown-item" href="#">2015-2016</a>
-	    <li><a class="dropdown-item" href="#">2014-2015</a>
-	    <li><a class="dropdown-item" href="#">2013-2014</a>
-	    <li><a class="dropdown-item" href="#">2012-2013</a>
-	  </ul>
-	</div>
-		<h3>Boys</h3>
-
-	<div class="col-sm-9 col-md-8 col-lg-12" style="overflow-y: auto; height: 150px;">
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fringilla, justo eu volutpat ornare, nibh tellus sollicitudin enim, quis posuere velit mi quis odio. Proin id tempor nibh. Maecenas quis faucibus ligula, eu sagittis turpis. In aliquet ultricies sollicitudin. Aenean tempor facilisis leo, in elementum magna venenatis sed. Phasellus tincidunt turpis vel lacus iaculis euismod. Proin at mollis felis. Integer maximus elit dolor, vel imperdiet erat malesuada ultricies. Nullam consequat sit amet neque id volutpat.
-
-	Morbi odio leo, sagittis sit amet mattis vitae, luctus nec nunc. Sed laoreet quam eu mattis ornare. Donec pharetra iaculis turpis, id interdum augue facilisis pulvinar. Cras eleifend dui vitae congue pellentesque. Nulla nec aliquet orci. Aliquam erat volutpat. Praesent condimentum facilisis purus id faucibus. Donec lacus purus, faucibus at risus sed, vulputate ultrices turpis. Fusce fringilla molestie ante, vel egestas risus sagittis quis. Praesent venenatis rhoncus ipsum sed faucibus. Vivamus sit amet turpis arcu. Curabitur lacinia iaculis mollis. Aliquam id venenatis tortor. Maecenas imperdiet felis at convallis condimentum.
-	</p>
-</div>
-	<hr>
-	<hr>
-	<hr>
-	<h3>Girls</h3>
-	<div class="col-sm-9 col-md-8 col-lg-12" style="overflow-y: auto; height: 150px;">
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-	Morbi odio leo, sagittis sit amet mattis vitae, luctus nec nunc. Sed laoreet quam eu mattis ornare. Donec pharetra iaculis turpis, id interdum augue facilisis pulvinar. Cras eleifend dui vitae congue pellentesque. Nulla nec aliquet orci. Aliquam erat volutpat. Praesent condimentum facilisis purus id faucibus. Donec lacus purus, faucibus at risus sed, vulputate ultrices turpis. Fusce fringilla molestie ante, vel egestas risus sagittis quis. Praesent venenatis rhoncus ipsum sed faucibus. Vivamus sit amet turpis arcu. Curabitur lacinia iaculis mollis. Aliquam id venenatis tortor. Maecenas imperdiet felis at convallis condimentum.</p>
-	</div>
-      </div>
-
     </div>
+    <div class="col-sm-9 col-md-6 col-lg-8">
+      <h2 id = "current_school">Please Select a School from the Left</h2>
+      <!--<div class="btn-group">
+	<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	  Select a Year <span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu">
+	  <li><a class="dropdown-item" href="#">2015-2016</a>
+	  <li><a class="dropdown-item" href="#">2014-2015</a>
+	  <li><a class="dropdown-item" href="#">2013-2014</a>
+	  <li><a class="dropdown-item" href="#">2012-2013</a>
+	</ul>
+      </div>-->
+      <h3 class="gender" style="visibility:hidden;">Boys</h3>
+      <div class="col-sm-9 col-md-8 col-lg-12" style="overflow-y: auto; height: 150px;">
+	<ul class="boys">
+	</uk>
+      </div>
+      <hr>
+      <hr>
+      <hr>
+      <h3 class="gender" style="visibility:hidden;">Girls</h3>
+      <div class="col-sm-9 col-md-8 col-lg-12" style="overflow-y: auto; height: 150px;">
+	<ul class="girls">
+	</ul>
+      </div>
+    </div>
+
+  </div>
 </div>
+
+{% endblock %}
+
+
+{% block script %}
+
+<script>
+  
+  $(".schools").click( function() {
+    var school_name = this.id;
+    $('.boys').text("");
+    $('.girls').text("");
+    $.getJSON("/roster", {school : school_name }, function(r) {
+       $('#current_school').text(school_name);
+       $('.gender').attr("style", "visibility:visibile;");
+       boys = r["boys"];
+       for (i = 0; i < boys.length; i++) {
+	 $('.boys').append("<li><a href='/player/" + boys[i][0] + "/" + boys[i][1] + "'>" + boys[i][2] + " " + boys[i][3] + "</a></li>");
+       };
+       girls = r["girls"];
+       for (i = 0; i < girls.length; i++) {
+	 $('.girls').append("<li><a href='/player/" + girls[i][0] + "/" + girls[i][1] + "'>" + girls[i][2] + " " + girls[i][3] + "</a></li>");
+       };		       
+		         
+    });
+  });
+
+
+</script>
+
 
 {% endblock %}
