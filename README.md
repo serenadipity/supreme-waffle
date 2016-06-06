@@ -37,3 +37,6 @@ Fencing Statistics Website
 |05/30/2016|SWL| We got the uploading/displaying of pictures to work by directly linking it to the file system instead of storing it in a database since the pictures would be large and no high security is needed.|
 |05/30/2016|SC | We further improved the look of the user interface. |
 |05/31/2016|AX| We are able to edit school and player profiles.|
+|06/02/2016|AX| We worked on event registration.|
+|06/03/2016|AX| We began working on inputting statistics (created the forms).|
+|06/05/2016|AX| We finished inputting of stats from forms and inputted to the database.|
