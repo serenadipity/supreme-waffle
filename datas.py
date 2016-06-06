@@ -558,7 +558,7 @@ def get_player_touches(school, player, year):
 
 
 ######## GET GAMESCORES BY SCHOOL ########
-def get_gamescores_by_school_and_gender(school, gender):
+"""def get_gamescores_by_school_and_gender(school, gender):
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
@@ -573,7 +573,7 @@ def get_gamescores_by_school_and_gender(school, gender):
     num_games = len(scores)
     for game in scores:
         total_score += game[0]
-    return [num_games, total_score]
+    return [num_games, total_score]"""
 
 #create_event("Stuyvesant High School", 20, "Bronx Science", 15, "02/15/2016", "4:00pm", 22745, "", "345 Chambers Street","Girls Team")
 #create_event("Brooklyn Tech", 35, "Stuyvesant High School", 20, "04/25/2016", "5:30pm", 36375, "", "345 Chambers Street","Girls Team")

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for
-import os
+import os, json
 from werkzeug import secure_filename
 import datetime
 now = datetime.datetime.now()
@@ -164,15 +164,15 @@ def show_school_profile(school_name):
     print school_name
     print boys
     print girls
-    boys_scores = get_gamescores_by_school_and_gender(school_name, "Boys")
-    girls_scores = get_gamescores_by_school_and_gender(school_name, "Girls")
+    #boys_scores = get_gamescores_by_school_and_gender(school_name, "Boys")
+    #girls_scores = get_gamescores_by_school_and_gender(school_name, "Girls")
 
     print school_name
     print "THIS IS THE SCHOOL"
     images = get_school_image(school_name)
     print images
     #images = []
-    return render_template("school.html", error = result[0], user = user, data = result[1], boys = boys, boys_scores = boys_scores, girls = girls, girls_scores = girls_scores, images = images) 
+    return render_template("school.html", error = result[0], user = user, data = result[1], boys = boys, girls = girls, images = images) 
 
 @app.route("/edit_school", methods=['GET','POST'])
 def edit_school_profile():
@@ -379,7 +379,18 @@ def default_directory():
     user = session['user']
     all_schools = get_distinct_schools()
     return render_template("directory.html", schools = all_schools, user=user)
-    #return redirect("directory/")
+
+@app.route("/roster")
+def current_roster():
+    school = request.args.get("school")
+    print school
+    print "\n\n\n\n"
+    boys = get_players_by_year_and_school_and_gender(2016, school, "Boys")
+    girls = get_players_by_year_and_school_and_gender(2016, school, "Girls")
+    roster = {'boys': boys, 'girls': girls}
+    print roster
+    return json.dumps(roster)
+
 
 if __name__ == "__main__":
     app.debug = True
