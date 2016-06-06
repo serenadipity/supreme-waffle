@@ -376,30 +376,31 @@ def create_event(school_home, home_score, school_away, away_score, date, time, g
 
 #  INDIVIDUAL FUNCTIONS
 
-###########################
+##########################
 
 ######## CREATE INDIVIDUAL SCORELOGS ########
 
-def create_ind(school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address, year, gender):
+def create_ind(school_home, p1id, p1touches, p1score, school_away, p2id, p2touches, p2score, date, gametype, game_id, bout_number, address, year, gender):
     #set up connection
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
     #create table for individual scores
-    q = 'CREATE TABLE IF NOT EXISTS individual (school_home TEXT, player1 TEXT, p1id INT, p1touches INT, school_away TEXT, player2 TEXT, p2id INT, p2touches INT, date TEXT, time TEXT, gametype TEXT, game_id INT, address TEXT, year INT, gender TEXT)'
+    q = 'CREATE TABLE IF NOT EXISTS individual (school_home TEXT, p1id INT, p1touches INT, p1score INT, school_away TEXT, p2id INT, p2touches INT, p2score, date TEXT, gametype TEXT, game_id INT, bout_number INT, address TEXT, year INT, gender TEXT)'
     c.execute(q)
 
     #validation
-    q = 'SELECT * FROM individual WHERE school_home = ? AND school_away = ? AND p1id = ? AND p2id = ? AND gender = ?'
-    new = c.execute(q, (school_home, school_away, p1id, p2id, gender)).fetchone()
+    q = 'SELECT * FROM individual WHERE school_home = ? AND school_away = ? AND p1id = ? AND p2id = ? AND gender = ? AND game_id = ? AND bout_number = ?'
+    new = c.execute(q, (school_home, school_away, p1id, p2id, gender, game_id, bout_number)).fetchone()
+    
     if new != None:
         conn.close()
         return [False, "Duplicate bout."]
-
+    
     #adding individual score
     else:
-        q = 'INSERT INTO individual (school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address, year, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-        c.execute(q, (school_home, player1, p1id, p1touches, school_away, player2, p2id, p2touches, date, time, gametype, game_id, address, year, gender))
+        q = 'INSERT INTO individual (school_home, p1id, p1touches, p1score, school_away, p2id, p2touches, p2score, date, gametype, game_id, bout_number, address, year, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        c.execute(q, (school_home, p1id, p1touches, p1score, school_away, p2id, p2touches, p2score, date, gametype, game_id, bout_number, address, year, gender))
         conn.commit()
         conn.close()
         return [True, "Individual Bout Scores Added."]
@@ -426,16 +427,16 @@ def create_ind(school_home, player1, p1id, p1touches, school_away, player2, p2id
 
 
 ######## GET SCORES PER INDIVIDUAL IN 1 GAME ########
-def get_ind_scores(school, player, game_id):
+def get_ind_scores(school, player_id, game_id):
     #set up connection
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
     #find number touches made among all bouts
-    q = "SELECT p1touches from individual WHERE school_home = ? AND player1 = ? AND game_id = ?"
-    home_scores = c.execute(q, (school, player, game_id)).fetchall()
-    q = "SELECT p2touches from individual WHERE school_away = ? AND player2 = ? AND game_id = ?"
-    away_scores = c.execute(q, (school, player, game_id)).fetchall()
+    q = "SELECT p1touches from individual WHERE school_home = ? AND p1_id = ? AND game_id = ?"
+    home_scores = c.execute(q, (school, player_id, game_id)).fetchall()
+    q = "SELECT p2touches from individual WHERE school_away = ? AND p2_id = ? AND game_id = ?"
+    away_scores = c.execute(q, (school, player_id, game_id)).fetchall()
     conn.close()
 
     #calculate total

@@ -266,41 +266,93 @@ def input_stats(username):
         if request.method == "GET":
             return render_template("input_stats.html",schools=schools)
         else:
-            school_home = request.form['school_home']
-            school_away = request.form['school_away']
-            weapon = request.form['weapon']
-            gender = request.form['gender']
-            error = False
-            if school_home == school_away:
-                error = True
-                message = "Home School and Away School cannot be the same"
-            if school_home != user_school and school_away != user_school:
-                error = True
-                message = "You can only input data for events your school participated in"
-            if error == True:
-                return redirect("input_stats.html")
-            else:
-                home_players = get_players_by_year_and_school_and_gender(now.year,school_home,gender)
-                away_players = get_players_by_year_and_school_and_gender(now.year,school_away,gender)
-                return render_template("input_stats2.html",school_home=school_home,school_away=school_away,home_players=home_players,away_players=away_players,weapon=weapon)
+            current_page = request.form['input_page_num'] 
+            if current_page == "1":
+                school_home = request.form['school_home']
+                school_away = request.form['school_away']
+                weapon = request.form['weapon']
+                gender = request.form['gender']
+                game_id = request.form['game_id']
+                date = request.form['date']
+                address = request.form['location']
+                error = False
+                if school_home == school_away:
+                    error = True
+                    message = "Home School and Away School cannot be the same"
+                if school_home != user_school and school_away != user_school:
+                    error = True
+                    message = "You can only input data for events your school participated in"
+                if error == True:
+                    return redirect("input_stats.html")
+                else:
+                    home_players = get_players_by_year_and_school_and_gender(now.year,school_home,gender)
+                    away_players = get_players_by_year_and_school_and_gender(now.year,school_away,gender)
+                    return render_template("input_stats2.html",school_home=school_home,school_away=school_away,home_players=home_players,away_players=away_players,gender=gender,weapon=weapon,game_id=game_id,address=address)
+            elif current_page == "2":
+                home_starter1 = request.form['home_starter1']
+                home_starter1 = get_player(now.year,home_starter1)
+                home_starter2 = request.form['home_starter2']
+                home_starter2 = get_player(now.year,home_starter2)
+                home_starter3 = request.form['home_starter3']
+                home_starter3 = get_player(now.year,home_starter3)
+                away_starter1 = request.form['away_starter1']     
+                away_starter1 = get_player(now.year,away_starter1)       
+                away_starter2 = request.form['away_starter2']
+                away_starter2 = get_player(now.year,away_starter2)
+                away_starter3 = request.form['away_starter3']
+                away_starter3 = get_player(now.year,away_starter3)
+                school_home = request.form['school_home']
+                school_away = request.form['school_away']
+                weapon = request.form['weapon']
+                gender = request.form['gender']
+                game_id = request.form['game_id']
+                date = request.form['date']
+                address = request.form['address']
+                
+                return render_template("input_stats3.html",home_starter1=home_starter1,home_starter2=home_starter2,home_starter3=home_starter3,away_starter1=away_starter1,away_starter2=away_starter2,away_starter3=away_starter3,school_home=school_home,school_away=school_away,gender=gender,weapon=weapon,date=date,address=address,game_id=game_id)
+            elif current_page == "3":
 
+                h_s1 = request.form['home_starter1']
+                h_s2 = request.form['home_starter2']
+                h_s3 = request.form['home_starter3']
+                a_s1 = request.form['away_starter1']
+                a_s2 = request.form['away_starter2']
+                a_s3 = request.form['away_starter3']
+                
+                school_home = request.form['school_home']
+                school_away = request.form['school_away']
+                gametype = request.form['weapon']
+                gender = request.form['gender']
+                game_id = request.form['game_id']
+                date = request.form['date']
+                address = request.form['address']
+                year = now.year
+                
+                conn = sqlite3.connect("data.db")
+                c = conn.cursor()
+                c.execute("DROP TABLE individual")
+                conn.commit()
+                conn.close()
 
-@app.route("/input_stats2.html", methods=['POST'])
-def input_stats2(username):
-    if 'user' not in session:
-        session['user'] = 0
-    user = session['user']
-    if user == 0:
-        return redirect("login")
-    else:
-        if request.method == "POST":
-            home_starter1 = request.method['home_starter1']
-            home_starter2 = request.method['home_starter2']
-            home_starter3 = request.method['home_starter3']
-            away_starter1 = request.method['away_starter1']            
-            away_starter2 = request.method['away_starter2']
-            away_starter3 = request.method['away_starter3']
-            return render_template("input_stats3.html",home_starter1=home_starter1,home_starter2=home_starter2,home_starter3=home_starter3,away_starter1=away_starter1,away_starter2=away_starter2,away_starter3=away_starter3)
+                create_ind(school_home, h_s3, request.form['bout1_home_starter3_touches'], request.form['bout1_home_starter3_score'], school_away, a_s3, request.form['bout1_away_starter3_touches'], request.form['bout1_away_starter3_score'], date, gametype, game_id, 1, address, year, gender)
+                
+                create_ind(school_home, h_s1, request.form['bout2_home_starter1_touches'], request.form['bout2_home_starter1_score'], school_away, a_s2, request.form['bout2_away_starter2_touches'], request.form['bout2_away_starter2_score'], date, gametype, game_id, 2, address, year, gender)
+                
+                create_ind(school_home, h_s2, request.form['bout3_home_starter2_touches'], request.form['bout3_home_starter2_score'], school_away, a_s1, request.form['bout3_away_starter1_touches'], request.form['bout3_away_starter1_score'], date, gametype, game_id, 3, address, year, gender)
+                
+                create_ind(school_home, h_s1, request.form['bout4_home_starter1_touches'], request.form['bout4_home_starter1_score'], school_away, a_s3, request.form['bout4_away_starter3_touches'], request.form['bout4_away_starter3_score'], date, gametype, game_id, 4, address, year, gender)
+                create_ind(school_home, h_s3, request.form['bout5_home_starter3_touches'], request.form['bout5_home_starter3_score'], school_away, a_s1, request.form['bout5_away_starter1_touches'], request.form['bout5_away_starter1_score'], date, gametype, game_id, 5, address, year, gender)
+                
+                create_ind(school_home, h_s2, request.form['bout6_home_starter2_touches'], request.form['bout6_home_starter2_score'], school_away, a_s2, request.form['bout6_away_starter2_touches'], request.form['bout6_away_starter2_score'], date, gametype, game_id, 6, address, year, gender)
+                
+                create_ind(school_home, h_s1, request.form['bout7_home_starter1_touches'], request.form['bout7_home_starter1_score'], school_away, a_s1, request.form['bout7_away_starter1_touches'], request.form['bout7_away_starter1_score'], date, gametype, game_id, 7, address, year, gender)
+
+                create_ind(school_home, h_s2, request.form['bout8_home_starter2_touches'], request.form['bout8_home_starter2_score'], school_away, a_s3, request.form['bout8_away_starter3_touches'], request.form['bout8_away_starter3_score'], date, gametype, game_id, 8, address, year, gender)
+
+                create_ind(school_home, h_s3, request.form['bout9_home_starter3_touches'], request.form['bout9_home_starter3_score'], school_away, a_s2, request.form['bout9_away_starter2_touches'], request.form['bout9_away_starter2_score'], date, gametype, game_id, 9, address, year, gender)
+
+                user_school = get_user_school(username)
+                return redirect("school/"+user_school)
 
 
 @app.route("/directory")
