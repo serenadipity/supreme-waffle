@@ -25,12 +25,12 @@
 	</div>
       </div>
       <div class="radio">
-	{% if player[5] == "Girls Team" %}
-	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls Team" checked="checked">Girls Team</label>
-	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys Team">Boys Team</label>
+	{% if player[5] == "Girls" %}
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls" checked="checked">Girls Team</label>
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys">Boys Team</label>
 	{% else %}
-	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls Team">Girls Team</label>
-	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys Team" checked="checked">Boys Team</label>
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls">Girls Team</label>
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys" checked="checked">Boys Team</label>
 	{% endif %}
       </div>
       <div class="form-group">
@@ -44,9 +44,9 @@
 	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Foil">Foil</label>
 	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Epee" checked="checked">Epee</label>
 	{% endif %}
-      </div>
+      </div> 
       <div class="form-group">
-	<input type="text" name="position" id="position" class="form-control input-lg" value="{{player[12]}}" tabindex="2">
+	<input type="text" name="position" id="position" class="form-control input-lg" value="{{player[8]}}" tabindex="2">
       </div>
       <input type="file" id="fileupload" name="file">
       <hr>

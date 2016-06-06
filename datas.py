@@ -290,17 +290,15 @@ def edit_school(school_name, street_address, borough, zipcode, girls_teamname, b
     c = conn.cursor()
     
     #update table
-    q = 'UPDATE schools SET street_address = ?, borough = ?, zipcode = ?, division = ?, coach = ?, manager = ?, team = ? WHERE school_name = ? AND gender = "Girls Team"'
+    q = 'UPDATE schools SET street_address = ?, borough = ?, zipcode = ?, division = ?, coach = ?, manager = ?, team = ? WHERE school_name = ? AND gender = "Girls"'
     new  = c.execute(q, (street_address, borough, zipcode, division, coach, manager, girls_teamname, school_name)).fetchone()
-    q = 'UPDATE schools SET street_address = ?, borough = ?, zipcode = ?, division = ?, coach = ?, manager = ?, team = ? WHERE school_name = ? AND gender = "Boys Team"'
+    q = 'UPDATE schools SET street_address = ?, borough = ?, zipcode = ?, division = ?, coach = ?, manager = ?, team = ? WHERE school_name = ? AND gender = "Boys"'
     new  = c.execute(q, (street_address, borough, zipcode, division, coach, manager, boys_teamname, school_name)).fetchone()
     conn.commit()
     conn.close()
     return new
 
 #edit_school("Stuyvesant High School","345 Chambers Street","Manhattan",10282,"Vipers","",2,"Joel Winston","Max Chan")
-#create_school("Stuyvesant High School","345 Chambers St","Manhattan",10282,"Vipers",2,"Joel Winston","Max Chan","Girls Team")
-
 
 ######## GET ALL SCHOOL GAMES #########
 def get_school_games(school):
@@ -501,9 +499,9 @@ def get_school_indicator(year, school):
     c = conn.cursor()
     
     #get array of players
-    q = "SELECT player1 from individual WHERE school_home = ? AND year = ?"
+    q = "SELECT p1 from individual WHERE school_home = ? AND year = ?"
     home_players = c.execute(q, (school, year)).fetchall()
-    q = "SELECT player2 from individual WHERE school_away = ? AND year = ?"
+    q = "SELECT p2 from individual WHERE school_away = ? AND year = ?"
     away_players = c.execute(q, (school, year)).fetchall() 
 
     total_players = home_players + away_players
@@ -687,7 +685,7 @@ def get_players_by_year_and_school_and_gender(year, school, gender):
     conn.close()
     return players
 
-# print get_players_by_year_and_school(2016, "Stuyvesant High School", "Girls Team")
+# print get_players_by_year_and_school(2016, "Stuyvesant High School", "Girls")
 
 
 ######## EDIT PLAYER ########
