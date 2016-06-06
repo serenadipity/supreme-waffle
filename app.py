@@ -278,12 +278,12 @@ def input_stats(username):
                 error = False
                 if school_home == school_away:
                     error = True
-                    message = "Home School and Away School cannot be the same"
+                    message = "Home School and Away School cannot be the same."
                 if school_home != user_school and school_away != user_school:
                     error = True
-                    message = "You can only input data for events your school participated in"
+                    message = "You can only input data for events your school participated in."
                 if error == True:
-                    return redirect("input_stats.html")
+                    return render_template("input_stats.html",error=error,message=message,schools=schools)
                 else:
                     home_players = get_players_by_year_and_school_and_gender(now.year,school_home,gender)
                     away_players = get_players_by_year_and_school_and_gender(now.year,school_away,gender)

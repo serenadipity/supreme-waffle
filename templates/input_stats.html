@@ -10,6 +10,11 @@
     <form role="form" method="POST" enctype="multipart/form-data">
       <div>	
 	<h1 class="center2">Input Data for an Event</h1>
+	{% if error %}
+	<div class="alert alert-danger">
+	  <p id="error">{{message}}.</p>
+	</div>
+	{% endif %}
       </div>
       <hr>			
       <div class="form-group">
