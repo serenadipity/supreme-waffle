@@ -40,3 +40,13 @@ for i in range(5):
         create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "regular")
         create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "regular")
         create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "regular")
+
+
+######### MAKE EVENTS #########
+
+for i in range(20):
+    schoolH = school_names[0, randint(len(school_names) - 1)]
+    schoolA = school_names[0, randint(len(school_names) - 1)]
+    date = "0" + str(randint(2, 6)) + "/" + str(randint(10, 31)) + "/2016"
+    address = school_names[0, randint(len(school_names) - 1)]
+    
