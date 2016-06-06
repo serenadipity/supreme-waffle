@@ -17,7 +17,10 @@ def home():
     if 'user' not in session:
         session['user'] = 0
     user = session['user']
-    return render_template("home.html", user = user)
+    all_events = get_all_events()
+    prev_events = all_events[0]
+    future_events = all_events[1]
+    return render_template("home.html", user = user, prev_events = prev_events, future_events = future_events)
 
 @app.route("/about")
 def about():

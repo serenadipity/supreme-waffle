@@ -2,7 +2,6 @@
 from datas import *
 from random import randint
 
-
 ######### MAKE SCHOOLS #########
 school_names = ["Kathy Wang Clown School for Clowns", "Sammi's Bird School for Birds", "Kelly School of Passive Aggressiveness", "Alice School for Really Pretty Hidden Profile Pictures", "Serena Chan's Fencing School"]
 addresses = ["7656 Aliquam Street", "3916 Mauris St.", "420 Amet Ave", "6966 Felis. Avenue", "2253 Urna Road"]
@@ -35,7 +34,7 @@ for i in range(5):
         create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "starter")
         create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "starter")
         create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "starter")
-    for j in range(randint(3, 10)):
+    for j in range(randint(3, 5)):
         create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "regular")
         create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "regular")
         create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "regular")
@@ -44,9 +43,21 @@ for i in range(5):
 
 ######### MAKE EVENTS #########
 
-for i in range(20):
-    schoolH = school_names[0, randint(len(school_names) - 1)]
-    schoolA = school_names[0, randint(len(school_names) - 1)]
+for i in range(30):
+    schoolH = school_names[randint(0, len(school_names) - 1)]
+    schoolA = school_names[randint(0, len(school_names) - 1)]
+    while (schoolA == schoolH):
+        schoolA = school_names[randint(0, len(school_names) - 1)]
     date = "0" + str(randint(2, 6)) + "/" + str(randint(10, 31)) + "/2016"
-    address = school_names[0, randint(len(school_names) - 1)]
-    
+    time = "3:30 PM"
+    if randint(0, 1) == 0:
+        address = schoolH
+    else:
+        address = schoolA
+    game = randint(10000, 40000)
+    if randint(0, 100) == 0:
+        status = "postponed to another time"
+    else:
+        status = "on time"
+    gender = genders[randint(0, 1)]
+    create_event(schoolH, schoolA, date, time, game, status, address, gender)

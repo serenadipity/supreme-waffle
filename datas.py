@@ -1,6 +1,7 @@
 import sqlite3
 from validator import valid_user
 from confirmtest import confirm
+import time
 
 from hashlib import sha512
 from uuid import uuid4 
@@ -23,7 +24,7 @@ def create_all_tables():
     c.execute(q)
     q = 'CREATE TABLE IF NOT EXISTS schools (school_name TEXT, street_address TEXT, borough TEXT, zipcode TEXT, team TEXT, division TEXT, coach TEXT, manager TEXT, gender TEXT)'
     c.execute(q)
-    q = 'CREATE TABLE IF NOT EXISTS events (school_home TEXT, home_score INT, school_away TEXT, away_score INT, date TEXT, time TEXT, game_id INT, status TEXT, address TEXT, gender TEXT)'
+    q = 'CREATE TABLE IF NOT EXISTS events (school_home TEXT, school_away TEXT, date TEXT, time TEXT, game_id INT, status TEXT, address TEXT, gender TEXT)'
     c.execute(q)
     q = 'CREATE TABLE IF NOT EXISTS individual (school_home TEXT, player1 TEXT, p1id INT, p1touches INT, school_away TEXT, player2 TEXT, p2id INT, p2touches INT, date TEXT, time TEXT, gametype TEXT, game_id INT, address TEXT)'
     c.execute(q)
@@ -33,8 +34,8 @@ def create_all_tables():
     c.execute(q)
     q = 'CREATE TABLE IF NOT EXISTS images_players (player_id INT, year INT, filename TEXT)'
     c.execute(q)
-    for year in range(100):
-        q = 'CREATE TABLE IF NOT EXISTS players_' + str(year + 1950) + ' (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, gender TEXT, grad_year INT, player_type TEXT, position TEXT)'
+    for year in range(20):
+        q = 'CREATE TABLE IF NOT EXISTS players_' + str(year + 2000) + ' (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, gender TEXT, grad_year INT, player_type TEXT, position TEXT)'
         c.execute(q)
     conn.close()
 
@@ -362,9 +363,24 @@ def create_event(school_home, school_away, date, time, game_id, status, address,
         conn.close()
         return [True, "Successful Event Creation"]
 
+####### GET ALL EVENTS ########
 
+def get_all_events():
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
 
+    #get all events
+    q = 'SELECT * FROM events'
+    all_events = c.execute(q).fetchall()
 
+    #split future and prev events and sort accordingly
+    future_events = [x for x in all_events if str(x[2]) >= time.strftime("%m/%d/%Y")]
+    future_events = sorted(future_events, key = lambda event: event[2])
+    
+    prev_events = [x for x in all_events if str(x[2]) <  time.strftime("%m/%d/%Y")]
+    prev_events = sorted(prev_events, key = lambda event: event[2])[::-1]
+    
+    return [prev_events, future_events]
 
 
 
