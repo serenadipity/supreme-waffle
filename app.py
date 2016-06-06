@@ -348,6 +348,24 @@ def input_stats(username):
                 user_school = get_user_school(username)
                 return redirect("school/"+user_school)
 
+@app.route("/register_event", methods=['GET','POST'])
+def register_event():
+    if request.method=="GET":
+        schools = get_distinct_schools()
+        return render_template("register_event.html",schools=schools)
+    else:
+        school_home=request.form['school_home']
+        school_away=request.form['school_away']
+        date=request.form['date']
+        time=request.form['time']
+        game_id=request.form['game_id']
+        status=request.form['status']
+        address=request.form['address']
+        gender=request.form['gender']
+        result=create_event(school_home,school_away,date,time,game_id,status,address,gender)
+        return render_template("register_event.html",error=True,message=result[1])
+        
+
 
 @app.route("/directory")
 def default_directory():

@@ -340,13 +340,13 @@ def get_all_bouts(school):
     
 ######## CREATE EVENT ########
 
-def create_event(school_home, home_score, school_away, away_score, date, time, game_id, status, address, gender):
+def create_event(school_home, school_away, date, time, game_id, status, address, gender):
     #set up connection
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
     #create events table
-    q = 'CREATE TABLE IF NOT EXISTS events (school_home TEXT, home_score INT, school_away TEXT, away_score INT, date TEXT, time TEXT, game_id INT, status TEXT, address TEXT, gender TEXT)'
+    q = 'CREATE TABLE IF NOT EXISTS events (school_home TEXT, school_away TEXT, date TEXT, time TEXT, game_id INT, status TEXT, address TEXT, gender TEXT)'
     c.execute(q)
 
     #check data is valid
@@ -356,8 +356,8 @@ def create_event(school_home, home_score, school_away, away_score, date, time, g
         conn.close()
         return [False, "Event already exists"]
     else:
-        q = 'INSERT INTO events (school_home, home_score, school_away, away_score, date, time, game_id, status, address, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-        c.execute(q, (school_home, home_score, school_away, away_score, date, time, game_id, status, address, gender))
+        q = 'INSERT INTO events (school_home, school_away, date, time, game_id, status, address, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+        c.execute(q, (school_home, school_away, date, time, game_id, status, address, gender))
         conn.commit()
         conn.close()
         return [True, "Successful Event Creation"]
