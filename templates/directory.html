@@ -12,7 +12,7 @@ body {
 
 <div class="container" id="font2">
   <center>
-    <h1>Directory</h1>
+    <h1 style="font-size=120%;">Directory</h1>
   </center>
   <hr>
   <div class="row">
@@ -26,7 +26,7 @@ body {
   </div>
   <div class="row">
     <div class="col-sm-3 col-md-6 col-lg-4" style="overflow-y: auto; height: 475px;">
-      <div class="list-group" id="font3">
+      <div class="list-group">
 	{% for school in schools %}
 	<a id="{{school}}" class="list-group-item schools">{{school}}</a> 
         {% endfor %}
@@ -80,12 +80,12 @@ body {
        $('#current_school').text(school_name);
        $('.gender').attr("style", "visibility:visibile;");
        boys = r["boys"];
-       $('.boys').append("<a href='#' class='list-group-item active'><h4 class='list-group-item-heading'>Boys Roster</h4></a>");
+       $('.boys').append("<a href='#' class='list-group-item active disabled'><h4 class='list-group-item-heading'>Boys Roster</h4></a>");
        for (i = 0; i < boys.length; i++) {
 	 $('.boys').append("<a class='list-group-item' href='/player/" + boys[i][0] + "/" + boys[i][1] + "'>" + boys[i][2] + " " + boys[i][3] + "</a>");
        };
        girls = r["girls"];
-       $('.girls').append("<a href='#' class='list-group-item active'><h4 class='list-group-item-heading'>Girls Roster</h4></a>");
+       $('.girls').append("<a href='#' class='list-group-item active disabled'><h4 class='list-group-item-heading'>Girls Roster</h4></a>");
        for (i = 0; i < girls.length; i++) {
 	 $('.girls').append("<a class='list-group-item' href='/player/" + girls[i][0] + "/" + girls[i][1] + "'>" + girls[i][2] + " " + girls[i][3] + "</a></li>");
        };		       

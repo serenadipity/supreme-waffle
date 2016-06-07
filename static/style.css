@@ -156,7 +156,7 @@ tr:nth-child(even) {
 
 #font3 {
     font-family: 'Noticia Text', serif;
-    color: white;
+    color: white; !important;
 }
 
 .list-group-item {
@@ -167,4 +167,9 @@ tr:nth-child(even) {
 .list-group-item.active, .list-group-item.active:hover {
           background-color: #C11B17;  !important;
           border-color: #fff;  !important;
+          color: white;
           }
+
+.list-group-item > a{
+    color:#fff; !important;
+}
