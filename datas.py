@@ -574,6 +574,44 @@ def get_player_touches_and_wins_and_losses(school, player_id, year):
 #print get_player_touches("Stuyvesant High School", "Kevin Li", 2016)
 #print "expected: idk like 25???"
 
+####### annoying function sammi wants me to write. #####
+def get_team_indicators(year, school, gender, gametype):
+    #set up connection YET AGAIN
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    indicator_list = []
+    
+    q = "SELECT first_name,last_name,player_id FROM players_" + str(year) + " WHERE school = ? AND player_type = ? AND gender = ?"
+#    print q
+    playerlist = c.execute(q, (school, gametype, gender)).fetchall()
+    
+    #loop de loop through players
+    for players in playerlist: 
+        name = players[0] + " " + players[1]
+        ind = get_player_indicator(name, players[2], year, gametype)
+        indicator_list+= [name, ind]
+
+    return indicator_list
+#print get_player_indicator("Kevin Li", 1, 2016, "Epee")
+#print get_team_indicators(2016, "Stuyvesant High School", "Boys Team", "Epee")
+
+
+
+######## GET PLAYER BY YEAR, SCHOOL, TYPE, GENDER #######
+def get_team_players(year, school, gametype, gender):
+    #set up connection..... again.....
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    q = "SELECT * FROM players_" + str(year) + " WHERE school = ? AND player_type = ? AND gender = ?"
+    players = c.execute(q, (school, gametype, gender)).fetchall()
+
+    return players
+
+#get_team_players(2016, "Stuyvesant High School", "Epee", "Boys Team")
+
+
 
 ######## GET GAMESCORES BY SCHOOL ########
 """def get_gamescores_by_school_and_gender(school, gender):

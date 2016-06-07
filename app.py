@@ -185,11 +185,20 @@ def edit_school_profile():
         result = get_user_school(user)
         if request.method == "GET":
             school = get_school(get_user_school(user))
-            girls = school[1][0]
-            boys = school[1][1]
-            if school[1][0][8] == "Boys":
-                boys = school[1][0]
-                girls = school[1][1]
+            girls = ''
+            boys = ''
+            if len(school) > 2:
+                if school[1][0][8] == "Girls":
+                    girls = school[1][0]
+                    boys = school[1][1]
+                else:
+                    boys = school[1][0]
+                    girls = school[1][1]
+            else:
+                if school[1][0][8] == "Girls":
+                    girls = school[1][0]
+                else:
+                    boys = school[1][0]
             return render_template("edit_school.html", user=user, boys = boys, girls = girls)
         else:
             school_name = get_user_school(user)
@@ -215,8 +224,9 @@ def show_player_profile(year, id):
     print player
     image = get_player_image(id, year)
     indicator = get_player_indicator(player[4], id, year, player[7])
-    touches_info = get_player_touches_and_wins_and_losses(player[4], id, year)
-    return render_template("player.html", user = user, error = False, player = player, image = image, indicator = indicator, touches_info = touches_info)
+    print indicator
+    #get_player_indicator(
+    return render_template("player.html", user = user, error = False, player = player, image = image, indicator = indicator)
 
 @app.route("/edit_player/<year>/<id>", methods=['GET','POST'])
 def edit_player_profile(year,id):
@@ -318,14 +328,6 @@ def input_stats(username):
 
                 return render_template("input_stats3.html",home_starter1=home_starter1,home_starter2=home_starter2,home_starter3=home_starter3,away_starter1=away_starter1,away_starter2=away_starter2,away_starter3=away_starter3,school_home=school_home,school_away=school_away,gender=gender,weapon=weapon,date=date,address=address,game_id=game_id,home_players=home_players,away_players=away_players)
             elif current_page == "3":
-
-                #h_s1 = request.form['home_starter1']
-                #h_s2 = request.form['home_starter2']
-                #h_s3 = request.form['home_starter3']
-                #a_s1 = request.form['away_starter1']
-                #a_s2 = request.form['away_starter2']
-                #a_s3 = request.form['away_starter3']
-                
                 school_home = request.form['school_home']
                 school_away = request.form['school_away']
                 gametype = request.form['weapon']
@@ -334,13 +336,6 @@ def input_stats(username):
                 date = request.form['date']
                 address = request.form['address']
                 year = now.year
-
-
-                conn=sqlite3.connect("data.db")
-                c=conn.cursor()
-                c.execute("drop table individual")
-                conn.commit()
-                conn.close()
 
                 for i in range(1,9):
                     p1 = request.form['b'+str(i)+'_home']
