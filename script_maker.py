@@ -68,8 +68,8 @@ for i in range(30):
         gametype = "Epee"
 
     for i in range(1,9):
-        p1 = randint(0, len(gf_names) + len(bf_names) - 1)
-        p2 = randint(0, len(gf_names) + len(bf_names) - 1)
+        p1 = randint(1, len(gf_names) + len(bf_names) - 1)
+        p2 = randint(1, len(gf_names) + len(bf_names) - 1)
         gender = get_player(2016, p1)[4]
         home_touches = randint(1,50)
         home_score = randint(1,30)
