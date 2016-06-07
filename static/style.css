@@ -180,6 +180,6 @@ tr:nth-child(even) {
           color: white;
           }
 
-.list-group-item > a{
-    color:#fff; !important;
+a.list-group-item{
+    color:white !important;
 }
