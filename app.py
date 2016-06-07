@@ -161,7 +161,6 @@ def show_school_profile(school_name):
     #### need to get current year
     boys = get_players_by_year_and_school_and_gender(now.year, school_name, "Boys")
     girls = get_players_by_year_and_school_and_gender(now.year, school_name, "Girls")
-    print school_name
     print boys
     print girls
     #boys_scores = get_gamescores_by_school_and_gender(school_name, "Boys")
@@ -172,7 +171,7 @@ def show_school_profile(school_name):
     images = get_school_image(school_name)
     print images
     #images = []
-    return render_template("school.html", error = result[0], user = user, data = result[1], boys = boys, girls = girls, images = images) 
+    return render_template("school.html", error = result[0], user = user, data = result[1:], boys = boys, girls = girls, images = images) 
 
 @app.route("/edit_school", methods=['GET','POST'])
 def edit_school_profile():

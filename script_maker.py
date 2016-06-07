@@ -2,6 +2,8 @@
 from datas import *
 from random import randint
 
+create_all_tables()
+
 ######### MAKE SCHOOLS #########
 school_names = ["Kathy Wang Clown School for Clowns", "Sammi's Bird School for Birds", "Kelly School of Passive Aggressiveness", "Alice School for Really Pretty Hidden Profile Pictures", "Serena Chan's Fencing School"]
 addresses = ["7656 Aliquam Street", "3916 Mauris St.", "420 Amet Ave", "6966 Felis. Avenue", "2253 Urna Road"]
@@ -34,7 +36,7 @@ for i in range(5):
         create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "Starter")
         create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "Starter")
         create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "Starter")
-    for j in range(randint(3, 5)):
+    for j in range(randint(4, 6)):
         create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "Regular")
         create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "Regular")
         create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "Regular")
@@ -68,8 +70,8 @@ for i in range(30):
         gametype = "Epee"
 
     for i in range(1,9):
-        p1 = randint(1, len(gf_names) + len(bf_names) - 1)
-        p2 = randint(1, len(gf_names) + len(bf_names) - 1)
+        p1 = randint(1, 150)
+        p2 = randint(1, 150)
         gender = get_player(2016, p1)[4]
         home_touches = randint(1,50)
         home_score = randint(1,30)
