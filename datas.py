@@ -599,6 +599,14 @@ def get_team_indicators(year, school, gender, gametype):
 #print get_player_indicator("Kevin Li", 1, 2016, "Epee")
 #print get_team_indicators(2016, "Stuyvesant High School", "Boys Team", "Epee")
 
+### this isnt even a hard fn sammi just wants me to write it ###
+def get_total_team_indicator(year, school, gender, gametype):
+    indicatorlist = get_team_indicators(year, school, gender, gametype)[0]
+    return sum(indicatorlist)
+
+### even more functions ##
+def get_gender_indicator(year, school, gender):
+    return get_total_team_indicator(year, school, gender, "Foil") + get_total_team_indicator(year, school, gender, "Epee")
 
 
 ######## GET PLAYER BY YEAR, SCHOOL, TYPE, GENDER #######
