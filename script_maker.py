@@ -30,15 +30,15 @@ player_types = ["Foil","Epee"]
 
 for i in range(5):
     for j in range(3):
-        create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "starter")
-        create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "starter")
-        create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "starter")
-        create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "starter")
+        create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "Starter")
+        create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "Starter")
+        create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "Starter")
+        create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "Starter")
     for j in range(randint(3, 5)):
-        create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "regular")
-        create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "regular")
-        create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "regular")
-        create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "regular")
+        create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "Regular")
+        create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "Regular")
+        create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "Regular")
+        create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "Regular")
 
 
 ######### MAKE EVENTS #########

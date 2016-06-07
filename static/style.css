@@ -126,3 +126,30 @@ tr:nth-child(even) {
     border-color: red;
     background-color: red;
 }
+
+.panel > .panel-heading {
+    background-image: none;
+    background-color: #C11B17;
+    border-color: #C11B17;
+    color: white;
+}
+
+.nav-tabs{
+  background-color:#161616;
+  color: #fff;
+}
+.tab-content{
+    background-color:#303136;
+    color:#fff;
+    padding:5px
+}
+.nav-tabs > li > a{
+  border: medium none;
+}
+.nav-tabs > li > a:hover,
+.nav-tabs > .active > a{
+  background-color: #303136 !important;
+    border: medium none;
+    border-radius: 0;
+    color:#6D6968;
+}

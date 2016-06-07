@@ -531,30 +531,48 @@ def get_school_indicator(year, school):
 #print get_school_indicator(2016, "Stuyvesant High School")
 
 
-######## CALCULATE NO. TOUCHES ########
-def get_player_touches(school, player, year):
+######## CALCULATE NO. TOUCHES PLUS WINS AND LOSSES ########
+def get_player_touches_and_wins_and_losses(school, player_id, year):
     touches = 0
-
+    wins = 0
+    matches = 0
+    losses = 0
+    
     #set up connection
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
-    #get all instances of player on home and away
-    q = "SELECT p1touches from individual WHERE school_home = ? AND player1 = ? AND year = ?"
-    home_touches = c.execute(q, (school, player, year)).fetchall() 
-    q = "SELECT p2touches from individual WHERE school_away = ? AND player2 = ? AND year = ?"
-    away_touches = c.execute(q, (school, player, year)).fetchall()
+    #get all instances of player on home 
+    q = "SELECT p1touches, p2touches from individual WHERE school_home = ? AND p1id = ? AND year = ?"
+    home_touches = c.execute(q, (school, player_id, year)).fetchall()
 
-    total_touches = home_touches + away_touches
+    #calculate wins and matches
+    if home_touches != None:
+        matches = len(home_touches)
+        wins = sum([1 for bout in home_touches if bout[0] > bout[1]])
 
-    for bout in total_touches:
+    #get all isntances of player on away
+    q = "SELECT p1touches, p2touches from individual WHERE school_away = ? AND p2id = ? AND year = ?"
+    away_touches = c.execute(q, (school, player_id, year)).fetchall()
+
+    #calculate wins and matches
+    if away_touches != None:
+        matches += len(away_touches)
+        wins += sum([1 for bout in home_touches if bout[1] > bout[0]])
+
+    #calculate losses
+    losses = matches - wins
+
+    #calculate total touches made by player
+    for bout in home_touches:
         touches += bout[0]
+    for bout in away_touches:
+        touches += bout[1]
 
-    return touches
+    return [matches, touches, wins, losses]
 
 #print get_player_touches("Stuyvesant High School", "Kevin Li", 2016)
 #print "expected: idk like 25???"
-
 
 
 ######## GET GAMESCORES BY SCHOOL ########
