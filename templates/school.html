@@ -98,11 +98,9 @@
   ]
   }
   data.datasets[0].data = r[0][0];
-  data.labels = r[0][1];
   data.datasets[0].label = "Girl's Epee";
-  
   data.datasets[1].data = r[1][0];
-  data.labels = data.labels.concat(r[1][1]);
+  data.labels = $.merge(r[0][1], r[1][1]);
   data.datasets[1].label = "Girl's Foil";
   
   var BarChart = new Chart(ctx, {
@@ -133,12 +131,10 @@
   ]
   }
   data2.datasets[0].data = r[2][0];
-  data2.labels = r[2][1];
   data2.datasets[0].label = "Boys's Epee";
   data2.datasets[1].data = r[3][0];
-  console.log(data2.labels)
-  //data2.labels = data2.lables.concat(r[3][1]);
   data2.datasets[1].label = "Boys's Foil";
+  data2.labels = $.merge(r[2][1], r[3][1]);
   var BarChart = new Chart(ctx2, {
   type: 'bar',
   data: data2,
