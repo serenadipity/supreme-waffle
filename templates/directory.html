@@ -4,6 +4,12 @@
 
 {% block contents %}
 
+<style>
+body {
+  background: linear-gradient(white, black);
+}
+</style>
+
 <div class="container" id="font2">
   <center>
     <h1>Directory</h1>
@@ -14,7 +20,7 @@
       <h2>Select a School</h2>
       <div class="list-group">
 	{% for school in schools %}
-	<p id="{{school}}" class="list-group-item schools">{{school}}</p> 
+	<a id="{{school}}" class="list-group-item schools">{{school}}</a> 
         {% endfor %}
       </div>
     </div>
@@ -32,16 +38,13 @@
 	  <li><a class="dropdown-item" href="#">2012-2013</a>
 	</ul>
       </div>-->
-      <h3 class="gender" style="visibility:hidden;">Boys</h3>
-      <div class="col-sm-9 col-md-8 col-lg-12" style="overflow-y: auto; height: 150px;">
+      <h3 class="gender" style="visibility:hidden;">Boys Roster</h3>
+      <div class="col-md-6" style="overflow-y: auto; height: 300px;">
 	<ul class="list-group boys">
-	</uk>
+	</ul>
       </div>
-      <hr>
-      <br>
-      <br>
-      <h3 class="gender" style="visibility:hidden;">Girls</h3>
-      <div class="col-sm-9 col-md-8 col-lg-12" style="overflow-y: auto; height: 150px;">
+      <h3 class="gender" style="visibility:hidden;">Girls Roster</h3>
+      <div class="col-md-6" style="overflow-y: auto; height: 300px;">
 	<ul class="list-group girls">
 	</ul>
       </div>
