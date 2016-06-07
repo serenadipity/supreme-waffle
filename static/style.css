@@ -1,5 +1,15 @@
 /* CSS Stylesheet */
 
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 body {
     padding-top:80px;
     /*background-color: #AFC2D5;*/
