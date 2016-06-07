@@ -211,13 +211,13 @@ def show_player_profile(year, id):
     if 'user' not in session:
         session['user'] = 0
     user = session['user']
-    print "HERE"
-    players = get_player(year,id)
-    print "\n\n"
-    print players
-    print "\n\n"
+    player = get_player(year,id)
+    print player
     image = get_player_image(id, year)
-    return render_template("player.html", user = user, error = False, players = players, image = image)
+    indicator = get_player_indicator(player[4], id, year, player[7])
+    print indicator
+    #get_player_indicator(
+    return render_template("player.html", user = user, error = False, player = player, image = image, indicator = indicator)
 
 @app.route("/edit_player/<year>/<id>", methods=['GET','POST'])
 def edit_player_profile(year,id):

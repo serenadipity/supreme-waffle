@@ -26,7 +26,7 @@ def create_all_tables():
     c.execute(q)
     q = 'CREATE TABLE IF NOT EXISTS events (school_home TEXT, school_away TEXT, date TEXT, time TEXT, game_id INT, status TEXT, address TEXT, gender TEXT)'
     c.execute(q)
-    q = 'CREATE TABLE IF NOT EXISTS individual (school_home TEXT, player1 TEXT, p1id INT, p1touches INT, school_away TEXT, player2 TEXT, p2id INT, p2touches INT, date TEXT, time TEXT, gametype TEXT, game_id INT, address TEXT)'
+    q = 'CREATE TABLE IF NOT EXISTS individual (school_home TEXT, p1id INT, p1touches INT, p1score INT, school_away TEXT, p2id INT, p2touches INT, p2score, date TEXT, gametype TEXT, game_id INT, bout_number INT, address TEXT, year INT, gender TEXT)'
     c.execute(q)
     q = 'CREATE TABLE IF NOT EXISTS info (school TEXT, title TEXT, description TEXT, date TEXT)'
     c.execute(q)
@@ -485,10 +485,10 @@ def get_player_indicator(school, player_id, year, gametype):
         total_for += bout[0]
     
     #find num touches against player
-    q = "SELECT p2touches from individual WHERE school_home = ? AND p1id = ? AND year = ? AND type = ?"
-    away_against = c.execute(q, (school, player_id, year, type)).fetchall()
-    q = "SELECT p1touches from individual WHERE school_away = ? AND p2id = ? AND year = ? AND type = ?"
-    home_against = c.execute(q, (school, player_id, year, type)).fetchall()
+    q = "SELECT p2touches from individual WHERE school_home = ? AND p1id = ? AND year = ? AND gametype = ?"
+    away_against = c.execute(q, (school, player_id, year, gametype)).fetchall()
+    q = "SELECT p1touches from individual WHERE school_away = ? AND p2id = ? AND year = ? AND gametype = ?"
+    home_against = c.execute(q, (school, player_id, year, gametype)).fetchall()
 
     #sum up player's touches-against
     total_against = 0

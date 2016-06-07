@@ -14,47 +14,50 @@
   {% endif %}
   <div>
     <div class="row">
-    <div class="col-md-4">
-      <center>
-        <br><br>
-   <img src="/static/player/images/{{image}}" onerror="this.style.display='none';" class="img-thumbnail" id="thumbnail1" height="300">
-   <br>
-   <a href="/edit_player/{{players[0]}}/{{players[1]}}" class="btn btn-default" role="button">Edit Profile</a>
-    </center>
- </div>
- <div class="col-md-8">
-<br>
-<h2><b>{{players[2]}} {{players[3]}}</b></h2>
-  <table class="table">
-    <tr>
-      <td>Year</td><td>{{players[0]}}</td>
-    </tr>
-    <tr>
-      <td>Class of</td><td>{{players[6]}}</td>
-    </tr>
-    <tr>
-      <td>Type</td><td>{{players[7]}}</td>
-    </tr>
-    <tr>
-      <td>Matches</td><td>TO BE CALCULATED</td>
-    </tr>
-    <tr>
-      <td>Wins</td><td>TO BE CALCUALTED</td>
-    </tr>
-    <tr>
-      <td>Losses</td><td>TO BE CALCULATED</td>
-    </tr>
-    <tr>
-      <td>Touches</td><td>TO BE CALCULATED</td>
-    </tr>
-    <tr>
-      <td>Position</td><td>{{players[8]}}</td>
-    </tr>
-  </table>
-  <hr>
-</div>
-</div>
+      <div class="col-md-4">
+	<center>
+          <br><br>
+	  <img src="/static/player/images/{{image}}" onerror="this.style.display='none';" class="img-thumbnail" id="thumbnail1" height="300">
+	  <br>
+	  <a href="/edit_player/{{player[0]}}/{{player[1]}}" class="btn btn-default" role="button">Edit Profile</a>
+	</center>
+      </div>
+      <div class="col-md-8">
+	<br>
+	<h2><b>{{player[2]}} {{player[3]}}</b></h2>
+	<table class="table">
+	  <tr>
+	    <td>Year</td><td>{{player[0]}}</td>
+	  </tr>
+	  <tr>
+	    <td>Class of</td><td>{{player[6]}}</td>
+	  </tr>
+	  <tr>
+	    <td>Type</td><td>{{player[7]}}</td>
+	  </tr>
+	  <tr>
+	    <td>Indicator Score</td><td>{{indicator}}</td>
+	  </tr>
+	  <tr>
+	    <td>Matches</td><td>TO BE CALCULATED</td>
+	  </tr>
+	  <tr>
+	    <td>Wins</td><td>TO BE CALCUALTED</td>
+	  </tr>
+	  <tr>
+	    <td>Losses</td><td>TO BE CALCULATED</td>
+	  </tr>
+	  <tr>
+	    <td>Touches</td><td>TO BE CALCULATED</td>
+	  </tr>
+	  <tr>
+	    <td>Position</td><td>{{player[8]}}</td>
+	  </tr>
+	</table>
+	<hr>
+      </div>
+    </div>
+  </div>
 </div>
 
-
-{% endblock %}
+  {% endblock %}
