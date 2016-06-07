@@ -153,3 +153,18 @@ tr:nth-child(even) {
     border-radius: 0;
     color:#6D6968;
 }
+
+#font3 {
+    font-family: 'Noticia Text', serif;
+    color: white;
+}
+
+.list-group-item {
+    background-color: #303136; !important;
+    color: white; !important;
+}
+
+.list-group-item.active, .list-group-item.active:hover {
+          background-color: #C11B17;  !important;
+          border-color: #fff;  !important;
+          }

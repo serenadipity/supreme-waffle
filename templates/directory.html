@@ -16,17 +16,22 @@ body {
   </center>
   <hr>
   <div class="row">
-    <div class="col-sm-3 col-md-6 col-lg-4" style="overflow-y: auto; height: 475px;">
+    <div class="col-sm-3 col-md-6 col-lg-4">
       <h2>Select a School</h2>
-      <div class="list-group">
+    </div>
+      <div class="col-sm-9 col-md-6 col-lg-8">
+      <h2 id = "current_school">Please Select a School from the Left</h2>
+      <a id="more"></a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3 col-md-6 col-lg-4" style="overflow-y: auto; height: 475px;">
+      <div class="list-group" id="font3">
 	{% for school in schools %}
 	<a id="{{school}}" class="list-group-item schools">{{school}}</a> 
         {% endfor %}
       </div>
     </div>
-    <div class="col-sm-9 col-md-6 col-lg-8">
-      <h2 id = "current_school">Please Select a School from the Left</h2>
-      <a id="more"></a>
       <!--<div class="btn-group">
 	<button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	  Select a Year <span class="caret"></span>
@@ -38,20 +43,25 @@ body {
 	  <li><a class="dropdown-item" href="#">2012-2013</a>
 	</ul>
       </div>-->
+      <div class="col-md-4" style="overflow-y: auto; height: 375px;">
+        <!--
       <h3 class="gender" style="visibility:hidden;">Boys Roster</h3>
-      <div class="col-md-6" style="overflow-y: auto; height: 300px;">
-	<ul class="list-group boys">
-	</ul>
+    -->
+	<div class="list-group boys">
+    
+	</div>
       </div>
+      <div class="col-md-4" style="overflow-y: auto; height: 375px;">
+        <!--
       <h3 class="gender" style="visibility:hidden;">Girls Roster</h3>
-      <div class="col-md-6" style="overflow-y: auto; height: 300px;">
-	<ul class="list-group girls">
-	</ul>
+    -->
+	<div class="list-group girls">
+	</div>
       </div>
     </div>
 
   </div>
-</div>
+
 
 {% endblock %}
 
@@ -70,12 +80,14 @@ body {
        $('#current_school').text(school_name);
        $('.gender').attr("style", "visibility:visibile;");
        boys = r["boys"];
+       $('.boys').append("<a href='#' class='list-group-item active'><h4 class='list-group-item-heading'>Boys Roster</h4></a>");
        for (i = 0; i < boys.length; i++) {
-	 $('.boys').append("<li class='list-group-item'><a href='/player/" + boys[i][0] + "/" + boys[i][1] + "'>" + boys[i][2] + " " + boys[i][3] + "</a></li>");
+	 $('.boys').append("<a class='list-group-item' href='/player/" + boys[i][0] + "/" + boys[i][1] + "'>" + boys[i][2] + " " + boys[i][3] + "</a>");
        };
        girls = r["girls"];
+       $('.girls').append("<a href='#' class='list-group-item active'><h4 class='list-group-item-heading'>Girls Roster</h4></a>");
        for (i = 0; i < girls.length; i++) {
-	 $('.girls').append("<li class='list-group-item'><a href='/player/" + girls[i][0] + "/" + girls[i][1] + "'>" + girls[i][2] + " " + girls[i][3] + "</a></li>");
+	 $('.girls').append("<a class='list-group-item' href='/player/" + girls[i][0] + "/" + girls[i][1] + "'>" + girls[i][2] + " " + girls[i][3] + "</a></li>");
        };		       
 		         
     });

@@ -14,129 +14,304 @@
       <hr> 
       <h3>Bout 1</h3>
 
-      <p>{{home_starter3[2]}} {{ home_starter3[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout1_home_starter3_touches" id="bout1_home_starter3_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout1_home_starter3_score" id="bout1_home_starter3_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<select class="form-control" name="b1_home" id="b1_home" required>
+	  <option value="{{home_starter3[1]}}" selected>Home Starter 3: {{home_starter3[2]}} {{home_starter3[3]}}</option>
+	  {% for player in home_players %}
+	  {% if player[1] != home_starter3[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
       </div>
 
-      <p>{{away_starter3[2]}} {{away_starter3[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout1_away_starter3_touches" id="bout1_away_starter3_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout1_away_starter3_score" id="bout1_away_starter3_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<input type="number" name="b1_home_touches" id="b1_home_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b1_home_score" id="b1_home_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <div class="form-group">
+	<select class="form-control" name="b1_away" id="b1_away" required>
+	  <option value="{{away_starter3[1]}}" selected>Away Starter 3: {{away_starter3[2]}} {{away_starter3[3]}}</option>
+	  {% for player in away_players %}
+	  {% if player[1] != away_starter3[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
+      </div>
+
+      <div class="form-group">
+	<input type="number" name="b1_away_touches" id="b1_away_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b1_away_score" id="b1_away_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
       </div>
 
       <h3>Bout 2</h3>
-      <p>{{home_starter1[2]}} {{home_starter1[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout2_home_starter1_touches" id="bout2_home_starter2_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout2_home_starter1_score" id="bout2_home_starter1_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<select class="form-control" name="b2_home" id="b2_home" required>
+	  <option value="{{home_starter1[1]}}" selected>Home Starter 1: {{home_starter1[2]}} {{home_starter1[3]}}</option>
+	  {% for player in home_players %}
+	  {% if player[1] != home_starter3[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
       </div>
 
-      <p>{{away_starter2[2]}} {{away_starter2[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout2_away_starter2_touches" id="bout2_away_start2_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout2_away_starter2_score" id="bout2_home_away2_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<input type="number" name="b2_home_touches" id="b2_home_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b2_home_score" id="b2_home_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+     <div class="form-group">
+	<select class="form-control" name="b2_away" id="b2_away" required>
+	  <option value="{{away_starter2[1]}}" selected>Away Starter 2: {{away_starter2[2]}} {{away_starter2[3]}}</option>
+	  {% for player in away_players %}
+	  {% if player[1] != away_starter2[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
+      </div>
+
+      <div class="form-group">
+	<input type="number" name="b2_away_touches" id="b2_away_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b2_away_score" id="b2_away_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
       </div>
 
       <h3>Bout 3</h3>
-      <p>{{home_starter2[2]}} {{home_starter2[3]}}</p>
+
       <div class="form-group">
-	<input type="number" name="bout3_home_starter2_touches" id="bout3_home_starter2_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout3_home_starter2_score" id="bout3_home_starter2_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<select class="form-control" name="b3_home" id="b3_home" required>
+	  <option value="{{home_starter2[1]}}" selected>Home Starter 2: {{home_starter2[2]}} {{home_starter2[3]}}</option>
+	  {% for player in home_players %}
+	  {% if player[1] != home_starter2[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
       </div>
 
-      <p>{{away_starter1[2]}} {{away_starter1[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout3_away_starter1_touches" id="bout3_away_starter1_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout3_away_starter1_score" id="bout3_home_starter1_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<input type="number" name="b3_home_touches" id="b3_home_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b3_home_score" id="b3_home_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <div class="form-group">
+	<select class="form-control" name="b3_away" id="b3_away" required>
+	  <option value="{{away_starter1[1]}}" selected>Away Starter 1: {{away_starter1[2]}} {{away_starter1[3]}}</option>
+	  {% for player in away_players %}
+	  {% if player[1] != away_starter1[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
+      </div>
+
+      <div class="form-group">
+	<input type="number" name="b3_away_touches" id="b3_away_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b3_away_score" id="b3_away_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
       </div>
 
       <h3>Bout 4</h3>
-      <p>{{home_starter1[2]}} {{home_starter1[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout4_home_starter1_touches" id="bout4_home_starter1_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout4_home_starter1_score" id="bout4_home_starter1_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<select class="form-control" name="b4_home" id="b4_home" required>
+	  <option value="{{home_starter1[1]}}" selected>Home Starter 1: {{home_starter1[2]}} {{home_starter1[3]}}</option>
+	  {% for player in home_players %}
+	  {% if player[1] != home_starter1[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
       </div>
 
-      <p>{{away_starter3[2]}} {{away_starter3[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout4_away_starter3_touches" id="bout4_away_starter4_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout4_away_starter3_score" id="bout4_away_starter3_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<input type="number" name="b4_home_touches" id="b4_home_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b4_home_score" id="b4_home_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <div class="form-group">
+	<select class="form-control" name="b4_away" id="b4_away" required>
+	  <option value="{{away_starter3[1]}}" selected>Away Starter 3: {{away_starter3[2]}} {{away_starter3[3]}}</option>
+	  {% for player in away_players %}
+	  {% if player[1] != away_starter3[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
+      </div>
+
+      <div class="form-group">
+	<input type="number" name="b4_away_touches" id="b4_away_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b4_away_score" id="b4_away_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
       </div>
 
       <h3>Bout 5</h3>
-      <p>{{home_starter3[2]}} {{home_starter3[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout5_home_starter3_touches" id="bout5_home_starter3_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout5_home_starter3_score" id="bout5_home_starter3_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<select class="form-control" name="b5_home" id="b5_home" required>
+	  <option value="{{home_starter3[1]}}" selected>Home Starter 3: {{home_starter3[2]}} {{home_starter3[3]}}</option>
+	  {% for player in home_players %}
+	  {% if player[1] != home_starter3[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
       </div>
 
-      <p>{{away_starter1[2]}} {{away_starter1[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout5_away_starter1_touches" id="bout5_away_starter1_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout5_away_starter1_score" id="bout5_away_starter1_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<input type="number" name="b5_home_touches" id="b5_home_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b5_home_score" id="b5_home_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <div class="form-group">
+	<select class="form-control" name="b5_away" id="b5_away" required>
+	  <option value="{{away_starter1[1]}}" selected>Away Starter 1: {{away_starter1[2]}} {{away_starter1[3]}}</option>
+	  {% for player in away_players %}
+	  {% if player[1] != away_starter1[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
+      </div>
+
+      <div class="form-group">
+	<input type="number" name="b5_away_touches" id="b5_away_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b5_away_score" id="b5_away_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
       </div>
 
       <h3>Bout 6</h3>
-      <p>{{home_starter2[2]}} {{home_starter2[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout6_home_starter2_touches" id="bout6_home_starter2_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout6_home_starter2_score" id="bout6_home_starter2_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<select class="form-control" name="b6_home" id="b6_home" required>
+	  <option value="{{home_starter2[1]}}" selected>Home Starter 2: {{home_starter2[2]}} {{home_starter2[3]}}</option>
+	  {% for player in home_players %}
+	  {% if player[1] != home_starter2[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
       </div>
 
-      <p>{{away_starter2[2]}} {{away_starter2[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout6_away_starter2_touches" id="bout6_away_starter2_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout6_away_starter2_score" id="bout6_away_starter2_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<input type="number" name="b6_home_touches" id="b6_home_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b6_home_score" id="b6_home_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <div class="form-group">
+	<select class="form-control" name="b6_away" id="b6_away" required>
+	  <option value="{{away_starter2[1]}}" selected>Away Starter 2: {{away_starter2[2]}} {{away_starter2[3]}}</option>
+	  {% for player in away_players %}
+	  {% if player[1] != away_starter2[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
+      </div>
+
+      <div class="form-group">
+	<input type="number" name="b6_away_touches" id="b6_away_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b6_away_score" id="b6_away_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
       </div>
 
       <h3>Bout 7</h3>
-      <p>{{home_starter1[2]}} {{home_starter1[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout7_home_starter1_touches" id="bout7_home_starter1_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout7_home_starter1_score" id="bout7_home_starter1_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<select class="form-control" name="b7_home" id="b7_home" required>
+	  <option value="{{home_starter1[1]}}" selected>Home Starter 1: {{home_starter1[2]}} {{home_starter1[3]}}</option>
+	  {% for player in home_players %}
+	  {% if player[1] != home_starter1[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
       </div>
 
-      <p>{{away_starter1[2]}} {{away_starter1[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout7_away_starter1_touches" id="bout7_away_starter1_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout7_away_starter1_score" id="bout7_away_starter1_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<input type="number" name="b7_home_touches" id="b7_home_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b7_home_score" id="b7_home_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+     <div class="form-group">
+	<select class="form-control" name="b7_away" id="b7_away" required>
+	  <option value="{{away_starter1[1]}}" selected>Away Starter 1: {{away_starter1[2]}} {{away_starter1[3]}}</option>
+	  {% for player in away_players %}
+	  {% if player[1] != away_starter1[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
+      </div>
+
+      <div class="form-group">
+	<input type="number" name="b7_away_touches" id="b7_away_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b7_away_score" id="b7_away_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
       </div>
 
       <h3>Bout 8</h3>
-      <p>{{home_starter2[2]}} {{home_starter2[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout8_home_starter2_touches" id="bout8_home_starter2_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout8_home_starter2_score" id="bout8_home_starter2_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<select class="form-control" name="b8_home" id="b8_home" required>
+	  <option value="{{home_starter2[1]}}" selected>Home Starter 2: {{home_starter2[2]}} {{home_starter2[3]}}</option>
+	  {% for player in home_players %}
+	  {% if player[1] != home_starter2[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
       </div>
 
-      <p>{{away_starter3[2]}} {{away_starter3[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout8_away_starter3_touches" id="bout8_away_starter3_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout8_away_starter3_score" id="bout8_away_starter3_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<input type="number" name="b8_home_touches" id="b8_home_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b8_home_score" id="b8_home_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <div class="form-group">
+	<select class="form-control" name="b8_away" id="b8_away" required>
+	  <option value="{{away_starter3[1]}}" selected>Away Starter 3: {{away_starter3[2]}} {{away_starter3[3]}}</option>
+	  {% for player in away_players %}
+	  {% if player[1] != away_starter3[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
+      </div>
+
+      <div class="form-group">
+	<input type="number" name="b8_away_touches" id="b8_away_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b8_away_score" id="b8_away_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
       </div>
 
       <h3>Bout 9</h3>
-      <p>{{home_starter3[2]}} {{home_starter3[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout9_home_starter3_touches" id="bout9_home_starter3_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout9_home_starter3_score" id="bout9_home_starter3_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<select class="form-control" name="b9_home" id="b9_home" required>
+	  <option value="{{home_starter3[1]}}" selected>Home Starter 3: {{home_starter3[2]}} {{home_starter3[3]}}</option>
+	  {% for player in home_players %}
+	  {% if player[1] != home_starter3[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
       </div>
 
-      <p>{{away_starter2[2]}} {{away_starter2[3]}}</p>
       <div class="form-group">
-	<input type="number" name="bout9_away_starter2_touches" id="bout9_away_starter2_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
-	<input type="number" name="bout9_away_starter2_score" id="bout9_away_starter2_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+	<input type="number" name="b9_home_touches" id="b9_home_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b9_home_score" id="b9_home_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
+      </div>
+
+      <div class="form-group">
+	<select class="form-control" name="b9_away" id="b9_away" required>
+	  <option value="{{away_starter2[1]}}" selected>Away Starter 2: {{away_starter3[2]}} {{away_starter2[3]}}</option>
+	  {% for player in away_players %}
+	  {% if player[1] != away_starter2[1] %}
+	  <option value="{{player[1]}}">Sub: {{player[2]}} {{player[3]}}</option>
+	  {% endif %}
+	  {% endfor %}
+	</select>
+      </div>
+
+      <div class="form-group">
+	<input type="number" name="b9_away_touches" id="b9_away_touches" class="form-control input-lg" placeholder="Touches" tabindex="2" required>
+	<input type="number" name="b9_away_score" id="b9_away_score" class="form-control input-lg" placeholder="Score" tabindex="2" required>
       </div>
      
       <input type="hidden" name="input_page_num" value="3">
-      <input type="hidden" name="home_starter1" value="{{home_starter1[1]}}">
-      <input type="hidden" name="home_starter2" value="{{home_starter2[1]}}">
-      <input type="hidden" name="home_starter3" value="{{home_starter3[1]}}">
-      <input type="hidden" name="away_starter1" value="{{away_starter1[1]}}">
-      <input type="hidden" name="away_starter2" value="{{away_starter2[1]}}">
-      <input type="hidden" name="away_starter3" value="{{away_starter3[1]}}">
       <input type="hidden" name="school_home" value="{{school_home}}">
       <input type="hidden" name="school_away" value="{{school_away}}">
       <input type="hidden" name="gender" value="{{gender}}">
