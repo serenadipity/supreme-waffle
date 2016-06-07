@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %} Input Form {% endblock %}
+
+{% block contents %}
+
+<div class="container">
+<br><br>
+  <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+    <form role="form" method="POST" enctype="multipart/form-data">
+      {% if error %}
+      <div class="alert alert-danger">
+	<p id="error">{{message}}</p>
+      </div>
+      {% endif %}
+      <div>
+	<h1 class="center2">Register an Event</h1>
+      </div>
+      <hr>
+      <div class="radio">
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls">Girls Event</label>
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys">Boys Event</label>
+      </div>
+     <div class="form-group">
+	<input type="number" name="game_id" id="game_id" class="form-control input-lg" placeholder="Game ID" tabindex="1" required>
+      </div>
+      <p>Home School:</p>
+      <div class="form-group">
+	<select class="form-control" name="school_home" id="school_home" required>
+	  <option value="" selected disabled>Schools</option>
+	  {% for school in schools %}
+	  <option value="{{school}}">{{school}}</option>
+	  {% endfor %}
+	</select>
+      </div>
+      <p>Away School:</p>
+      <div class="form-group">
+	<select class="form-control" name="school_away" id="school_away" required>
+	  <option value="" selected disabled>Schools</option>
+	  {% for school in schools %}
+	  <option value="{{school}}">{{school}}</option>
+	  {% endfor %}
+	</select>    
+      <div class="form-group">
+	<input type="text" name="address" id="address" class="form-control input-lg" placeholder="Location" tabindex="2" required>
+      </div>
+      <div class="form-group">
+	<input type="date" name="date" id="date" class="form-control input-lg" placeholder="Date" tabindex="2" required>
+      </div>
+      <div class="form-group">
+	<input type="time" name="time" id="time" class="form-control input-lg" placeholder="Time" tabindex="2" required>
+      </div>
+      Optional:
+      <div class="form-group">
+	<input type="text" name="status" id="status" class="form-control input-lg" placeholder="Status" tabindex="2">
+      </div>
+      <div class="row">
+	<div class="col-xs-12 col-md-12"><input type="submit" value="Register" class="btn btn-success btn-block btn-lg" tabindex="5"></div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -314,15 +314,18 @@ def input_stats(username):
                 date = request.form['date']
                 address = request.form['address']
                 
-                return render_template("input_stats3.html",home_starter1=home_starter1,home_starter2=home_starter2,home_starter3=home_starter3,away_starter1=away_starter1,away_starter2=away_starter2,away_starter3=away_starter3,school_home=school_home,school_away=school_away,gender=gender,weapon=weapon,date=date,address=address,game_id=game_id)
+                home_players = get_players_by_year_and_school_and_gender(now.year,school_home,gender)
+                away_players = get_players_by_year_and_school_and_gender(now.year,school_away,gender)
+
+                return render_template("input_stats3.html",home_starter1=home_starter1,home_starter2=home_starter2,home_starter3=home_starter3,away_starter1=away_starter1,away_starter2=away_starter2,away_starter3=away_starter3,school_home=school_home,school_away=school_away,gender=gender,weapon=weapon,date=date,address=address,game_id=game_id,home_players=home_players,away_players=away_players)
             elif current_page == "3":
 
-                h_s1 = request.form['home_starter1']
-                h_s2 = request.form['home_starter2']
-                h_s3 = request.form['home_starter3']
-                a_s1 = request.form['away_starter1']
-                a_s2 = request.form['away_starter2']
-                a_s3 = request.form['away_starter3']
+                #h_s1 = request.form['home_starter1']
+                #h_s2 = request.form['home_starter2']
+                #h_s3 = request.form['home_starter3']
+                #a_s1 = request.form['away_starter1']
+                #a_s2 = request.form['away_starter2']
+                #a_s3 = request.form['away_starter3']
                 
                 school_home = request.form['school_home']
                 school_away = request.form['school_away']
@@ -333,42 +336,43 @@ def input_stats(username):
                 address = request.form['address']
                 year = now.year
 
-                create_ind(school_home, h_s3, request.form['bout1_home_starter3_touches'], request.form['bout1_home_starter3_score'], school_away, a_s3, request.form['bout1_away_starter3_touches'], request.form['bout1_away_starter3_score'], date, gametype, game_id, 1, address, year, gender)
-                
-                create_ind(school_home, h_s1, request.form['bout2_home_starter1_touches'], request.form['bout2_home_starter1_score'], school_away, a_s2, request.form['bout2_away_starter2_touches'], request.form['bout2_away_starter2_score'], date, gametype, game_id, 2, address, year, gender)
-                
-                create_ind(school_home, h_s2, request.form['bout3_home_starter2_touches'], request.form['bout3_home_starter2_score'], school_away, a_s1, request.form['bout3_away_starter1_touches'], request.form['bout3_away_starter1_score'], date, gametype, game_id, 3, address, year, gender)
-                
-                create_ind(school_home, h_s1, request.form['bout4_home_starter1_touches'], request.form['bout4_home_starter1_score'], school_away, a_s3, request.form['bout4_away_starter3_touches'], request.form['bout4_away_starter3_score'], date, gametype, game_id, 4, address, year, gender)
-                create_ind(school_home, h_s3, request.form['bout5_home_starter3_touches'], request.form['bout5_home_starter3_score'], school_away, a_s1, request.form['bout5_away_starter1_touches'], request.form['bout5_away_starter1_score'], date, gametype, game_id, 5, address, year, gender)
-                
-                create_ind(school_home, h_s2, request.form['bout6_home_starter2_touches'], request.form['bout6_home_starter2_score'], school_away, a_s2, request.form['bout6_away_starter2_touches'], request.form['bout6_away_starter2_score'], date, gametype, game_id, 6, address, year, gender)
-                
-                create_ind(school_home, h_s1, request.form['bout7_home_starter1_touches'], request.form['bout7_home_starter1_score'], school_away, a_s1, request.form['bout7_away_starter1_touches'], request.form['bout7_away_starter1_score'], date, gametype, game_id, 7, address, year, gender)
 
-                create_ind(school_home, h_s2, request.form['bout8_home_starter2_touches'], request.form['bout8_home_starter2_score'], school_away, a_s3, request.form['bout8_away_starter3_touches'], request.form['bout8_away_starter3_score'], date, gametype, game_id, 8, address, year, gender)
+                conn=sqlite3.connect("data.db")
+                c=conn.cursor()
+                c.execute("drop table individual")
+                conn.commit()
+                conn.close()
 
-                create_ind(school_home, h_s3, request.form['bout9_home_starter3_touches'], request.form['bout9_home_starter3_score'], school_away, a_s2, request.form['bout9_away_starter2_touches'], request.form['bout9_away_starter2_score'], date, gametype, game_id, 9, address, year, gender)
+                for i in range(1,9):
+                    p1 = request.form['b'+str(i)+'_home']
+                    p2 = request.form['b'+str(i)+'_away']
+                    create_ind(school_home, p1, request.form['b'+str(i)+'_home_touches'], request.form['b'+str(i)+'_home_score'], school_away, p2, request.form['b'+str(i)+'_away_touches'], request.form['b'+str(i)+'_away_score'], date, gametype, game_id, 1, address, year, gender)
 
                 user_school = get_user_school(username)
                 return redirect("school/"+user_school)
 
 @app.route("/register_event", methods=['GET','POST'])
 def register_event():
-    if request.method=="GET":
-        schools = get_distinct_schools()
-        return render_template("register_event.html",schools=schools)
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
+    if user == 0:
+        return redirect("login")
     else:
-        school_home=request.form['school_home']
-        school_away=request.form['school_away']
-        date=request.form['date']
-        time=request.form['time']
-        game_id=request.form['game_id']
-        status=request.form['status']
-        address=request.form['address']
-        gender=request.form['gender']
-        result=create_event(school_home,school_away,date,time,game_id,status,address,gender)
-        return render_template("register_event.html",error=True,message=result[1])
+        if request.method=="GET":
+            schools = get_distinct_schools()
+            return render_template("register_event.html",user=user,schools=schools)
+        else:
+            school_home=request.form['school_home']
+            school_away=request.form['school_away']
+            date=request.form['date']
+            time=request.form['time']
+            game_id=request.form['game_id']
+            status=request.form['status']
+            address=request.form['address']
+            gender=request.form['gender']
+            result=create_event(school_home,school_away,date,time,game_id,status,address,gender)
+            return render_template("register_event.html",user=user,error=True,message=result[1])
         
 
 
