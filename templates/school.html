@@ -14,102 +14,138 @@
   </div>
   {% else %}
   <center>
-  <div>
-    <h1>{{data[0][0][0]}}</h1>
+    <div>
+      <h1>{{data[0][0][0]}}</h1>
+    </div>
+    <a href="/edit_school" class="btn btn-default" role="button">Edit Profile</a>
+    <h3>{{data[0][0][1]}} 
+      <br>
+      {{data[0][0][2]}}, NY, {{data[0][0][3]}}</h3>
+    <h3>Division: {{data[0][0][5]}}</h3>
+
+  </center>
+
+  <div class="row">
+
+    <div class="col-lg-6">
+      
+      <hr>
+      <canvas id="chart1" width="300" height="300"></canvas>
+      <hr>
+      <h3><p>{{data[0][0][8]}} Team: {{data[0][0][4]}}</p></h3>
+      <p>Coach: {{data[0][0][6]}}</p>
+      <p>Manager: {{data[0][0][7]}}</p>
+      <img class="img-thumbnail" id="thumbnail1" src="/static/school/images/{{images[0]}}" onerror="this.style.display='none';" height="400">
+      <hr>
+      {% for player in girls %}
+      <p><a href="/player/{{player[0]}}/{{player[1]}}">{{player[2]}} {{player[3]}}</a> - Class of {{player[6]}}, {{player[7]}}</p>
+      {% endfor %}
+    </div>
+
+    <div class="col-lg-6">
+      <hr>
+      <canvas id="chart2" width="300" height="300"></canvas>
+      <hr>
+      <h3><p>{{data[0][1][8]}} Team: {{data[0][1][4]}}</p></h3>
+      <p>Coach: {{data[0][1][6]}}</p>
+      <p>Manager: {{data[0][1][7]}}</p>
+      <img class="img-thumbnail" id="thumbnail1" src="/static/school/images/{{images[1]}}" onerror="this.style.display='none';" height="200" class="img-thumbnail">
+      <hr>
+      {% for player in boys %}
+      <p><a href="/player/{{player[0]}}/{{player[1]}}">{{player[2]}} {{player[3]}}</a> - Class of {{player[6]}}, {{player[7]}}</p>
+      {% endfor %}
+    </div>
+
   </div>
-  <a href="/edit_school" class="btn btn-default" role="button">Edit Profile</a>
-  <h3>{{data[0][0][1]}} 
-    <br>
-     {{data[0][2]}}, NY, {{data[0][3]}}</h3>
-  <h3>Division: {{data[0][0][5]}}</h3>
-
-</center>
-
-<div class="row">
-
-  <div class="col-lg-6">
-  
-  {% for i in range(0,data|length) %}
-  <hr>
-  <p>{{data[i][8]}} <i>Team {{data[i][4]}}</i></p>
-  <p>Coach: {{data[i][6]}}</p>
-  <!--
-  <p>Manager: {{data[i][7]}}</p>
--->
-  {% endfor %}
-  {% endif %}
-  <h2>PLACEHOLDER</h2>
-  <canvas id="myChart" width="300" height="300"></canvas>
-  <hr>
-  <h3>Girls Team</h3>
-  <img class="img-thumbnail" id="thumbnail1" src="/static/school/images/{{images[0]}}" onerror="this.style.display='none';" height="400">
-  <!--<p> Number of Games: girls_scores[0]</p>
-  <p> Total Score: girls_scores[1]</p>-->
-  <hr>
-  {% for player in girls %}
-  <hr>
-  <p><a href="/player/{{player[0]}}/{{player[1]}}">{{player[2]}} {{player[3]}}</a> - Class of {{player[6]}}, {{player[7]}}</p>
-  {% endfor %}
-  </div>
-
-<div class="col-lg-6">
-  <h3>Boys Team</h3>
-  <img class="img-thumbnail" id="thumbnail1" src="/static/school/images/{{images[1]}}" onerror="this.style.display='none';" height="200" class="img-thumbnail">
-  <!--<p> Number of Games: boys_scores[0]</p>
-  <p> Total Score: boys_scores[1]</p>-->
-  <hr>
-  {% for player in boys %}
-  <p><a href="/player/{{player[0]}}/{{player[1]}}">{{player[2]}} {{player[3]}}</a> - Class of {{player[6]}}, {{player[7]}}</p>
-  {% endfor %}
 </div>
 
-</div>
-</div>
-
-
+{% endif %}
 {% endblock %}
 
 {% block script %}
 <script>
   console.log("Hello");
-  var ctx = document.getElementById("myChart").getContext("2d");
+  var ctx = document.getElementById("chart1").getContext("2d");
+  var ctx2 = document.getElementById("chart2").getContext("2d");
+  
   var options = {
   responsive: false,
-  maintainAspectRatio: true
+  maintainAspectRatio: true,
+  scaleShowLabels : false
   }
+  
+  school_name = "{{data[0][0][0]}}"
+
+  $.getJSON("/graph", {school: school_name}, function(r) {
   var data = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
+  labels: [],
   datasets: [
   {
-  label: "Best School",
+  label: "",
   fill: false,
   lineTension: 0.1,
   backgroundColor: "rgba(75,192,192,0.4)",
-  borderColor: "rgba(75,192,192,1)",
-  borderCapStyle: 'butt',
-  borderDash: [],
-  borderDashOffset: 0.0,
-  borderJoinStyle: 'miter',
-  pointBorderColor: "rgba(75,192,192,1)",
   pointBackgroundColor: "#fff",
-  pointBorderWidth: 1,
-  pointHoverRadius: 5,
-  pointHoverBackgroundColor: "rgba(75,192,192,1)",
-  pointHoverBorderColor: "rgba(220,220,220,1)",
-  pointHoverBorderWidth: 2,
-  pointRadius: 1,
-  pointHitRadius: 10,
-  data: [65, 59, 80, 81, 56, 55, 40],
+  data: []
+  },
+  {
+  label: "",
+  fill: false,
+  lineTension: 0.1,
+  backgroundColor: "#34FFA0",
+  data: []
   }
   ]
   }
-  //console.log(data.datasets[0].data);
-  //data.datasets[0].data = [0,0,0,0];
-  //console.log(data.datasets.data);
-  var myLineChart = new Chart(ctx, {
-  type: 'line',
+  data.datasets[0].data = r[0][0];
+  data.labels = r[0][1];
+  data.datasets[0].label = "Girl's Epee";
+  
+  data.datasets[1].data = r[1][0];
+  data.labels = data.labels.concat(r[1][1]);
+  data.datasets[1].label = "Girl's Foil";
+  
+  var BarChart = new Chart(ctx, {
+  type: 'bar',
   data: data,
   options: options
   });
+
+  var data2 = {
+  labels: [],
+  datasets: [
+  {
+  label: "",
+  fill: false,
+  lineTension: 0.1,
+  backgroundColor: "rgba(75,192,192,0.4)",
+  pointBackgroundColor: "#fff",
+  data: [],
+  },
+  {
+  label: "",
+  fill: false,
+  lineTension: 0.1,
+  backgroundColor: "#34FFA0",
+  pointBackgroundColor: "#fff",
+  data: [],
+  }
+  ]
+  }
+  data2.datasets[0].data = r[2][0];
+  data2.labels = r[2][1];
+  data2.datasets[0].label = "Boys's Epee";
+  data2.datasets[1].data = r[3][0];
+  console.log(data2.labels)
+  //data2.labels = data2.lables.concat(r[3][1]);
+  data2.datasets[1].label = "Boys's Foil";
+  var BarChart = new Chart(ctx2, {
+  type: 'bar',
+  data: data2,
+  options: options
+  });
+  });
+
+  
 </script>
 {% endblock %}

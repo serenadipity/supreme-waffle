@@ -156,22 +156,32 @@ def show_school_profile(school_name):
     if 'user' not in session:
         session['user'] = 0
     user = session['user']
-    print "SCHOOL" + school_name
+    
     result = get_school(school_name)
-    #### need to get current year
+    print result
+    print "\n\n\n\n"
     boys = get_players_by_year_and_school_and_gender(now.year, school_name, "Boys")
     girls = get_players_by_year_and_school_and_gender(now.year, school_name, "Girls")
+
     print boys
     print girls
-    #boys_scores = get_gamescores_by_school_and_gender(school_name, "Boys")
-    #girls_scores = get_gamescores_by_school_and_gender(school_name, "Girls")
-
-    print school_name
-    print "THIS IS THE SCHOOL"
+    
     images = get_school_image(school_name)
-    print images
-    #images = []
+
+    
     return render_template("school.html", error = result[0], user = user, data = result[1:], boys = boys, girls = girls, images = images) 
+
+@app.route("/graph")
+def graph():
+    school = request.args.get("school")
+    graph = []
+    graph.append(get_team_indicators(now.year, school, "Girls", "Epee"))
+    graph.append(get_team_indicators(now.year, school, "Girls", "Foil"))
+    graph.append(get_team_indicators(now.year, school, "Boys", "Epee"))
+    graph.append(get_team_indicators(now.year, school, "Boys", "Foil"))
+    print graph
+    "\n\n\n"
+    return json.dumps(graph)
 
 @app.route("/edit_school", methods=['GET','POST'])
 def edit_school_profile():

@@ -580,6 +580,7 @@ def get_team_indicators(year, school, gender, gametype):
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
 
+    names = []
     indicator_list = []
     
     q = "SELECT first_name,last_name,player_id FROM players_" + str(year) + " WHERE school = ? AND player_type = ? AND gender = ?"
@@ -587,12 +588,14 @@ def get_team_indicators(year, school, gender, gametype):
     playerlist = c.execute(q, (school, gametype, gender)).fetchall()
     
     #loop de loop through players
-    for players in playerlist: 
+    for players in playerlist:
+        print players
         name = players[0] + " " + players[1]
-        ind = get_player_indicator(name, players[2], year, gametype)
-        indicator_list+= [name, ind]
+        ind = get_player_indicator(school, players[2], year, gametype)
+        names.append(name)
+        indicator_list.append(ind)
 
-    return indicator_list
+    return [indicator_list, names]
 #print get_player_indicator("Kevin Li", 1, 2016, "Epee")
 #print get_team_indicators(2016, "Stuyvesant High School", "Boys Team", "Epee")
 
