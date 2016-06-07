@@ -189,3 +189,7 @@ tr:nth-child(even) {
 a.list-group-item{
     color:white !important;
 }
+
+a.list-group-item:hover{
+    background-color:#484848 !important;
+}
