@@ -61,3 +61,18 @@ for i in range(30):
         status = "on time"
     gender = genders[randint(0, 1)]
     create_event(schoolH, schoolA, date, time, game, status, address, gender)
+
+    if randint(0, 100) < 50:
+        gametype = "Foil"
+    else:
+        gametype = "Epee"
+
+    for i in range(1,9):
+        p1 = randint(1, len(gf_names) + len(bf_names) - 1)
+        p2 = randint(1, len(gf_names) + len(bf_names) - 1)
+        gender = get_player(2016, p1)[4]
+        home_touches = randint(1,50)
+        home_score = randint(1,30)
+        away_touches = randint(1,50)
+        away_score = randint(1,30)
+        create_ind(schoolH, p1, home_touches, home_score, schoolA, p2, away_touches, away_score, date, gametype, game, 1, address, 2016, gender)

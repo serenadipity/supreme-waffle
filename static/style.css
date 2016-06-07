@@ -125,11 +125,11 @@ tr:nth-child(even) {
 .homepage thead, .homepage tbody { display: block; }
 
 .homepage tbody {
-    height: 200px;       
-    overflow-y: auto;    /* Trigger vertical scroll    */
-    overflow-x: hidden;  /* Hide the horizontal scroll */
+    height: 200px;
+    overflow-y: auto;
 }
 
+<<<<<<< HEAD
 .homepage2 thead, .homepage tbody { display: block; }
 
 .homepage2 tbody {
@@ -138,6 +138,15 @@ tr:nth-child(even) {
     overflow-x: hidden;  /* Hide the horizontal scroll */
 }
 
+=======
+.homepage tr:first-child td {
+    border-top-width: 2px !important;
+}
+
+.homepage th {
+    border-bottom-width: 0px !important;
+}
+>>>>>>> d42ad768418ca7bc9cefafea152651e5c554a7f5
 #colorstrip{
     width: 100%; height: 100px;
     border-style: solid;
@@ -190,4 +199,8 @@ tr:nth-child(even) {
 
 a.list-group-item{
     color:white !important;
+}
+
+a.list-group-item:hover{
+    background-color:#484848 !important;
 }
