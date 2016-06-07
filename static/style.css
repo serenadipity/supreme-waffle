@@ -89,7 +89,7 @@ div.header > h1 {
     overflow: hidden;
 }
 
-#thumbnail1 {
+#thumbnail1 .img-thumbnail{
     width: 300px;
     height:330px;
 }
@@ -129,7 +129,6 @@ tr:nth-child(even) {
     overflow-y: auto;
 }
 
-<<<<<<< HEAD
 .homepage2 thead, .homepage tbody { display: block; }
 
 .homepage2 tbody {
@@ -138,7 +137,6 @@ tr:nth-child(even) {
     overflow-x: hidden;  /* Hide the horizontal scroll */
 }
 
-=======
 .homepage tr:first-child td {
     border-top-width: 2px !important;
 }
@@ -146,7 +144,7 @@ tr:nth-child(even) {
 .homepage th {
     border-bottom-width: 0px !important;
 }
->>>>>>> d42ad768418ca7bc9cefafea152651e5c554a7f5
+
 #colorstrip{
     width: 100%; height: 100px;
     border-style: solid;

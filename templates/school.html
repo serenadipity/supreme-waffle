@@ -15,37 +15,34 @@
   {% else %}
   <center>
   <div>
-    <h1 class="">{{data[0][0]}}</h1>
+    <h1>{{data[0][0]}}</h1>
   </div>
   <a href="/edit_school" class="btn btn-default" role="button">Edit Profile</a>
+  <h3>{{data[0][1]}} 
+    <br>
+     {{data[0][2]}}, NY, {{data[0][3]}}</h3>
+  <h3>Division: {{data[0][5]}}</h3>
+
 </center>
-  <hr>
-  <p>Address: {{data[0][1]}}</p>
-  <p>Zipcode: {{data[0][3]}}</p>
-  <p>Borough: {{data[0][2]}}</p>
-  <p>Division: {{data[0][5]}}</p>
+
+<div class="row">
+
+  <div class="col-lg-6">
   
   {% for i in range(0,data|length) %}
   <hr>
   <p>{{data[i][8]}} <i>Team {{data[i][4]}}</i></p>
   <p>Coach: {{data[i][6]}}</p>
+  <!--
   <p>Manager: {{data[i][7]}}</p>
+-->
   {% endfor %}
   {% endif %}
   <h2>PLACEHOLDER</h2>
   <canvas id="myChart" width="300" height="300"></canvas>
   <hr>
-  <h3>Boys Team</h3>
-  <img src="/static/school/images/{{images[1]}}" onerror="this.style.display='none';" height="200" class="img-thumbnail">
-  <!--<p> Number of Games: boys_scores[0]</p>
-  <p> Total Score: boys_scores[1]</p>-->
-  <hr>
-  {% for player in boys %}
-  <p><a href="/player/{{player[0]}}/{{player[1]}}">{{player[2]}} {{player[3]}}</a> - Class of {{player[6]}}, {{player[7]}}</p>
-  {% endfor %}
-
   <h3>Girls Team</h3>
-  <img src="/static/school/images/{{images[0]}}" onerror="this.style.display='none';" height="400">
+  <img class="img-thumbnail" id="thumbnail1" src="/static/school/images/{{images[0]}}" onerror="this.style.display='none';" height="400">
   <!--<p> Number of Games: girls_scores[0]</p>
   <p> Total Score: girls_scores[1]</p>-->
   <hr>
@@ -53,6 +50,20 @@
   <hr>
   <p><a href="/player/{{player[0]}}/{{player[1]}}">{{player[2]}} {{player[3]}}</a> - Class of {{player[6]}}, {{player[7]}}</p>
   {% endfor %}
+  </div>
+
+<div class="col-lg-6">
+  <h3>Boys Team</h3>
+  <img class="img-thumbnail" id="thumbnail1" src="/static/school/images/{{images[1]}}" onerror="this.style.display='none';" height="200" class="img-thumbnail">
+  <!--<p> Number of Games: boys_scores[0]</p>
+  <p> Total Score: boys_scores[1]</p>-->
+  <hr>
+  {% for player in boys %}
+  <p><a href="/player/{{player[0]}}/{{player[1]}}">{{player[2]}} {{player[3]}}</a> - Class of {{player[6]}}, {{player[7]}}</p>
+  {% endfor %}
+</div>
+
+</div>
 </div>
 
 
