@@ -385,6 +385,8 @@ def current_roster():
     return json.dumps(roster)
 
 
+app.secret_key = "woohoo softdev" 
+
 if __name__ == "__main__":
     app.debug = True
 #    app.secret_key = "Password"
