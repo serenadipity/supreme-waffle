@@ -638,7 +638,7 @@ def get_gender_indicator(year, school, gender):
     return get_total_team_indicator(year, school, gender, "Foil") + get_total_team_indicator(year, school, gender, "Epee")
 
 ######Get Player Indicators #########
-def get_all_team_indicators_2():
+def get_all_player_indicators():
     all_schools = get_distinct_schools()
     epee_girls = []
     foil_girls = []
@@ -658,13 +658,7 @@ def get_all_team_indicators_2():
     epee_boys.sort(key = lambda student : student[2])
     foil_boys.sort(key = lambda student : student[2])
 
-
-    all_girls = (epee_girls + foil_girls)
-    all_girls.sort(key = lambda student : student[2])
-    all_boys = (epee_boys + foil_boys)
-    all_boys.sort(key = lambda student : student[2])
-
-    return [epee_girls[::-1], foil_girls[::-1], epee_boys[::-1], foil_boys[::-1], all_girls[::-1], all_boys[::-1]]
+    return [epee_girls[::-1], foil_girls[::-1], epee_boys[::-1], foil_boys[::-1]]
 
 ######## GET PLAYER BY YEAR, SCHOOL, TYPE, GENDER #######
 def get_team_players(year, school, gametype, gender):
