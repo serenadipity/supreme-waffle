@@ -247,7 +247,7 @@
 	       {% for event in future_events %}
 	       <tr>
 		 <td width="100px">{{event[2]}}</td>
-		 <td witdh="400px">{{event[0]}} vs. {{event[1]}}</td>
+		 <td witdh="400px"><a href="edit_event/{{event[4]}}">{{event[0]}} vs. {{event[1]}}</a></td>
 	       </tr>
 	       {% endfor %}
 	     </tbody>
@@ -268,7 +268,7 @@
 	       {% for event in prev_events %}
 	       <tr>
 		 <td width="100px">{{event[2]}}</td>
-		 <td witdh="400px">{{event[0]}} vs. {{event[1]}}</td>
+		 <td witdh="400px"><a href="/edit_event/{{event[4]}}">{{event[0]}} vs. {{event[1]}}</a></td>
 	       </tr>
 	       {% endfor %}
 	     </tbody>
