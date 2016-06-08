@@ -65,8 +65,6 @@ for i in range(30):
         gametype = "Foil"
     else:
         gametype = "Epee"
-<<<<<<< HEAD
-        
     for j in range(0,2):
         if j == 0:
             players = get_all_players_by_year_and_gender(2016,"Girls")
@@ -86,15 +84,4 @@ for i in range(30):
                 away_touches = randint(1,50)
                 away_score = randint(1,30)
                 create_ind(schoolH, p1, home_touches, home_score, schoolA, p2, away_touches, away_score, date, gametype, game, 1, address, 2016, gender)
-=======
 
-    for i in range(1,20):
-        p1 = randint(school_names.index(schoolH) * 32, (school_names.index(schoolH) + 1) * 32)
-        p2 = randint(school_names.index(schoolA) * 32, (school_names.index(schoolA) + 1) * 32)
-        gender = get_player(2016, p1)[4]
-        home_touches = randint(1,50)
-        home_score = randint(1,30)
-        away_touches = randint(1,50)
-        away_score = randint(1,30)
-        create_ind(schoolH, p1, home_touches, home_score, schoolA, p2, away_touches, away_score, date, gametype, game, 1, address, 2016, gender)
->>>>>>> ac1a27b964a5871f5fe3c50fffce19756a36a5b4

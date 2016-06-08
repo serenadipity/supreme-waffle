@@ -20,7 +20,6 @@ def home():
     all_events = get_all_events()
     prev_events = all_events[0]
     future_events = all_events[1]
-    return render_template("home.html", user = user, prev_events = prev_events, future_events = future_events)
 
     indicators = get_all_team_indicators()
     eg = indicators[0]
@@ -29,7 +28,9 @@ def home():
     fb = indicators[3]
     ag = indicators[4]
     ab = indicators[5]
-                    
+
+    print indicators
+    print "\n\n\n\n"
     return render_template("home.html", user = user, prev_events = prev_events, future_events = future_events, eg = eg, fg = fg, eb = eb, fb = fb, ag = ag, ab = ab)
 
 
@@ -100,7 +101,7 @@ def register_school():
         manager = request.form['manager']
         gender = request.form['gender']
         result = create_school(school_name, street_address, borough, zipcode, team, division, coach, manager, gender)
-        
+
         if not request.files.get('file', None):
             pass
         elif result[0] == False:
@@ -113,7 +114,7 @@ def register_school():
                     filename = "_".join(filename.split(" "))
                 file.save(os.path.join("static/school/images/", filename))
                 add_school_image(school_name, gender, filename)
-                
+
         if result[0] == False:
             return redirect("/home")
         else:
@@ -141,7 +142,7 @@ def register_player():
         touch = 0
         position = request.form['position']
         result = create_player(year, first_name, last_name, school, gender, grad_year, player_type, position)
-        
+
         if not request.files.get('file', None):
             pass
         elif result[0] == False:
@@ -154,7 +155,7 @@ def register_player():
                 print filename
                 file.save(os.path.join("static/player/images", filename))
                 add_player_image_names(result[2], year, filename)
-                
+
         if result[0] == False:
             player_id = result[2]
             return redirect("player/"+str(year) + "/"+ str(player_id))
@@ -167,20 +168,20 @@ def show_school_profile(school_name):
     if 'user' not in session:
         session['user'] = 0
     user = session['user']
-    
+
     result = get_school(school_name)
     print result
     print "\n\n\n\n"
     boys = get_players_by_year_and_school_and_gender(now.year, school_name, "Boys")
     girls = get_players_by_year_and_school_and_gender(now.year, school_name, "Girls")
-    
+
     print boys
     print girls
-    
+
     images = get_school_image(school_name)
 
-    
-    return render_template("school.html", error = result[0], user = user, data = result[1:], boys = boys, girls = girls, images = images) 
+
+    return render_template("school.html", error = result[0], user = user, data = result[1:], boys = boys, girls = girls, images = images)
 
 @app.route("/graph")
 def graph():
@@ -281,7 +282,7 @@ def show_schools(username):
         teams = result[1:][0]
         error = result[0]
         print teams
-        
+
         return render_template("user.html", user = user, teams = teams, error = error)
 
 @app.route("/input_stats/<username>", methods=['GET','POST'])
@@ -297,7 +298,7 @@ def input_stats(username):
         if request.method == "GET":
             return render_template("input_stats.html",schools=schools, user = user)
         else:
-            current_page = request.form['input_page_num'] 
+            current_page = request.form['input_page_num']
             if current_page == "1":
                 school_home = request.form['school_home']
                 school_away = request.form['school_away']
@@ -328,8 +329,8 @@ def input_stats(username):
                 home_starter2 = get_player(now.year,home_starter2)
                 home_starter3 = request.form['home_starter3']
                 home_starter3 = get_player(now.year,home_starter3)
-                away_starter1 = request.form['away_starter1']     
-                away_starter1 = get_player(now.year,away_starter1)       
+                away_starter1 = request.form['away_starter1']
+                away_starter1 = get_player(now.year,away_starter1)
                 away_starter2 = request.form['away_starter2']
                 away_starter2 = get_player(now.year,away_starter2)
                 away_starter3 = request.form['away_starter3']
@@ -341,7 +342,7 @@ def input_stats(username):
                 game_id = request.form['game_id']
                 date = request.form['date']
                 address = request.form['address']
-                
+
                 home_players = get_players_by_year_and_school_and_gender(now.year,school_home,gender)
                 away_players = get_players_by_year_and_school_and_gender(now.year,school_away,gender)
 
@@ -386,7 +387,7 @@ def register_event():
             gender=request.form['gender']
             result=create_event(school_home,school_away,date,time,game_id,status,address,gender)
             return render_template("register_event.html",user=user,error=True,message=result[1])
-        
+
 @app.route("/edit_event/<game_id>", methods=['GET','POST'])
 def edit_event(game_id):
     if 'user' not in session:
@@ -441,7 +442,16 @@ def current_roster():
 
 @app.route("/rankings")
 def rankings():
-    return render_template("rankings.html")
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
+    print get_all_player_indicators()
+    indicators = get_all_player_indicators()
+    eg = indicators[0]
+    fg = indicators[1]
+    eb = indicators[2]
+    fb = indicators[3]
+    return render_template("rankings.html", user = user, eg = eg, fg = fg, eb = eb, fb = fb)
 
 app.secret_key = "woohoo softdev"
 create_all_tables()
@@ -451,4 +461,3 @@ if __name__ == "__main__":
 #    app.secret_key = "Password"
    # create_all_tables()
     app.run(host='0.0.0.0', port=8000)
-
