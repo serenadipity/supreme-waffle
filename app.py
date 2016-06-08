@@ -166,6 +166,8 @@ def register_player():
 def show_school_profile(school_name):
     if 'user' not in session:
         session['user'] = 0
+    else:
+        user_school = get_user_school(session['user'])
     user = session['user']
 
     result = get_school(school_name)
@@ -248,8 +250,9 @@ def show_player_profile(year, id):
     #look up player
     if 'user' not in session:
         session['user'] = 0
+    else:
+        user_school = get_user_school(session['user'])
     user = session['user']
-    user_school = get_user_school(user)
     player = get_player(year,id)
     image = get_player_image(id, year)
     indicator = get_player_indicator(player[4], id, year, player[7])
