@@ -249,12 +249,12 @@ def show_player_profile(year, id):
     if 'user' not in session:
         session['user'] = 0
     user = session['user']
+    user_school = get_user_school(user)
     player = get_player(year,id)
-    print player
     image = get_player_image(id, year)
     indicator = get_player_indicator(player[4], id, year, player[7])
     touches_info = get_player_touches_and_wins_and_losses(player[4], id, year)
-    return render_template("player.html", user = user, error = False, player = player, image = image, indicator = indicator, touches_info = touches_info)
+    return render_template("player.html", user = user, user_school = user_school, error = False, player = player, image = image, indicator = indicator, touches_info = touches_info)
 
 @app.route("/edit_player/<year>/<id>", methods=['GET','POST'])
 def edit_player_profile(year,id):
@@ -265,8 +265,14 @@ def edit_player_profile(year,id):
         return redirect("login")
     else:
         player = get_player(year, id)
+        user_school = get_user_school(user)
         if request.method == "GET":
-            return render_template("edit_player.html", user=user, player=player)
+            error = False
+            message = ''
+            if player[4] != user_school:
+                error = True
+                message = "You can only edit profiles for your school's players."
+            return render_template("edit_player.html", user=user, error=error, message=message, player=player)
         else:
             first_name = request.form['fname']
             last_name = request.form['lname']

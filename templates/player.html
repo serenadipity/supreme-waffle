@@ -19,7 +19,9 @@
           <br><br>
 	  <img src="/static/player/images/{{image}}" onerror="this.style.display='none';" class="img-thumbnail" id="thumbnail1" height="300">
 	  <br>
+	  {% if player[4] == user_school %}
 	  <a href="/edit_player/{{player[0]}}/{{player[1]}}" class="btn btn-default" role="button">Edit Profile</a>
+	  {% endif %}
 	</center>
       </div>
       <div class="col-md-8">
