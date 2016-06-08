@@ -24,6 +24,9 @@ body {
     
 }
 
+.ranking {
+    max-width: 850px !important;
+}
 div.header > h1 {
     font-size: 50px !important;
     text-align: center;

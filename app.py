@@ -29,8 +29,6 @@ def home():
     ag = indicators[4]
     ab = indicators[5]
 
-    print indicators
-    print "\n\n\n\n"
     return render_template("home.html", user = user, prev_events = prev_events, future_events = future_events, eg = eg, fg = fg, eb = eb, fb = fb, ag = ag, ab = ab)
 
 
@@ -445,12 +443,14 @@ def rankings():
     if 'user' not in session:
         session['user'] = 0
     user = session['user']
-    print get_all_player_indicators()
+
+    
     indicators = get_all_player_indicators()
     eg = indicators[0]
     fg = indicators[1]
     eb = indicators[2]
     fb = indicators[3]
+    
     return render_template("rankings.html", user = user, eg = eg, fg = fg, eb = eb, fb = fb)
 
 app.secret_key = "woohoo softdev"
@@ -458,6 +458,6 @@ create_all_tables()
 
 if __name__ == "__main__":
     app.debug = True
-#    app.secret_key = "Password"
-   # create_all_tables()
+    app.secret_key = "Password"
+    create_all_tables()
     app.run(host='0.0.0.0', port=8000)
