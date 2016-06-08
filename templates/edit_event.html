@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %} Input Form {% endblock %}
+
+{% block contents %}
+
+<div class="container">
+<br><br>
+  <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+    <form role="form" method="POST" enctype="multipart/form-data">
+      {% if error %}
+      <div class="alert alert-danger">
+	<p id="error">{{message}}</p>
+      </div>
+      {% else %}
+      <div>
+	<h1 class="center2">Edit Game {{game[4]}}: {{game[0]}} v. {{game[1]}}</h1>
+      </div>  
+      <hr>
+      <div class="radio">
+	{% if game[7] == "Girls" %}
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls" checked="checked">Girls Event</label>
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys">Boys Event</label>
+	{% else %}
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls">Girls Event</label>
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys" checked="checked">Boys Event</label>
+	{% endif %}
+      </div>
+      <div class="form-group">
+	<select class="form-control" name="school_home" id="school_home" required>
+	  <option value="{{game[0]}}" selected>Home School: {{game[0]}}</option>
+	  {% for school in schools %}
+	  <option value="{{school}}">{{school}}</option>
+	  {% endfor %}
+	</select>
+      </div>
+      <div class="form-group">
+	<select class="form-control" name="school_away" id="school_away" required>
+	  <option value="{{game[1]}}" selected>Away School : {{game[1]}}</option>
+	  {% for school in schools %}
+	  <option value="{{school}}">{{school}}</option>
+	  {% endfor %}
+	</select>    
+      </div>
+      <div class="form-group">
+	<input type="text" name="address" id="address" class="form-control input-lg" value="{{game[6]}}" tabindex="2" required>
+      </div>
+      <div class="form-group">
+	<input type="date" name="date" id="date" class="form-control input-lg" value="{{game[2]}}" tabindex="2" required>
+      </div>
+      <div class="form-group">
+	<input type="time" name="time" id="time" class="form-control input-lg" value="{{game[3]}}" tabindex="2" required>
+      </div>
+      <div class="form-group">
+	Status (optional):
+	<input type="text" name="status" id="status" class="form-control input-lg" value="{{game[5]}}" tabindex="2">
+      </div>
+
+      <input type="hidden" name="game_id" value="{{game[4]}}">
+
+      <div class="row">
+	<div class="col-xs-12 col-md-12"><input type="submit" value="Update" class="btn btn-success btn-block btn-lg" tabindex="5"></div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

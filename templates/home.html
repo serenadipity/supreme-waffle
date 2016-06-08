@@ -5,11 +5,11 @@
 {% block contents %}
 
 <style>
-body {
+  body {
   background: linear-gradient(white, black);
-}
+  }
 
-carousel-inner > .item > img,
+  carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
   width: 100%;
   margin: auto;
@@ -32,9 +32,9 @@ carousel-inner > .item > img,
 	    <li role="presentation" class="active"><a href="#boysoverall" aria-controls="boysoverall" role="tab" data-toggle="tab">Boys Overall</a></li>
 	    <li role="presentation"><a href="#boysfoil" aria-controls="foil" role="tab" data-toggle="tab">Boys Foil</a></li>
 	    <li role="presentation"><a href="#boysepee" aria-controls="epee" role="tab" data-toggle="tab">Boys Epee</a></li>
-	    <li role="presentation"><a href="#overall" aria-controls="overall" role="tab" data-toggle="tab">Girls Overall</a></li>
-	    <li role="presentation"><a href="#foil" aria-controls="foil" role="tab" data-toggle="tab">Girls Foil</a></li>
-	    <li role="presentation"><a href="#epee" aria-controls="epee" role="tab" data-toggle="tab">Girls Epee</a></li>
+	    <li role="presentation"><a href="#girlsoverall" aria-controls="overall" role="tab" data-toggle="tab">Girls Overall</a></li>
+	    <li role="presentation"><a href="#girlsfoil" aria-controls="foil" role="tab" data-toggle="tab">Girls Foil</a></li>
+	    <li role="presentation"><a href="#girlsepee" aria-controls="epee" role="tab" data-toggle="tab">Girls Epee</a></li>
 	  </ul>
 	  <!-- Tab panes -->
 	  <div class="tab-content">
@@ -49,19 +49,21 @@ carousel-inner > .item > img,
 		  </tr>
 		</thead>
 		<tbody>
+		  {% set count = 1 %}
+		  {% for school in ab %}
 		  <tr>
-		    <td width="20px">1</td>
-		    <td width="150px">Stuyvesant High School</td>
-		    <td width="50px">250</td>
+		    <td width="20px">{{count}}</td>
+		    <td width="150px">{{school[0]}}</td>
+		    <td width="50px">{{school[1]}}</td>
 		  </tr>
+		  {% set count = count + 1 %}
+		  {% endfor %}
 		</tbody>
 
 	      </table>
-
-
 	    </div>
+	    
 	    <div role="tabpanel" class="tab-pane" id="boysfoil">
-
 	      <table class="table homepage2">
 		<thead>
 		  <tr>
@@ -71,11 +73,15 @@ carousel-inner > .item > img,
 		  </tr>
 		</thead>
 		<tbody>
+		  {% set count = 1 %}
+		  {% for school in fb %}
 		  <tr>
-		    <td width="20px">1</td>
-		    <td width="300px">Stuyvesant High School</td>
-		    <td width="100px">250</td>
+		    <td width="20px">{{count}}</td>
+		    <td width="150px">{{school[0]}}</td>
+		    <td width="50px">{{school[1]}}</td>
 		  </tr>
+		  {% set count = count + 1 %}
+		  {% endfor %}
 		</tbody>
 
 	      </table>
@@ -92,117 +98,203 @@ carousel-inner > .item > img,
 		  </tr>
 		</thead>
 		<tbody>
+		  {% set count = 1 %}
+		  {% for school in eb %}
 		  <tr>
-		    <td width="20px">1</td>
-		    <td width="300px">Stuyvesant High School</td>
-		    <td width="100px">250</td>
+		    <td width="20px">{{count}}</td>
+		    <td width="150px">{{school[0]}}</td>
+		    <td width="50px">{{school[1]}}</td>
 		  </tr>
+		  {% set count = count + 1 %}
+		  {% endfor %}
 		</tbody>
 	      </table>
 
 	    </div>
-	  </div>
 
-	  
-	</div>
-      </div>
-      <div class="col-md-4">
-
-<br>
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
-	  <ol class="carousel-indicators">
-	    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-	    <li data-target="#myCarousel" data-slide-to="1"></li>
-	    <li data-target="#myCarousel" data-slide-to="2"></li>
-	  </ol>
-
-	  <div class="carousel-inner" role="listbox">
-	    <div class="item active">
-              <img src="static/images/fencing1.jpg" width="460" height="345">
-	    </div>
-
-	    <div class="item">
-              <img src="static/images/fencing2.jpg" width="460" height="345">
-	    </div>
-	    
-	    <div class="item">
-              <img src="static/images/fencing3.jpg" width="460" height="345">
-	    </div>
-
-	  </div>
-
-	  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-	    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-	    <span class="sr-only">Previous</span>
-	  </a>
-	  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-	    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-	    <span class="sr-only">Next</span>
-	  </a>
-	</div>
-      </div>
-
-      <div class="col-md-4">
-	<div class="panel panel-default">
-	  <!-- Default panel contents -->
-	  <div class="panel-heading"><b>Events</b></div>
-	  <!-- Nav tabs -->
-	  <ul class="nav nav-tabs" role="tablist">
-	    <li role="presentation" class="active"><a href="#upcoming" aria-controls="upcoming" role="tab" data-toggle="tab">Upcoming</a></li>
-	    <li role="presentation"><a href="#past" aria-controls="past" role="tab" data-toggle="tab">Past</a></li>
-	  </ul>
-
-	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="upcoming">
-	      <!-- Table -->
-	      <table class="table homepage">
+	    <div role="tabpanel" class="tab-pane" id="girlsoverall">
+	      
+	      <table class="table homepage2">
 		<thead>
 		  <tr>
-		    <th width="100px">Date</th>
-		    <th witdh="400px">Event</th>
+		    <th width="20px">#</th>
+		    <th width="150px">School</th>
+		    <th width="50px">Indicator</th>
 		  </tr>
 		</thead>
 		<tbody>
-		  {% for event in future_events %}
+		  {% set count = 1 %}
+		  {% for school in ag %}
 		  <tr>
-		    <td width="100px">{{event[2]}}</td>
-		    <td witdh="400px">{{event[0]}} vs. {{event[1]}}</td>
+		    <td width="20px">{{count}}</td>
+		    <td width="150px">{{school[0]}}</td>
+		    <td width="50px">{{school[1]}}</td>
 		  </tr>
+		  {% set count = count + 1 %}
 		  {% endfor %}
 		</tbody>
 
 	      </table>
-	    </div>
 
-	    <div role="tabpanel" class="tab-pane" id="past">
-	      <!-- Table -->
-	      <table class="table homepage">
+
+	    </div>
+	    <div role="tabpanel" class="tab-pane" id="girlsfoil">
+
+	      <table class="table homepage2">
 		<thead>
 		  <tr>
+		    <th width="20px">#</th>
+		    <th width="300px">School</th>
+		    <th width="100px">Indicator</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  {% set count = 1 %}
+		  {% for school in fg %}
+		  <tr>
+		    <td width="20px">{{count}}</td>
+		    <td width="150px">{{school[0]}}</td>
+		    <td width="50px">{{school[1]}}</td>
+		  </tr>
+		  {% set count = count + 1 %}
+		  {% endfor %}
+		</tbody>
+
+	      </table>
+
+	    </div>
+	    <div role="tabpanel" class="tab-pane" id="girlsepee">
+	      <table class="table homepage2">
+		<thead>
+		  <tr>
+
 		    <th width="100px">Date</th>
 		    <th width="400px">Event</th>
+
+		    <th width="20px">#</th>
+		    <th width="300px">School</th>
+		    <th width="100px">Indicator</th>
+
 		  </tr>
 		</thead>
 		<tbody>
-		  {% for event in prev_events %}
+		  {% set count = 1 %}
+		  {% for school in eg %}
 		  <tr>
+
 		    <td width="100px">{{event[2]}}</td>
 		    <td width="400px">{{event[0]}} vs. {{event[1]}}</td>
-		  </tr>
-		  {% endfor %}
-		  </tr>
-		</tbody>
 
+		    <td width="20px">{{count}}</td>
+		    <td width="150px">{{school[0]}}</td>
+		    <td width="50px">{{school[1]}}</td>
+
+		  </tr>
+		  {% set count = count + 1 %}
+		  {% endfor %}
+		</tbody>
 	      </table>
 	    </div>
+	    
+	    
+	  </div>
+	</div>
+	<div class="col-md-4">
 
+	  <br>
+	  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+	    <ol class="carousel-indicators">
+	      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+	      <li data-target="#myCarousel" data-slide-to="1"></li>
+	      <li data-target="#myCarousel" data-slide-to="2"></li>
+	    </ol>
+
+	    <div class="carousel-inner" role="listbox">
+	      <div class="item active">
+		<img src="static/images/fencing1.jpg" width="460" height="345">
+	      </div>
+
+	      <div class="item">
+		<img src="static/images/fencing2.jpg" width="460" height="345">
+	      </div>
+	      
+	      <div class="item">
+		<img src="static/images/fencing3.jpg" width="460" height="345">
+	      </div>
+
+	    </div>
+
+	    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+	      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	      <span class="sr-only">Previous</span>
+	    </a>
+	    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+	      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	      <span class="sr-only">Next</span>
+	    </a>
 	  </div>
 	</div>
 
+	<div class="col-md-4">
+	  <div class="panel panel-default">
+	    <!-- Default panel contents -->
+	    <div class="panel-heading"><b>Events</b></div>
+	    <!-- Nav tabs -->
+	    <ul class="nav nav-tabs" role="tablist">
+	      <li role="presentation" class="active"><a href="#upcoming" aria-controls="upcoming" role="tab" data-toggle="tab">Upcoming</a></li>
+	      <li role="presentation"><a href="#past" aria-controls="past" role="tab" data-toggle="tab">Past</a></li>
+	    </ul>
 
+	    <div class="tab-content">
+	      <div role="tabpanel" class="tab-pane active" id="upcoming">
+		<!-- Table -->
+		<table class="table homepage">
+		  <thead>
+		    <tr>
+		      <th width="100px">Date</th>
+		      <th witdh="400px">Event</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    {% for event in future_events %}
+		    <tr>
+		      <td width="100px">{{event[2]}}</td>
+		      <td witdh="400px"><a href="edit_event/{{event[4]}}">{{event[0]}} vs. {{event[1]}}</a></td>
+		    </tr>
+		    {% endfor %}
+		  </tbody>
+
+		</table>
+	      </div>
+
+	      <div role="tabpanel" class="tab-pane" id="past">
+		<!-- Table -->
+		<table class="table homepage">
+		  <thead>
+		    <tr>
+		      <th width="100px">Date</th>
+		      <th witdh="400px">Event</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    {% for event in prev_events %}
+		    <tr>
+		      <td width="100px">{{event[2]}}</td>
+		      <td witdh="400px">{{event[0]}} vs. {{event[1]}}</td>
+		    </tr>
+		    {% endfor %}
+		  </tbody>
+		  
+		</table>
+	      </div>
+	      
+	    </div>
+	  </div>
+	  
+	  
   </center>
   </div>  
-  
+
   {% endblock %}
 
 
