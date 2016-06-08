@@ -22,171 +22,7 @@
     <h1  id="font2">PSAL Fencing</h1>
     <br>
     <div class="row">
-      <div class="col-md-4">
-	<div class="panel panel-default">
-	  <!-- Default panel contents -->
-	  <div class="panel-heading"><b>School Rankings By Indicator</b></div>
-	  <!-- Nav tabs -->
-	  <ul class="nav nav-tabs" role="tablist">
-	    <li role="presentation" class="active"><a href="#boysoverall" aria-controls="boysoverall" role="tab" data-toggle="tab">Boys Overall</a></li>
-	    <li role="presentation"><a href="#boysfoil" aria-controls="foil" role="tab" data-toggle="tab">Boys Foil</a></li>
-	    <li role="presentation"><a href="#boysepee" aria-controls="epee" role="tab" data-toggle="tab">Boys Epee</a></li>
-	    <li role="presentation"><a href="#girlsoverall" aria-controls="overall" role="tab" data-toggle="tab">Girls Overall</a></li>
-	    <li role="presentation"><a href="#girlsfoil" aria-controls="foil" role="tab" data-toggle="tab">Girls Foil</a></li>
-	    <li role="presentation"><a href="#girlsepee" aria-controls="epee" role="tab" data-toggle="tab">Girls Epee</a></li>
-	  </ul>
-	  <!-- Tab panes -->
-	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="boysoverall">
-
-	      <table class="table homepage2">
-		<thead>
-		  <tr>
-		    <th width="20px">#</th>
-		    <th width="150px">School</th>
-		    <th width="50px">Indicator</th>
-		  </tr>
-		</thead>
-		<tbody>
-		  {% set count = 1 %}
-		  {% for school in ab %}
-		  <tr>
-		    <td width="20px">{{count}}</td>
-		    <td width="150px">{{school[0]}}</td>
-		    <td width="50px">{{school[1]}}</td>
-		  </tr>
-		  {% set count = count + 1 %}
-		  {% endfor %}
-		</tbody>
-
-	      </table>
-	    </div>
-	    
-	    <div role="tabpanel" class="tab-pane" id="boysfoil">
-	      <table class="table homepage2">
-		<thead>
-		  <tr>
-		    <th width="20px">#</th>
-		    <th width="300px">School</th>
-		    <th width="100px">Indicator</th>
-		  </tr>
-		</thead>
-		<tbody>
-		  {% set count = 1 %}
-		  {% for school in fb %}
-		  <tr>
-		    <td width="20px">{{count}}</td>
-		    <td width="150px">{{school[0]}}</td>
-		    <td width="50px">{{school[1]}}</td>
-		  </tr>
-		  {% set count = count + 1 %}
-		  {% endfor %}
-		</tbody>
-
-	      </table>
-
-	    </div>
-	    <div role="tabpanel" class="tab-pane" id="boysepee">
-
-	      <table class="table homepage2">
-		<thead>
-		  <tr>
-		    <th width="20px">#</th>
-		    <th width="300px">School</th>
-		    <th width="100px">Indicator</th>
-		  </tr>
-		</thead>
-		<tbody>
-		  {% set count = 1 %}
-		  {% for school in eb %}
-		  <tr>
-		    <td width="20px">{{count}}</td>
-		    <td width="150px">{{school[0]}}</td>
-		    <td width="50px">{{school[1]}}</td>
-		  </tr>
-		  {% set count = count + 1 %}
-		  {% endfor %}
-		</tbody>
-	      </table>
-
-	    </div>
-
-	    <div role="tabpanel" class="tab-pane" id="girlsoverall">
-	      
-	      <table class="table homepage2">
-		<thead>
-		  <tr>
-		    <th width="20px">#</th>
-		    <th width="150px">School</th>
-		    <th width="50px">Indicator</th>
-		  </tr>
-		</thead>
-		<tbody>
-		  {% set count = 1 %}
-		  {% for school in ag %}
-		  <tr>
-		    <td width="20px">{{count}}</td>
-		    <td width="150px">{{school[0]}}</td>
-		    <td width="50px">{{school[1]}}</td>
-		  </tr>
-		  {% set count = count + 1 %}
-		  {% endfor %}
-		</tbody>
-
-	      </table>
-
-
-	    </div>
-	    <div role="tabpanel" class="tab-pane" id="girlsfoil">
-
-	      <table class="table homepage2">
-		<thead>
-		  <tr>
-		    <th width="20px">#</th>
-		    <th width="300px">School</th>
-		    <th width="100px">Indicator</th>
-		  </tr>
-		</thead>
-		<tbody>
-		  {% set count = 1 %}
-		  {% for school in fg %}
-		  <tr>
-		    <td width="20px">{{count}}</td>
-		    <td width="150px">{{school[0]}}</td>
-		    <td width="50px">{{school[1]}}</td>
-		  </tr>
-		  {% set count = count + 1 %}
-		  {% endfor %}
-		</tbody>
-
-	      </table>
-
-	    </div>
-	    <div role="tabpanel" class="tab-pane" id="girlsepee">
-	      <table class="table homepage2">
-		<thead>
-		  <tr>
-		    <th width="20px">#</th>
-		    <th width="300px">School</th>
-		    <th width="100px">Indicator</th>
-		  </tr>
-		</thead>
-		<tbody>
-		  {% set count = 1 %}
-		  {% for school in eg %}
-		  <tr>
-		    <td width="20px">{{count}}</td>
-		    <td width="150px">{{school[0]}}</td>
-		    <td width="50px">{{school[1]}}</td>
-		  </tr>
-		  {% set count = count + 1 %}
-		  {% endfor %}
-		</tbody>
-	      </table>
-	    </div>   
-	  </div>
-	</div>
-      </div>
+      
       <div class="col-md-4">
 
 	<br>
@@ -199,15 +35,15 @@
 
 	  <div class="carousel-inner" role="listbox">
 	    <div class="item active">
-	      <img src="static/images/fencing1.jpg" width="460" height="345">
+	      <img src="static/images/fencing1.jpg" width="500" height="380">
 	    </div>
 
 	    <div class="item">
-	      <img src="static/images/fencing2.jpg" width="460" height="345">
+	      <img src="static/images/fencing2.jpg" width="500" height="380">
 	    </div>
 	    
 	    <div class="item">
-	      <img src="static/images/fencing3.jpg" width="460" height="345">
+	      <img src="static/images/fencing3.jpg" width="500" height="380">
 	    </div>
 
 	  </div>
