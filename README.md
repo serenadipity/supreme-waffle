@@ -40,6 +40,7 @@ Fencing Statistics Website
 |06/02/2016|AX| We worked on event registration.|
 |06/03/2016|AX| We began working on inputting statistics (created the forms).|
 |06/05/2016|AX| We finished inputting of stats from forms and inputted to the database.|
+|06/07/2016|SWL| Crunch Time. We added many things such as events input and indicator ranking. |
 
 #Deployment Guide 
 1. Set up a DigitalOcean droplet to the desired size. 
