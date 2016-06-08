@@ -9,38 +9,38 @@
   <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
     <form role="form" method="POST">
       <div>				
-	<h1 class="center2">Edit Information for {{boys[0]}}</h1>
+	<h1 class="center2">Edit Information for {{user_school}}</h1>
       </div>
       <hr>
       <div class="form-group">
 	<p>Street Address:</p>
-	<input type="text" name="street_address" id="street_address" class="form-control input-lg" value="{{boys[1]}}" tabindex="2" required>
+	<input type="text" name="street_address" id="street_address" class="form-control input-lg" value="{{school[1]}}" tabindex="2" required>
       </div>
       <p>Borough:</p>
       <div class="form-group">
 	<select class="form-control" name="borough" id="borough" required>
 	  <option value="" selected disabled>Select Borough</option>
-	  {% if boys[2] == "Bronx" %}
+	  {% if school[2] == "Bronx" %}
 	  <option value="Bronx" selected>Bronx</option>
 	  {% else %}
 	  <option value="Bronx">Bronx</option>
 	  {% endif %}
-	  {% if boys[2] == "Brooklyn" %}
+	  {% if school[2] == "Brooklyn" %}
 	  <option value="Brooklyn" selected>Brooklyn</option>
 	  {% else %}
 	  <option value="Brooklyn">Brooklyn</option>
 	  {% endif %}
-	  {% if boys[2] == "Manhattan" %}
+	  {% if school[2] == "Manhattan" %}
 	  <option value="Manhattan" selected>Manhattan</option>
 	  {% else %}
 	  <option value="Manhattan">Manhattan</option>
 	  {% endif %}
-	  {% if boys[2] == "Queens" %}
+	  {% if school[2] == "Queens" %}
 	  <option value="Queens" selected>Queens</option>
 	  {% else %}
 	  <option value="Queens">Queens</option>
 	  {% endif %}
-	  {% if boys[2] == "Staten Island" %}
+	  {% if school[2] == "Staten Island" %}
 	  <option value="Staten Island" selected>Staten Island</option>
 	  {% else %}
 	  <option value="Staten Island">Staten Island</option>
@@ -49,7 +49,7 @@
       </div>
       <p>Zipcode:</p>
       <div class="form-group">
-	<input type="text" name="zipcode" id="zipcode" class="form-control input-lg" value="{{boys[3]}}" tabindex="2" required>
+	<input type="text" name="zipcode" id="zipcode" class="form-control input-lg" value="{{school[3]}}" tabindex="2" required>
       </div>
       <p>Girls Team Name:</p>
       <div class="form-group">
@@ -61,15 +61,23 @@
       </div>
       <p>Division:</p>
       <div class="form-group">
-	<input type="text" name="division" id="division" class="form-control input-lg" value={{boys[5]}} tabindex="2" required>
+	<input type="text" name="division" id="division" class="form-control input-lg" value="{{boys[5]}}" tabindex="2" required>
       </div>
-      <p>Coach Name:</p>
+      <p>Girls Coach Name:</p>
       <div class="form-group">
-	<input type="text" name="coach" id="coach" class="form-control input-lg" value="{{boys[6]}}" tabindex="2" required>
+	<input type="text" name="g_coach" id="g_coach" class="form-control input-lg" value="{{girls[6]}}" tabindex="2" required>
       </div>
-      <p>Manager Name:</p>
+      <p>Girls Manager Name:</p>
       <div class="form-group">
-	<input type="text" name="manager" id="manager" class="form-control input-lg" value="{{boys[7]}}" tabindex="2" required>
+	<input type="text" name="g_manager" id="g_manager" class="form-control input-lg" value="{{girls[7]}}" tabindex="2" required>
+      </div>
+      <p>Boys Coach Name:</p>
+      <div class="form-group">
+	<input type="text" name="b_coach" id="b_coach" class="form-control input-lg" value="{{boys[6]}}" tabindex="2" required>
+      </div>
+      <p>Girls Manager Name:</p>
+      <div class="form-group">
+	<input type="text" name="b_manager" id="b_manager" class="form-control input-lg" value="{{boys[7]}}" tabindex="2" required>
       </div>
       <input type="file" id="fileupload" name="file">
       <hr>

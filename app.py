@@ -169,6 +169,7 @@ def show_school_profile(school_name):
     user = session['user']
 
     result = get_school(school_name)
+    user_school = get_user_school(user)
     print result
     print "\n\n\n\n"
     boys = get_players_by_year_and_school_and_gender(now.year, school_name, "Boys")
@@ -178,9 +179,10 @@ def show_school_profile(school_name):
     print girls
 
     images = get_school_image(school_name)
-
-
-    return render_template("school.html", error = result[0], user = user, data = result[1:], boys = boys, girls = girls, images = images)
+    print "AWef"
+    print result[1:]
+    print user_school
+    return render_template("school.html", error = result[0], user = user, school_name = school_name, user_school = user_school, data = result[1:], boys = boys, girls = girls, images = images)
 
 @app.route("/graph")
 def graph():
@@ -204,9 +206,10 @@ def edit_school_profile():
     else:
         result = get_user_school(user)
         if request.method == "GET":
-            school = get_school(get_user_school(user))
-            girls = ''
-            boys = ''
+            user_school = get_user_school(user)
+            school = get_school(user_school)
+            girls = ['','','','','','','','','']
+            boys = ['','','','','','','','','']
             if len(school) > 2:
                 if school[1][0][8] == "Girls":
                     girls = school[1][0]
@@ -219,7 +222,11 @@ def edit_school_profile():
                     girls = school[1][0]
                 else:
                     boys = school[1][0]
-            return render_template("edit_school.html", user=user, boys = boys, girls = girls)
+            if len(school) > 1:
+                school = school[1][0]
+            else:
+                school = ['','','','','','','','','']
+            return render_template("edit_school.html", user=user, user_school = user_school, boys = boys, girls = girls, school = school)
         else:
             school_name = get_user_school(user)
             street_address = request.form['street_address']
@@ -228,9 +235,11 @@ def edit_school_profile():
             girls_teamname = request.form['girls_teamname']
             boys_teamname = request.form['boys_teamname']
             division = request.form['division']
-            coach = request.form['coach']
-            manager = request.form['manager']
-            edit_school(school_name, street_address, borough, zipcode, girls_teamname, boys_teamname, division, coach, manager)
+            g_coach = request.form['g_coach']
+            g_manager = request.form['g_manager']
+            b_coach = request.form['b_coach']
+            b_manager = request.form['b_manager']
+            edit_school(school_name, street_address, borough, zipcode, girls_teamname, boys_teamname, division, g_coach, g_manager, b_coach, b_manager)
             return redirect("/school/"+result)
 
 

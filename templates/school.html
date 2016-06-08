@@ -15,9 +15,13 @@
   {% else %}
   <center>
     <div>
-      <h1>{{data[0][0][0]}}</h1>
+      <h1>{{school_name}}</h1>
     </div>
+    {% if school_name == user_school %}
     <a href="/edit_school" class="btn btn-default" role="button">Edit Profile</a>
+    {% endif %}
+
+    {% if data|length > 0 %}
     <h3>{{data[0][0][1]}} 
       <br>
       {{data[0][0][2]}}, NY, {{data[0][0][3]}}</h3>
@@ -42,6 +46,8 @@
       {% endfor %}
     </div>
 
+    {% endif %}
+    {% if data|length > 1 %}
     <div class="col-lg-6">
       <hr>
       <canvas id="chart2" width="300" height="300"></canvas>
@@ -55,7 +61,7 @@
       <p><a href="/player/{{player[0]}}/{{player[1]}}">{{player[2]}} {{player[3]}}</a> - Class of {{player[6]}}, {{player[7]}}</p>
       {% endfor %}
     </div>
-
+    {% endif %}
   </div>
 </div>
 

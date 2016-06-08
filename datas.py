@@ -285,16 +285,16 @@ def get_user_school(username):
 
 ######## EDIT SCHOOL ########
 
-def edit_school(school_name, street_address, borough, zipcode, girls_teamname, boys_teamname, division, coach, manager):
+def edit_school(school_name, street_address, borough, zipcode, girls_teamname, boys_teamname, division, g_coach, g_manager, b_coach, b_manager):
     #set up connection
     conn = sqlite3.connect("data.db")
     c = conn.cursor()
     
     #update table
     q = 'UPDATE schools SET street_address = ?, borough = ?, zipcode = ?, division = ?, coach = ?, manager = ?, team = ? WHERE school_name = ? AND gender = "Girls"'
-    new  = c.execute(q, (street_address, borough, zipcode, division, coach, manager, girls_teamname, school_name)).fetchone()
+    new  = c.execute(q, (street_address, borough, zipcode, division, g_coach, g_manager, girls_teamname, school_name)).fetchone()
     q = 'UPDATE schools SET street_address = ?, borough = ?, zipcode = ?, division = ?, coach = ?, manager = ?, team = ? WHERE school_name = ? AND gender = "Boys"'
-    new  = c.execute(q, (street_address, borough, zipcode, division, coach, manager, boys_teamname, school_name)).fetchone()
+    new  = c.execute(q, (street_address, borough, zipcode, division, b_coach, b_manager, boys_teamname, school_name)).fetchone()
     conn.commit()
     conn.close()
     return new
