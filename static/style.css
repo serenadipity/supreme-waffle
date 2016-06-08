@@ -125,14 +125,19 @@ tr:nth-child(even) {
 }
 */
 
-.homepage thead, .homepage tbody { display: block; }
+.homepage thead, .homepage tbody, .rankingpage thead, .rankingpage tbody { display: block; }
 
 .homepage tbody {
     height: 200px;
     overflow-y: auto;
 }
 
-.homepage2 thead, .homepage tbody { display: block; }
+.rankingpage tbody {
+    height: 500px;
+    overflow-y: auto;
+}
+
+.homepage2 thead, .homepage2 tbody { display: block; }
 
 .homepage2 tbody {
     height: 170px;       
