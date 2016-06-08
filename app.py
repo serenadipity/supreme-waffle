@@ -20,6 +20,7 @@ def home():
     all_events = get_all_events()
     prev_events = all_events[0]
     future_events = all_events[1]
+    return render_template("home.html", user = user, prev_events = prev_events, future_events = future_events)
 
     indicators = get_all_team_indicators()
     eg = indicators[0]
@@ -30,6 +31,7 @@ def home():
     ab = indicators[5]
                     
     return render_template("home.html", user = user, prev_events = prev_events, future_events = future_events, eg = eg, fg = fg, eb = eb, fb = fb, ag = ag, ab = ab)
+
 
 @app.route("/about")
 def about():
@@ -385,6 +387,40 @@ def register_event():
             result=create_event(school_home,school_away,date,time,game_id,status,address,gender)
             return render_template("register_event.html",user=user,error=True,message=result[1])
         
+@app.route("/edit_event/<game_id>", methods=['GET','POST'])
+def edit_event(game_id):
+    if 'user' not in session:
+        session['user'] = 0
+    user = session['user']
+    if user == 0:
+        return redirect("login")
+    else:
+        if request.method=="GET":
+            school = get_user_school(user)
+            result = get_event_by_id(game_id)
+            event = result[1]
+            schools = get_distinct_schools()
+            error = False
+            message = ""
+            if result[0] == False:
+                error = True
+                message = "This event does not exist."
+            else:
+                if event[0] != school and event[1] != school:
+                    error = True
+                    message = "You can only edit events for your own school."
+            return render_template("edit_event.html",user=user,error=error,message=message,game=event,schools=schools)
+        else:
+            school_home=request.form['school_home']
+            school_away=request.form['school_away']
+            date=request.form['date']
+            time=request.form['time']
+            game_id=request.form['game_id']
+            status=request.form['status']
+            address=request.form['address']
+            gender=request.form['gender']
+            result=update_event(school_home,school_away,date,time,game_id,status,address,gender)
+            return render_template("edit_event.html",user=user,error=True,message="Event updated.")
 
 
 @app.route("/directory")

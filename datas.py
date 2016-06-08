@@ -382,7 +382,31 @@ def get_all_events():
     
     return [prev_events, future_events]
 
+####### GET EVENT BY GAME ID #######
+def get_event_by_id(game_id):
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
 
+    q = 'SELECT * FROM events WHERE game_id = ?'
+    result = c.execute(q, (game_id, )).fetchone()
+
+    if result == None:
+        conn.close()
+        return [False, "No such event exists."]
+    else:
+        conn.commit()
+        conn.close()
+        return [True, result]
+
+######## UPDATE EVENT ########
+def update_event(school_home, school_away, date, time, game_id, status, address, gender):
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+    q = 'UPDATE events SET school_home = ?, school_away = ?, date = ?, time = ?, status = ?, address = ?, gender = ? WHERE game_id = ?'
+    new  = c.execute(q, (school_home, school_away, date, time, status, address, gender, game_id)).fetchone()
+    conn.commit()
+    conn.close()
+    return new
 
 
     
@@ -787,6 +811,20 @@ def get_players_by_year_and_gender(year, gender):
 
 #print get_player(2014,1)
 #print get_players_by_year_and_gender(2014, "Girls Team")
+
+
+######## GET ALL PLAYERS BY YEAR AND GENDER ########
+def get_all_players_by_year_and_gender(year, gender):
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+
+    q = """SELECT * 
+           from players_""" + str(year) + """
+           WHERE gender = ?"""
+    players = c.execute(q, (gender,)).fetchall()
+    conn.close()
+    return players
+
 
 
 ######## GET PLAYERS BY YEAR, SCHOOL, and GENDER ########
