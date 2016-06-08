@@ -36,7 +36,7 @@ for i in range(5):
         create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "Starter")
         create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "Starter")
         create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "Starter")
-    for j in range(randint(4, 6)):
+    for j in range(5):
         create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "Regular")
         create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "Regular")
         create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "Regular")
@@ -52,10 +52,7 @@ for i in range(30):
         schoolA = school_names[randint(0, len(school_names) - 1)]
     date = "0" + str(randint(2, 6)) + "/" + str(randint(10, 31)) + "/2016"
     time = "3:30 PM"
-    if randint(0, 1) == 0:
-        address = schoolH
-    else:
-        address = schoolA
+    address = schoolH
     game = randint(10000, 40000)
     if randint(0, 100) == 0:
         status = "postponed to another time"
@@ -69,9 +66,9 @@ for i in range(30):
     else:
         gametype = "Epee"
 
-    for i in range(1,9):
-        p1 = randint(1, 150)
-        p2 = randint(1, 150)
+    for i in range(1,20):
+        p1 = randint(school_names.index(schoolH) * 32, (school_names.index(schoolH) + 1) * 32)
+        p2 = randint(school_names.index(schoolA) * 32, (school_names.index(schoolA) + 1) * 32)
         gender = get_player(2016, p1)[4]
         home_touches = randint(1,50)
         home_score = randint(1,30)

@@ -20,7 +20,16 @@ def home():
     all_events = get_all_events()
     prev_events = all_events[0]
     future_events = all_events[1]
-    return render_template("home.html", user = user, prev_events = prev_events, future_events = future_events)
+
+    indicators = get_all_team_indicators()
+    eg = indicators[0]
+    fg = indicators[1]
+    eb = indicators[2]
+    fb = indicators[3]
+    ag = indicators[4]
+    ab = indicators[5]
+                    
+    return render_template("home.html", user = user, prev_events = prev_events, future_events = future_events, eg = eg, fg = fg, eb = eb, fb = fb, ag = ag, ab = ab)
 
 @app.route("/about")
 def about():
@@ -162,7 +171,7 @@ def show_school_profile(school_name):
     print "\n\n\n\n"
     boys = get_players_by_year_and_school_and_gender(now.year, school_name, "Boys")
     girls = get_players_by_year_and_school_and_gender(now.year, school_name, "Girls")
-
+    
     print boys
     print girls
     
