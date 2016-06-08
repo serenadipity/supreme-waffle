@@ -2,6 +2,8 @@
 from datas import *
 from random import randint
 
+create_all_tables()
+
 ######### MAKE SCHOOLS #########
 school_names = ["Kathy Wang Clown School for Clowns", "Sammi's Bird School for Birds", "Kelly School of Passive Aggressiveness", "Alice School for Really Pretty Hidden Profile Pictures", "Serena Chan's Fencing School"]
 addresses = ["7656 Aliquam Street", "3916 Mauris St.", "420 Amet Ave", "6966 Felis. Avenue", "2253 Urna Road"]
@@ -34,7 +36,7 @@ for i in range(5):
         create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "Starter")
         create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "Starter")
         create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "Starter")
-    for j in range(randint(3, 5)):
+    for j in range(5):
         create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "Regular")
         create_player(2016, gf_names[randint(0, len(gf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[0], grad_year[randint(0, len(grad_year) - 1)], player_types[1], "Regular")
         create_player(2016, bf_names[randint(0, len(bf_names) - 1)], last_names[randint(0, len(last_names) - 1)], school_names[i], genders[1], grad_year[randint(0, len(grad_year) - 1)], player_types[0], "Regular")
@@ -50,10 +52,7 @@ for i in range(30):
         schoolA = school_names[randint(0, len(school_names) - 1)]
     date = "0" + str(randint(2, 6)) + "/" + str(randint(10, 31)) + "/2016"
     time = "3:30 PM"
-    if randint(0, 1) == 0:
-        address = schoolH
-    else:
-        address = schoolA
+    address = schoolH
     game = randint(10000, 40000)
     if randint(0, 100) == 0:
         status = "postponed to another time"
@@ -66,6 +65,7 @@ for i in range(30):
         gametype = "Foil"
     else:
         gametype = "Epee"
+<<<<<<< HEAD
         
     for j in range(0,2):
         if j == 0:
@@ -86,3 +86,15 @@ for i in range(30):
                 away_touches = randint(1,50)
                 away_score = randint(1,30)
                 create_ind(schoolH, p1, home_touches, home_score, schoolA, p2, away_touches, away_score, date, gametype, game, 1, address, 2016, gender)
+=======
+
+    for i in range(1,20):
+        p1 = randint(school_names.index(schoolH) * 32, (school_names.index(schoolH) + 1) * 32)
+        p2 = randint(school_names.index(schoolA) * 32, (school_names.index(schoolA) + 1) * 32)
+        gender = get_player(2016, p1)[4]
+        home_touches = randint(1,50)
+        home_score = randint(1,30)
+        away_touches = randint(1,50)
+        away_score = randint(1,30)
+        create_ind(schoolH, p1, home_touches, home_score, schoolA, p2, away_touches, away_score, date, gametype, game, 1, address, 2016, gender)
+>>>>>>> ac1a27b964a5871f5fe3c50fffce19756a36a5b4

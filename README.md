@@ -40,3 +40,20 @@ Fencing Statistics Website
 |06/02/2016|AX| We worked on event registration.|
 |06/03/2016|AX| We began working on inputting statistics (created the forms).|
 |06/05/2016|AX| We finished inputting of stats from forms and inputted to the database.|
+
+#Deployment Guide 
+1. Set up a DigitalOcean droplet to the desired size. 
+2. SSH into the IP of the droplet. 
+3. Create a new user on the droplet with <code>useradd -r -m -s [NAME OF USER]</code>.
+4. While still on the root account, install pip. 
+5. Install virtualenv by running <code>pip install virtualenv.</code>
+6. Also, install git and nginx by running <code>apt-get install git</code> and <code>apt-get install nginx</code>, respectively.
+7. Switch over to the deployment account by running <code> su - [name] </code>
+8. Clone the project repo by running <code>git clone https://github.com/serenadipity/supreme-waffle.git </code>
+9. cd into the repo. 
+10. Set up the virtual environment with <code>virtualenv venv</code>.
+11. Activate it by running <code>source venv/bin/activate</code>.
+12. In the virtual environment, pip install gunicorn, flask, and sql. 
+13. Do Issue #1 in <a href="https://blog.marksteve.com/deploy-a-flask-application-inside-a-digitalocean-droplet/">the guide that guided this guide.</a>
+14. Run <code>gunicorn -D app:app</code>
+15. Navigate to the droplet on your browser and check out the site!

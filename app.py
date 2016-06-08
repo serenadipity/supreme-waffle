@@ -20,8 +20,18 @@ def home():
     all_events = get_all_events()
     prev_events = all_events[0]
     future_events = all_events[1]
-    print all_events
     return render_template("home.html", user = user, prev_events = prev_events, future_events = future_events)
+
+    indicators = get_all_team_indicators()
+    eg = indicators[0]
+    fg = indicators[1]
+    eb = indicators[2]
+    fb = indicators[3]
+    ag = indicators[4]
+    ab = indicators[5]
+                    
+    return render_template("home.html", user = user, prev_events = prev_events, future_events = future_events, eg = eg, fg = fg, eb = eb, fb = fb, ag = ag, ab = ab)
+
 
 @app.route("/about")
 def about():
@@ -157,23 +167,32 @@ def show_school_profile(school_name):
     if 'user' not in session:
         session['user'] = 0
     user = session['user']
-    print "SCHOOL" + school_name
+    
     result = get_school(school_name)
-    #### need to get current year
+    print result
+    print "\n\n\n\n"
     boys = get_players_by_year_and_school_and_gender(now.year, school_name, "Boys")
     girls = get_players_by_year_and_school_and_gender(now.year, school_name, "Girls")
-    print school_name
+    
     print boys
     print girls
-    #boys_scores = get_gamescores_by_school_and_gender(school_name, "Boys")
-    #girls_scores = get_gamescores_by_school_and_gender(school_name, "Girls")
-
-    print school_name
-    print "THIS IS THE SCHOOL"
+    
     images = get_school_image(school_name)
-    print images
-    #images = []
-    return render_template("school.html", error = result[0], user = user, data = result[1], boys = boys, girls = girls, images = images) 
+
+    
+    return render_template("school.html", error = result[0], user = user, data = result[1:], boys = boys, girls = girls, images = images) 
+
+@app.route("/graph")
+def graph():
+    school = request.args.get("school")
+    graph = []
+    graph.append(get_team_indicators(now.year, school, "Girls", "Epee"))
+    graph.append(get_team_indicators(now.year, school, "Girls", "Foil"))
+    graph.append(get_team_indicators(now.year, school, "Boys", "Epee"))
+    graph.append(get_team_indicators(now.year, school, "Boys", "Foil"))
+    print graph
+    "\n\n\n"
+    return json.dumps(graph)
 
 @app.route("/edit_school", methods=['GET','POST'])
 def edit_school_profile():
@@ -420,10 +439,16 @@ def current_roster():
     roster = {'boys': boys, 'girls': girls}
     return json.dumps(roster)
 
+@app.route("/rankings")
+def rankings():
+    return render_template("rankings.html")
+
+app.secret_key = "woohoo softdev"
+create_all_tables()
 
 if __name__ == "__main__":
     app.debug = True
-    app.secret_key = "Password"
-    create_all_tables()
+#    app.secret_key = "Password"
+   # create_all_tables()
     app.run(host='0.0.0.0', port=8000)
 

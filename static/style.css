@@ -89,7 +89,7 @@ div.header > h1 {
     overflow: hidden;
 }
 
-#thumbnail1 {
+#thumbnail1 .img-thumbnail{
     width: 300px;
     height:330px;
 }
@@ -129,6 +129,14 @@ tr:nth-child(even) {
     overflow-y: auto;
 }
 
+.homepage2 thead, .homepage tbody { display: block; }
+
+.homepage2 tbody {
+    height: 170px;       
+    overflow-y: auto;    /* Trigger vertical scroll    */
+    overflow-x: hidden;  /* Hide the horizontal scroll */
+}
+
 .homepage tr:first-child td {
     border-top-width: 2px !important;
 }
@@ -136,6 +144,7 @@ tr:nth-child(even) {
 .homepage th {
     border-bottom-width: 0px !important;
 }
+
 #colorstrip{
     width: 100%; height: 100px;
     border-style: solid;
