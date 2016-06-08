@@ -505,32 +505,6 @@ def get_player_indicator(school, player_id, year, gametype):
 #print get_player_indicator("Stuyvesant High School", "Kevin Li", 2016)
 #print "predicted: 13"
 
-
-######## CALCULATE SCHOOL INDICATOR ########
-def get_school_indicator(year, school):
-    total_indicator = 0
-
-    #set up connection
-    conn = sqlite3.connect("data.db")
-    c = conn.cursor()
-    
-    #get array of players
-    q = "SELECT p1 from individual WHERE school_home = ? AND year = ?"
-    home_players = c.execute(q, (school, year)).fetchall()
-    q = "SELECT p2 from individual WHERE school_away = ? AND year = ?"
-    away_players = c.execute(q, (school, year)).fetchall() 
-
-    total_players = home_players + away_players
-    
-    for player in total_players:
-        total_indicator += get_player_indicator(school, str(player[0]), year)
-        
-    return total_indicator
-
-#NOTE TO KATHY: ACCOMODATE GENDER TEAM IN IND
-#print get_school_indicator(2016, "Stuyvesant High School")
-
-
 ######## CALCULATE NO. TOUCHES PLUS WINS AND LOSSES ########
 def get_player_touches_and_wins_and_losses(school, player_id, year):
     touches = 0
@@ -574,6 +548,35 @@ def get_player_touches_and_wins_and_losses(school, player_id, year):
 #print get_player_touches("Stuyvesant High School", "Kevin Li", 2016)
 #print "expected: idk like 25???"
 
+####### GET ALL TEAM INDICATORS ##########
+def get_all_team_indicators():
+    all_schools = get_distinct_schools()
+    epee_girls = []
+    foil_girls = []
+    epee_boys = []
+    foil_boys = []
+    all_girls = []
+    all_boys = []
+    for school in all_schools:
+        epee_girls += get_team_indicators(time.strftime("%Y"), school, "Girls", "Epee")[2]
+        foil_girls += get_team_indicators(time.strftime("%Y"), school, "Girls", "Foil")[2]
+        epee_boys += get_team_indicators(time.strftime("%Y"), school, "Boys", "Epee")[2]
+        foil_boys += get_team_indicators(time.strftime("%Y"), school, "Boys", "Foil")[2]
+
+    
+    epee_girls.sort(key = lambda student : student[2])
+    foil_girls.sort(key = lambda student : student[2])
+    epee_boys.sort(key = lambda student : student[2])
+    foil_boys.sort(key = lambda student : student[2])
+
+
+    all_girls = (epee_girls + foil_girls)
+    all_girls.sort(key = lambda student : student[2])
+    all_boys = (epee_boys + foil_boys)
+    all_boys.sort(key = lambda student : student[2])
+
+    return [epee_girls[::-1], foil_girls[::-1], epee_boys[::-1], foil_boys[::-1], all_girls[::-1], all_boys[::-1]]
+
 ####### annoying function sammi wants me to write. #####
 def get_team_indicators(year, school, gender, gametype):
     #set up connection YET AGAIN
@@ -582,20 +585,20 @@ def get_team_indicators(year, school, gender, gametype):
 
     names = []
     indicator_list = []
-    
+    combined = []
     q = "SELECT first_name,last_name,player_id FROM players_" + str(year) + " WHERE school = ? AND player_type = ? AND gender = ?"
 #    print q
     playerlist = c.execute(q, (school, gametype, gender)).fetchall()
     
     #loop de loop through players
     for players in playerlist:
-        print players
         name = players[0] + " " + players[1]
         ind = get_player_indicator(school, players[2], year, gametype)
         names.append(name)
         indicator_list.append(ind)
-
-    return [indicator_list, names]
+        combined.append([school, name, ind])
+        
+    return [indicator_list, names, combined]
 #print get_player_indicator("Kevin Li", 1, 2016, "Epee")
 #print get_team_indicators(2016, "Stuyvesant High School", "Boys Team", "Epee")
 
