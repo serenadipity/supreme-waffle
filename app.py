@@ -29,6 +29,7 @@ def home():
     ag = indicators[4]
     ab = indicators[5]
 
+    print future_events
     return render_template("home.html", user = user, prev_events = prev_events, future_events = future_events, eg = eg, fg = fg, eb = eb, fb = fb, ag = ag, ab = ab)
 
 
