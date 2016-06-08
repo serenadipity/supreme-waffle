@@ -173,7 +173,6 @@ def show_school_profile(school_name):
     user = session['user']
 
     result = get_school(school_name)
-    user_school = get_user_school(user)
     print result
     print "\n\n\n\n"
     boys = get_players_by_year_and_school_and_gender(now.year, school_name, "Boys")
