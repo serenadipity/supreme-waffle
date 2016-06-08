@@ -394,6 +394,9 @@ def current_roster():
     roster = {'boys': boys, 'girls': girls}
     return json.dumps(roster)
 
+@app.route("/rankings")
+def rankings():
+    return render_template("rankings.html")
 
 app.secret_key = "woohoo softdev"
 create_all_tables()

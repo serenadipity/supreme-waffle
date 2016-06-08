@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block contents %}
+
+<style>
+body {
+  background: linear-gradient(white, black);
+}
+
+</style>
+
+<div class="container">
+	<div class="panel panel-default">
+	  <!-- Default panel contents -->
+	  <div class="panel-heading"><b>Rankings</b></div>
+	  <!-- Nav tabs -->
+	  <ul class="nav nav-tabs" role="tablist">
+	    <li role="presentation" class="active"><a href="#girlsfoil" aria-controls="girlsfoil" role="tab" data-toggle="tab">Girls Foil</a></li>
+	    <li role="presentation"><a href="#girlsepee" aria-controls="girlsepee" role="tab" data-toggle="tab">Girls Epee</a></li>
+	    <li role="presentation"><a href="#girlsepee" aria-controls="boysepee" role="tab" data-toggle="tab">Boys Foil</a></li>
+	    <li role="presentation"><a href="#girlsepee" aria-controls="boysepee" role="tab" data-toggle="tab">Boys Epee</a></li>
+	  </ul>
+
+	  <div class="tab-content">
+	    <div role="tabpanel" class="tab-pane active" id="girlsfoil">
+	      <!-- Table -->
+	      <table class="table homepage">
+		<thead>
+		  <tr>
+		    <th width="200px">#</th>
+		    <th width="600px">Player</th>
+		    <th width="100px">Indicator</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+		    <td width="200px">1</td>
+		    <td width="600px">ABC</td>
+		    <td width="100px">200</td>
+		  </tr>
+		</tbody>
+
+	      </table>
+	    </div>
+
+	    <div role="tabpanel" class="tab-pane" id="girlsepee">
+	      <!-- Table -->
+	      <table class="table homepage">
+		<thead>
+		  <tr>
+		    <th width="200px">#</th>
+		    <th width="600px">Player</th>
+		    <th width="100px">Indicator</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+		    <td width="200px">1</td>
+		    <td width="600px">ABC</td>
+		    <td width="100px">200</td>
+		  </tr>
+		</tbody>
+
+	      </table>
+	    </div>
+
+	    <div role="tabpanel" class="tab-pane active" id="boysfoil">
+	      <!-- Table -->
+	      <table class="table homepage">
+		<thead>
+		  <tr>
+		    <th width="200px">#</th>
+		    <th width="600px">Player</th>
+		    <th width="100px">Indicator</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+		    <td width="200px">1</td>
+		    <td width="600px">ABC</td>
+		    <td width="100px">200</td>
+		  </tr>
+		</tbody>
+
+	      </table>
+	    </div>
+
+	    <div role="tabpanel" class="tab-pane active" id="boysepee">
+	      <!-- Table -->
+	      <table class="table homepage">
+		<thead>
+		  <tr>
+		    <th width="200px">#</th>
+		    <th width="600px">Player</th>
+		    <th width="100px">Indicator</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+		    <td width="200px">1</td>
+		    <td width="600px">ABC</td>
+		    <td width="100px">200</td>
+		  </tr>
+		</tbody>
+
+	      </table>
+	    </div>
+
+	  </div>
+	</div>
+
+</div>
+
+{% endblock %}
