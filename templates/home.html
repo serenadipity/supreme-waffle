@@ -167,18 +167,28 @@
 	      <table class="table homepage2">
 		<thead>
 		  <tr>
+
+		    <th width="100px">Date</th>
+		    <th width="400px">Event</th>
+
 		    <th width="20px">#</th>
 		    <th width="300px">School</th>
 		    <th width="100px">Indicator</th>
+
 		  </tr>
 		</thead>
 		<tbody>
 		  {% set count = 1 %}
 		  {% for school in eg %}
 		  <tr>
+
+		    <td width="100px">{{event[2]}}</td>
+		    <td width="400px">{{event[0]}} vs. {{event[1]}}</td>
+
 		    <td width="20px">{{count}}</td>
 		    <td width="150px">{{school[0]}}</td>
 		    <td width="50px">{{school[1]}}</td>
+
 		  </tr>
 		  {% set count = count + 1 %}
 		  {% endfor %}
@@ -224,6 +234,26 @@
 	</div>
       </div>
 
+
+	    <div class="tab-content">
+	      <div role="tabpanel" class="tab-pane active" id="upcoming">
+		<!-- Table -->
+		<table class="table homepage">
+		  <thead>
+		    <tr>
+		      <th width="100px">Date</th>
+		      <th width="400px">Event</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    {% for event in future_events %}
+		    <tr>
+		      <td width="100px">{{event[2]}}</td>
+		      <td width="400px"><a href="edit_event/{{event[4]}}">{{event[0]}} vs. {{event[1]}}</a></td>
+		    </tr>
+		    {% endfor %}
+		  </tbody>
+
    <div class="col-md-4">
      <div class="panel panel-default">
        <!-- Default panel contents -->
@@ -234,6 +264,7 @@
 	 <li role="presentation"><a href="#past" aria-controls="past" role="tab" data-toggle="tab">Past</a></li>
        </ul>
 
+
        <div class="tab-content">
 	 <div role="tabpanel" class="tab-pane active" id="upcoming">
 	   <!-- Table -->
@@ -241,14 +272,14 @@
 	     <thead>
 	       <tr>
 		 <th width="100px">Date</th>
-		 <th witdh="400px">Event</th>
+		 <th width="400px">Event</th>
 	       </tr>
 	     </thead>
 	     <tbody>
 	       {% for event in future_events %}
 	       <tr>
 		 <td width="100px">{{event[2]}}</td>
-		 <td witdh="400px">{{event[0]}} vs. {{event[1]}}</td>
+		 <td width="400px">{{event[0]}} vs. {{event[1]}}</td>
 	       </tr>
 	       {% endfor %}
 	     </tbody>
@@ -262,14 +293,14 @@
 	     <thead>
 	       <tr>
 		 <th width="100px">Date</th>
-		 <th witdh="400px">Event</th>
+		 <th width="400px">Event</th>
 	       </tr>
 	     </thead>
 	     <tbody>
 	       {% for event in prev_events %}
 	       <tr>
 		 <td width="100px">{{event[2]}}</td>
-		 <td witdh="400px">{{event[0]}} vs. {{event[1]}}</td>
+		 <td width="400px">{{event[0]}} vs. {{event[1]}}</td>
 	       </tr>
 	       {% endfor %}
 	     </tbody>
