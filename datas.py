@@ -558,26 +558,28 @@ def get_all_team_indicators():
     all_girls = []
     all_boys = []
     for school in all_schools:
-        epee_girls += get_team_indicators(time.strftime("%Y"), school, "Girls", "Epee")[2]
-        foil_girls += get_team_indicators(time.strftime("%Y"), school, "Girls", "Foil")[2]
-        epee_boys += get_team_indicators(time.strftime("%Y"), school, "Boys", "Epee")[2]
-        foil_boys += get_team_indicators(time.strftime("%Y"), school, "Boys", "Foil")[2]
+        epee_girls.append([school, sum(get_team_indicators(time.strftime("%Y"), school, "Girls", "Epee")[0])])
+        foil_girls.append([school, sum(get_team_indicators(time.strftime("%Y"), school, "Girls", "Foil")[0])])
+        epee_boys.append([school, sum(get_team_indicators(time.strftime("%Y"), school, "Boys", "Epee")[0])])
+        foil_boys.append([school, sum(get_team_indicators(time.strftime("%Y"), school, "Boys", "Foil")[0])])
 
-    
-    epee_girls.sort(key = lambda student : student[2])
-    foil_girls.sort(key = lambda student : student[2])
-    epee_boys.sort(key = lambda student : student[2])
-    foil_boys.sort(key = lambda student : student[2])
+    for i in range(len(epee_girls)):
+        all_girls.append([epee_girls[i][0], epee_girls[i][1] + foil_girls[i][1]])
 
+    for i in range(len(epee_boys)):
+        all_boys.append([epee_boys[i][0], epee_boys[i][1] + foil_boys[i][1]])
 
-    all_girls = (epee_girls + foil_girls)
-    all_girls.sort(key = lambda student : student[2])
-    all_boys = (epee_boys + foil_boys)
-    all_boys.sort(key = lambda student : student[2])
+    epee_girls.sort(key = lambda student : student[1])
+    foil_girls.sort(key = lambda student : student[1])
+    epee_boys.sort(key = lambda student : student[1])
+    foil_boys.sort(key = lambda student : student[1])
+    all_girls.sort(key = lambda student : student[1])
+    all_boys.sort(key = lambda student : student[1])
 
     return [epee_girls[::-1], foil_girls[::-1], epee_boys[::-1], foil_boys[::-1], all_girls[::-1], all_boys[::-1]]
 
-####### annoying function sammi wants me to write. #####
+
+####### get specific team indicator ########
 def get_team_indicators(year, school, gender, gametype):
     #set up connection YET AGAIN
     conn = sqlite3.connect("data.db")
@@ -602,7 +604,7 @@ def get_team_indicators(year, school, gender, gametype):
 #print get_player_indicator("Kevin Li", 1, 2016, "Epee")
 #print get_team_indicators(2016, "Stuyvesant High School", "Boys Team", "Epee")
 
-### this isnt even a hard fn sammi just wants me to write it ###
+##### get total team indicator ########
 def get_total_team_indicator(year, school, gender, gametype):
     indicatorlist = get_team_indicators(year, school, gender, gametype)[0]
     return sum(indicatorlist)
@@ -611,6 +613,34 @@ def get_total_team_indicator(year, school, gender, gametype):
 def get_gender_indicator(year, school, gender):
     return get_total_team_indicator(year, school, gender, "Foil") + get_total_team_indicator(year, school, gender, "Epee")
 
+######Get Player Indicators #########
+def get_all_team_indicators_2():
+    all_schools = get_distinct_schools()
+    epee_girls = []
+    foil_girls = []
+    epee_boys = []
+    foil_boys = []
+    all_girls = []
+    all_boys = []
+    for school in all_schools:
+        epee_girls += get_team_indicators(time.strftime("%Y"), school, "Girls", "Epee")[2]
+        foil_girls += get_team_indicators(time.strftime("%Y"), school, "Girls", "Foil")[2]
+        epee_boys += get_team_indicators(time.strftime("%Y"), school, "Boys", "Epee")[2]
+        foil_boys += get_team_indicators(time.strftime("%Y"), school, "Boys", "Foil")[2]
+
+    
+    epee_girls.sort(key = lambda student : student[2])
+    foil_girls.sort(key = lambda student : student[2])
+    epee_boys.sort(key = lambda student : student[2])
+    foil_boys.sort(key = lambda student : student[2])
+
+
+    all_girls = (epee_girls + foil_girls)
+    all_girls.sort(key = lambda student : student[2])
+    all_boys = (epee_boys + foil_boys)
+    all_boys.sort(key = lambda student : student[2])
+
+    return [epee_girls[::-1], foil_girls[::-1], epee_boys[::-1], foil_boys[::-1], all_girls[::-1], all_boys[::-1]]
 
 ######## GET PLAYER BY YEAR, SCHOOL, TYPE, GENDER #######
 def get_team_players(year, school, gametype, gender):
