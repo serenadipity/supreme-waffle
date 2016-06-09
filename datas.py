@@ -615,10 +615,10 @@ def get_team_indicators(year, school, gender, gametype):
     q = """SELECT first_name, last_name, player_id 
            FROM players_""" + str(year) + """ 
            WHERE school = ? AND player_type = ? AND gender = ?"""
-    print q
+    #print q
     playerlist = c.execute(q, (school, gametype, gender)).fetchall()
-    print playerlist
-    print "\n\n\n PLAYER LIST \n\n\n"
+    #print playerlist
+    #print "\n\n\n PLAYER LIST \n\n\n"
     #loop de loop through players
     for players in playerlist:
         name = players[0] + " " + players[1]
@@ -627,8 +627,11 @@ def get_team_indicators(year, school, gender, gametype):
         indicator_list.append(ind)
         combined.append([school, name, ind])
 
-    print indicator_list
-    print "\n\n\n INDICATOR LIST \n\n\n"
+    combined.sort(key = lambda student : student[2])
+    #print indicator_list
+    #print "\n\n\n INDICATOR LIST \n\n\n"
+    #print combined
+    #print "\n\n\n combined \n\n\n"
     return [indicator_list, names, combined]
 #print get_player_indicator("Kevin Li", 1, 2016, "Epee")
 #print get_team_indicators(2016, "Stuyvesant High School", "Boys Team", "Epee")

@@ -165,18 +165,12 @@ def show_school_profile(school_name):
     user = session['user']
 
     result = get_school(school_name)
-    print result
-    print "\n\n\n\n"
+   
     boys = get_players_by_year_and_school_and_gender(now.year, school_name, "Boys")
     girls = get_players_by_year_and_school_and_gender(now.year, school_name, "Girls")
 
-    print boys
-    print girls
-
     images = get_school_image(school_name)
-    print "AWef"
-    print result[1:]
-    print user_school
+
     return render_template("school.html", error = result[0], user = user, school_name = school_name, user_school = user_school, data = result[1:], boys = boys, girls = girls, images = images)
 
 @app.route("/graph")
@@ -184,12 +178,15 @@ def graph():
     school = request.args.get("school")
     graph = []
     print now.year
-    graph.append(get_team_indicators(now.year, school, "Girls", "Epee"))
-    graph.append(get_team_indicators(now.year, school, "Girls", "Foil"))
-    graph.append(get_team_indicators(now.year, school, "Boys", "Epee"))
-    graph.append(get_team_indicators(now.year, school, "Boys", "Foil"))
+    graph.append(get_team_indicators(now.year, school, "Girls", "Epee")[2])
+    #print graph
+    #print "\n\n\n\ GRAPH \n\n\n\n"
+    graph.append(get_team_indicators(now.year, school, "Girls", "Foil")[2])
+    graph.append(get_team_indicators(now.year, school, "Boys", "Epee")[2])
+    graph.append(get_team_indicators(now.year, school, "Boys", "Foil")[2])
     print graph
-    "\n\n\n GRAPH \n\n\n\n"
+    print "\n\n\n GRAPH \n\n\n\n"
+    print "\n\n\n\n YO IM HERE \n\n\n\n\n\n"
     return json.dumps(graph)
 
 @app.route("/edit_school", methods=['GET','POST'])
@@ -451,8 +448,6 @@ def current_roster():
     boys = get_players_by_year_and_school_and_gender(2016, school, "Boys")
     girls = get_players_by_year_and_school_and_gender(2016, school, "Girls")
     roster = {'boys': boys, 'girls': girls}
-    print boys
-    print girl
     return json.dumps(roster)
 
 @app.route("/rankings")
