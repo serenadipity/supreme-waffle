@@ -452,9 +452,16 @@ def create_ind(school_home, p1id, p1touches, p1score, school_away, p2id, p2touch
 #create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Very Fake Fencer", 5, 0, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", "Boys Team")
 
 
-
-
-
+######### GET ALL BOUT DATA FOR ONE GAME #########
+def get_ind(game_id):
+    conn = sqlite3.connect("data.db")
+    c = conn.cursor()
+    q = "SELECT * FROM individual WHERE game_id = ?"
+    results = c.execute(q, (game_id, )).fetchall()
+    conn.close()
+    for i in results:
+        print i[11]
+    return results
 
 
 
@@ -778,7 +785,7 @@ def get_team_players(year, school, gametype, gender):
     conn = sqlite3.connect(os.path.dirname("data.db"))
     c = conn.cursor()
 
-    q = "SELECT * FROM players_" + str(year) + "WHERE school = ? AND player_type = ? AND gender = ?"
+    q = "SELECT * FROM players_" + str(year) + " WHERE school = ? AND player_type = ? AND gender = ?"
     players = c.execute(q, (school, gametype, gender)).fetchall()
 
     return players

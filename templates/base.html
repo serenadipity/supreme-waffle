@@ -34,9 +34,13 @@
             <li><a href="/create">Create an Account</a></li>
 	    <li><a href="/login">Login</a></li>
 	    {% else %}
-	    <li><a href="/register_school">Register School</a></li> 
-	    <li><a href="/register_player">Register Player</a></li>
-	    <li><a href="/register_event">Register Event</a></li>
+	    <li class="dropdown">
+	      <a class="dropdown-toggle" data-toggle="dropdown">Register<span class="caret"></span></a>
+	      <ul class="dropdown-menu">
+		<li><a href="/register_school">Register School</a></li> 
+		<li><a href="/register_player">Register Player</a></li>
+		<li><a href="/register_event">Register Event</a></li>
+	      </ul>
 	    <li><a href="/input_stats/{{user}}">Input Game Data</a></li>
 	    <li><a href="/user/{{user}}">{{user}}</a></li>
 	    <li><a href="/logout">Logout</a></li>
