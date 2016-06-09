@@ -12,9 +12,59 @@
       <div class="alert alert-danger">
 	<p id="error">{{message}}</p>
       </div>
-      {% endif %}
       <div>
       <center>
+	<h1>Register a Player</h1>
+      </center>
+      </div>
+      <hr>
+      <div class="row">	
+      	<div class="col-xs-12 col-sm-6 col-md-6">
+	  <div class="form-group">
+	    <input type="text" name="fname" id="fname" class="form-control input-lg" placeholder="First Name" tabindex="3" value="{{first_name}}" required>
+	  </div>
+	</div>
+	<div class="col-xs-12 col-sm-6 col-md-6">
+	  <div class="form-group">
+	    <input type="text" name="lname" id="lname" class="form-control input-lg" placeholder="Last Name" tabindex="4" value="{{last_name}}" required>
+	  </div>
+	</div>
+      </div>
+      <div class="form-group">
+	<input type="number" name="year" id="year" class="form-control input-lg" placeholder="Year of Input Season" tabindex="1" value="{{year}}" required>
+      </div>
+      <div class="radio">
+	{% if gender == "Boys" %}
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls">Girls Team</label>
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys" active checked>Boys Team</label>
+	{% else %}
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls" checked>Girls Team</label>
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys">Boys Team</label>
+	{% endif %}
+      </div>
+      <div class="form-group">
+	<input type="text" name="grad_year" id="grad_year" class="form-control input-lg" placeholder="Graduation Year" tabindex="2" value="{{grad_year}}" required>
+      </div>
+      <div class="radio">
+	{% if player_type == "Foil" %}
+	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Foil" checked>Foil</label>
+	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Epee">Epee</label>
+	{% else %}
+	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Foil">Foil</label>
+	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Epee" checked>Epee</label>
+	{% endif %}
+      </div>
+      <div class="form-group">
+	<input type="text" name="position" id="position" class="form-control input-lg" placeholder="Position" tabindex="2" value="{{position}}">
+      </div>
+      <input type="file" id="fileupload" name="file">
+      <hr>
+      <div class="row">
+	<div class="col-xs-12 col-md-12"><input type="submit" value="Register Again" name="check" id="check" class="btn btn-success btn-block btn-lg" tabindex="5"></div>
+      </div>
+      {% else %}
+      <div>
+	<center>
 	<h1>Register a Player</h1>
       </center>
       </div>
@@ -34,43 +84,26 @@
       <div class="form-group">
 	<input type="number" name="year" id="year" class="form-control input-lg" placeholder="Year of Input Season" tabindex="1" required>
       </div>
-      <!--<div class="form-group">
-	<input type="text" name="school" id="school" class="form-control input-lg" placeholder="Name of School" tabindex="2" required>
-      </div>-->
       <div class="radio">
-	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls">Girls Team</label>
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls" checked>Girls Team</label>
 	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys">Boys Team</label>
       </div>
       <div class="form-group">
 	<input type="text" name="grad_year" id="grad_year" class="form-control input-lg" placeholder="Graduation Year" tabindex="2" required>
       </div>
       <div class="radio">
-	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Foil">Foil</label>
-	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Epee">Epee</label>
+	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Foil" required checked>Foil</label>
+	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Epee" required>Epee</label>
       </div>
-      <!-- <div class="form-group">
-	<input type="number" name="player_id" id="player_id" class="form-control input-lg" placeholder="Player ID" tabindex="2">
-      </div> NOPE 
-      <div class="form-group">
-	<input type="number" name="matches" id="matches" class="form-control input-lg" placeholder="Number of Matches" tabindex="2">
-      </div>
-      <div class="form-group">
-	<input type="number" name="win" id="wins" class="form-control input-lg" placeholder="Number of Wins" tabindex="2">
-      </div>
-      <div class="form-group">
-	<input type="number" name="loss" id="loss" class="form-control input-lg" placeholder="Number of Losses" tabindex="2">
-      </div>
-      <div class="form-group">
-	<input type="touch" name="touch" id="touch" class="form-control input-lg" placeholder="Number of Touches" tabindex="2">
-      </div>-->
       <div class="form-group">
 	<input type="text" name="position" id="position" class="form-control input-lg" placeholder="Position" tabindex="2">
       </div>
       <input type="file" id="fileupload" name="file">
       <hr>
       <div class="row">
-	<div class="col-xs-12 col-md-12"><input type="submit" value="Register" class="btn btn-success btn-block btn-lg" tabindex="5"></div>
+	<div class="col-xs-12 col-md-12"><input type="submit" name="check" id="check" value="Register" class="btn btn-success btn-block btn-lg" tabindex="5"></div>
       </div>
+      {% endif %}
     </form>
   </div>
 </div>

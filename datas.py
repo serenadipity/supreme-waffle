@@ -735,7 +735,7 @@ def get_team_players(year, school, gametype, gender):
 
 ######## CREATE PLAYER ########
 
-def create_player(year, first_name, last_name, school, gender, grad_year, player_type, position):
+def create_player(year, first_name, last_name, school, gender, grad_year, player_type, position, check):
     #set up connection
     conn = sqlite3.connect(os.path.dirname("data.db"))
     c = conn.cursor()
@@ -764,14 +764,15 @@ def create_player(year, first_name, last_name, school, gender, grad_year, player
         #confirms same name isnt a mistake
         #this doesn't help the user confirm since it's a terminal thing
         #i know it's just a placeholder! 
-        if(confirm(prompt="Player of the same name already exists at this school. Proceed anyways?")): 
+        #if(confirm(prompt="Player of the same name already exists at this school. Proceed anyways?")):
+        if (check == True):
             q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
             c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, position))
             conn.commit()
             conn.close()
             return [False, "Successful Player Creation", num_players + 1]
         else: 
-            return [True, "Player not created"]
+            return [True, "Player with same name and school are already exists. Submit again to create anyway."]
     #add player
     q = 'INSERT INTO players_' + str(year) + ' (year, player_id, first_name, last_name, school, gender, grad_year, player_type, position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
     c.execute(q, (year, num_players + 1, first_name, last_name, school, gender, grad_year, player_type, position))

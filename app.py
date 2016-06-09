@@ -21,6 +21,7 @@ def home():
     prev_events = all_events[0]
     future_events = all_events[1]
 
+    print prev_events
     print future_events
     return render_template("home.html", user = user, prev_events = prev_events, future_events = future_events)
 
@@ -118,7 +119,7 @@ def register_player():
         session['user'] = 0
     user = session['user']
     if request.method == "GET":
-        return render_template("register_player.html", user=user)
+        return render_template("register_player.html", user=user, error = False)
     else:
         year = request.form['year']
         first_name = request.form['fname']
@@ -127,12 +128,13 @@ def register_player():
         gender = request.form['gender']
         grad_year = request.form['grad_year']
         player_type = request.form['player_type']
-        matches = 0
-        win = 0
-        loss = 0
-        touch = 0
         position = request.form['position']
-        result = create_player(year, first_name, last_name, school, gender, grad_year, player_type, position)
+        check = request.form['check']
+        if check == "Register Again":
+            check = True
+        else:
+            check = False
+        result = create_player(year, first_name, last_name, school, gender, grad_year, player_type, position, check)
 
         if not request.files.get('file', None):
             pass
@@ -151,7 +153,8 @@ def register_player():
             player_id = result[2]
             return redirect("player/"+str(year) + "/"+ str(player_id))
         else:
-            return render_template("register_player.html", user = user, error = True, message = result[1])
+            message = result[1]
+            return render_template("register_player.html", user = user, error = True, message = result[1], year = year, first_name = first_name, last_name = last_name, school = school, gender = gender, grad_year = grad_year, player_type = player_type, position = position)
 
 
 @app.route("/school/<school_name>")
