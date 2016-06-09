@@ -15,7 +15,6 @@ from uuid import uuid4
 ###########################
 
 
-
 #####CREATE ALL THE TABLES#########
 def create_all_tables():
     conn = sqlite3.connect(os.path.dirname("data.db"))
