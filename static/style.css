@@ -153,7 +153,9 @@ tr.homepage {
 .rankingpage tbody {
     height: 160px;
     overflow-y: auto;
+    font-weight: normal !important;
 }
+
 
 .homepage2 thead, .homepage2 tbody { display: block; }
 
@@ -176,6 +178,7 @@ div.centerme, .centerme {
     text-align: center !important;
     margin: 0 auto !important;
     float: none !important;
+    font-weight: normal !important;
 }
 
 #colorstrip{
