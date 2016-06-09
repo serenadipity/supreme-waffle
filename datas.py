@@ -15,7 +15,6 @@ from uuid import uuid4
 ###########################
 
 
-
 #####CREATE ALL THE TABLES#########
 def create_all_tables():
     conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
@@ -466,7 +465,7 @@ def create_ind(school_home, p1id, p1touches, p1score, school_away, p2id, p2touch
 
 ######### GET ALL BOUT DATA FOR ONE GAME #########
 def get_ind(game_id):
-    conn = sqlite3.connect("data.db")
+    conn = sqlite3.connect(os.path.dirname("data.db"))
     c = conn.cursor()
     q = "SELECT * FROM individual WHERE game_id = ?"
     results = c.execute(q, (game_id, )).fetchall()
