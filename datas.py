@@ -43,7 +43,6 @@ def create_all_tables():
     conn.commit()
     for year in range(20):
         q = 'CREATE TABLE IF NOT EXISTS players_' + str(year + 2000) + ' (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, gender TEXT, grad_year INT, player_type TEXT, position TEXT)'
-        print q
         c.execute(q)
         conn.commit()
 
@@ -797,8 +796,6 @@ def get_team_players(year, school, gametype, gender):
     #set up connection..... again.....
     conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
     c = conn.cursor()
-    q = 'CREATE TABLE IF NOT EXISTS players_' + str(year) + ' (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, gender TEXT, grad_year INT, player_type TEXT, position TEXT)'
-    c.execute(q)
 
     q = "SELECT * FROM players_" + str(year) + " WHERE school = ? AND player_type = ? AND gender = ?"
     players = c.execute(q, (school, gametype, gender)).fetchall()
