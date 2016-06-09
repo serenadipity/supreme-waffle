@@ -3,7 +3,6 @@ import os, json
 from werkzeug import secure_filename
 import datetime
 now = datetime.datetime.now()
-
 from datas import *
 
 #app = Flask(__name__)
@@ -178,18 +177,12 @@ def show_school_profile(school_name):
 
 @app.route("/graph")
 def graph():
-    school = request.args.get("school")
+    school = request.args.get("school").replace("&#39;","'")
     graph = []
-    print now.year
     graph.append(get_team_indicators(now.year, school, "Girls", "Epee")[2])
-    #print graph
-    #print "\n\n\n\ GRAPH \n\n\n\n"
     graph.append(get_team_indicators(now.year, school, "Girls", "Foil")[2])
     graph.append(get_team_indicators(now.year, school, "Boys", "Epee")[2])
     graph.append(get_team_indicators(now.year, school, "Boys", "Foil")[2])
-    print graph
-    print "\n\n\n GRAPH \n\n\n\n"
-    print "\n\n\n\n YO IM HERE \n\n\n\n\n\n"
     return json.dumps(graph)
 
 @app.route("/edit_school", methods=['GET','POST'])
