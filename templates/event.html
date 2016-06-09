@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %} School {% endblock %}
+
+{% block contents %}
+
+
+
+<div class="container">
+  <br><br>
+  {% if error %}
+  <div class="alert alert-danger">
+    <p id="error">{{data}}</p>
+  </div>
+  {% else %}
+  <center>
+    <div>
+      <h1>Game {{game[4]}}: {{game[0]}} v. {{game[1]}}</h1>
+    </div>
+    {% if game[0] == user_school and game[1] == user_school%}
+    <a href="/edit_event/{{game[0]}}" class="btn btn-default" role="button">Edit Profile</a>
+    {% endif %}
+  </center>
+  <p>{{game[7]}} Fencing</p>
+  <p>Date: {{game[2]}}</p>
+  <p>Time: {{game[3]}}</p>
+  <p>Location: {{game[6]}}</p>
+  {% endif %}
+  {% for bout in data %}
+  <h3>Bout {{bout[11]}}: {{bout[9]}}</h3>
+  <p>{{players[bout[1]*2-1]}} Touches: {{bout[2]}}
+  <p>{{players[bout[1]*2-1]}}'s Score: {{bout[3]}}
+  <p>{{players[bout[5]*2-1]}}'s Touches: {{bout[6]}}
+  <p>{{players[bout[5]*2-1]}}'s Score: {{bout[7]}}
+  {% endfor %}
+</div>
+{% endblock %}
+

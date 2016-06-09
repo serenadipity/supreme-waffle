@@ -310,7 +310,7 @@ def input_stats(username):
         schools = get_distinct_schools()
         user_school = get_user_school(username)
         if request.method == "GET":
-            return render_template("input_stats.html",schools=schools, user = user)
+            return render_template("input_stats.html",user_school=user_school,schools=schools, user = user)
         else:
             current_page = request.form['input_page_num']
             if current_page == "1":
@@ -333,8 +333,6 @@ def input_stats(username):
                 else:
                     home_players = get_players_by_year_and_school_and_gender(now.year,school_home,gender)
                     away_players = get_players_by_year_and_school_and_gender(now.year,school_away,gender)
-                    print home_players
-                    print away_players
                     return render_template("input_stats2.html",school_home=school_home,school_away=school_away,home_players=home_players,away_players=away_players,gender=gender,weapon=weapon,game_id=game_id,address=address)
             elif current_page == "2":
                 home_starter1 = request.form['home_starter1']
@@ -378,6 +376,24 @@ def input_stats(username):
 
                 user_school = get_user_school(username)
                 return redirect("school/"+user_school)
+
+@app.route("/event/<game_id>")
+def event(game_id):
+    if 'user' not in session:
+        session['user'] = "0"
+    user = session['user']
+    data = get_ind(game_id)
+    result = get_event_by_id(game_id)
+    event = result[1]
+    year = result[1][2][6:10]
+    players = []
+    for i in data:
+        player1 = get_player(year,i[1])
+        player2 = get_player(year,i[5])
+        players.append(player1[2]+' '+player1[3])
+        players.append(player2[2]+' '+player2[3])
+    return render_template("event.html", user = user, data=data, game=event, players=players)
+
 
 @app.route("/register_event", methods=['GET','POST'])
 def register_event():
