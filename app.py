@@ -21,16 +21,8 @@ def home():
     prev_events = all_events[0]
     future_events = all_events[1]
 
-    indicators = get_all_team_indicators()
-    eg = indicators[0]
-    fg = indicators[1]
-    eb = indicators[2]
-    fb = indicators[3]
-    ag = indicators[4]
-    ab = indicators[5]
-
     print future_events
-    return render_template("home.html", user = user, prev_events = prev_events, future_events = future_events, eg = eg, fg = fg, eb = eb, fb = fb, ag = ag, ab = ab)
+    return render_template("home.html", user = user, prev_events = prev_events, future_events = future_events)
 
 
 @app.route("/about")
@@ -191,12 +183,13 @@ def show_school_profile(school_name):
 def graph():
     school = request.args.get("school")
     graph = []
+    print now.year
     graph.append(get_team_indicators(now.year, school, "Girls", "Epee"))
     graph.append(get_team_indicators(now.year, school, "Girls", "Foil"))
     graph.append(get_team_indicators(now.year, school, "Boys", "Epee"))
     graph.append(get_team_indicators(now.year, school, "Boys", "Foil"))
     print graph
-    "\n\n\n"
+    "\n\n\n GRAPH \n\n\n\n"
     return json.dumps(graph)
 
 @app.route("/edit_school", methods=['GET','POST'])
@@ -458,6 +451,8 @@ def current_roster():
     boys = get_players_by_year_and_school_and_gender(2016, school, "Boys")
     girls = get_players_by_year_and_school_and_gender(2016, school, "Girls")
     roster = {'boys': boys, 'girls': girls}
+    print boys
+    print girl
     return json.dumps(roster)
 
 @app.route("/rankings")
@@ -466,14 +461,21 @@ def rankings():
         session['user'] = 0
     user = session['user']
 
+    school_indicators = get_all_team_indicators()
+    ges = school_indicators[0]
+    gfs = school_indicators[1]
+    bes = school_indicators[2]
+    bfs = school_indicators[3]
+    gos = school_indicators[4]
+    bos = school_indicators[5]
     
-    indicators = get_all_player_indicators()
-    eg = indicators[0]
-    fg = indicators[1]
-    eb = indicators[2]
-    fb = indicators[3]
+    player_indicators = get_all_player_indicators()
+    gep = player_indicators[0]
+    gfp = player_indicators[1]
+    bep = player_indicators[2]
+    bfp = player_indicators[3]
     
-    return render_template("rankings.html", user = user, eg = eg, fg = fg, eb = eb, fb = fb)
+    return render_template("rankings.html", user = user, ges = ges, gfs = gfs, bes = bes, bfs = bfs, gos = gos, bos = bos, gep = gep, gfp = gfp, bep = bep, bfp = bfp)
 
 app.secret_key = "woohoo softdev"
 create_all_tables()

@@ -47,7 +47,7 @@
     </div>
 
     {% endif %}
-    {% if data|length > 1 %}
+    {% if data|length == 1 %}
     <div class="col-lg-6">
       <hr>
       <canvas id="chart2" width="300" height="300"></canvas>
@@ -136,6 +136,7 @@
   }
   ]
   }
+  console.log(r[2][0]);
   data2.datasets[0].data = r[2][0];
   data2.datasets[0].label = "Boys's Epee";
   data2.datasets[1].data = r[3][0];

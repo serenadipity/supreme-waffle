@@ -139,8 +139,15 @@ tr:nth-child(even) {
     overflow-y: auto;
 }
 
+.rankingpage th {
+    text-align: center;
+}
+.rankings {
+    width: 750px;
+}
+
 .rankingpage tbody {
-    height: 500px;
+    height: 160px;
     overflow-y: auto;
 }
 

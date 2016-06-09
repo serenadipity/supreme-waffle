@@ -19,32 +19,32 @@
     <div class="panel-heading"><b>School Rankings By Indicator</b></div>
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#boysoverall" aria-controls="boysoverall" role="tab" data-toggle="tab">Boys Overall</a></li>
-      <li role="presentation"><a href="#boysfoil" aria-controls="foil" role="tab" data-toggle="tab">Boys Foil</a></li>
-      <li role="presentation"><a href="#boysepee" aria-controls="epee" role="tab" data-toggle="tab">Boys Epee</a></li>
-      <li role="presentation"><a href="#girlsoverall" aria-controls="overall" role="tab" data-toggle="tab">Girls Overall</a></li>
-      <li role="presentation"><a href="#girlsfoil" aria-controls="foil" role="tab" data-toggle="tab">Girls Foil</a></li>
-      <li role="presentation"><a href="#girlsepee" aria-controls="epee" role="tab" data-toggle="tab">Girls Epee</a></li>
+      <li role="presentation" class="active"><a href="#bos" role="tab" data-toggle="tab">Boys Overall</a></li>
+      <li role="presentation"><a href="#bfs" role="tab" data-toggle="tab">Boys Foil</a></li>
+      <li role="presentation"><a href="#bes" role="tab" data-toggle="tab">Boys Epee</a></li>
+      <li role="presentation"><a href="#gos" role="tab" data-toggle="tab">Girls Overall</a></li>
+      <li role="presentation"><a href="#gfs" role="tab" data-toggle="tab">Girls Foil</a></li>
+      <li role="presentation"><a href="#ges" role="tab" data-toggle="tab">Girls Epee</a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="boysoverall">
+      <div role="tabpanel" class="tab-pane active" id="bos">
 
-	<table class="table homepage2">
-	  <thead>
+	<table class="table rankingpage">
+	  <thead align="center">
 	    <tr>
-	      <th width="20px">#</th>
-	      <th width="150px">School</th>
-	      <th width="50px">Indicator</th>
+	      <th width="50px">#</th>
+	      <th width="350px">School</th>
+	      <th width="100px">Indicator</th>
 	    </tr>
 	  </thead>
-	  <tbody>
+	  <tbody align="center">
 	    {% set count = 1 %}
-	    {% for school in ab %}
+	    {% for school in bos %}
 	    <tr>
-	      <td width="20px">{{count}}</td>
-	      <td width="150px">{{school[0]}}</td>
-	      <td width="50px">{{school[1]}}</td>
+	      <td width="50px">{{count}}</td>
+	      <td width="350px">{{school[0]}}</td>
+	      <td width="100px">{{school[1]}}</td>
 	    </tr>
 	    {% set count = count + 1 %}
 	    {% endfor %}
@@ -53,18 +53,18 @@
 	</table>
       </div>
       
-      <div role="tabpanel" class="tab-pane" id="boysfoil">
+      <div role="tabpanel" class="tab-pane" id="bfs">
 	<table class="table homepage2">
-	  <thead>
+	  <thead align="center">
 	    <tr>
 	      <th width="20px">#</th>
 	      <th width="300px">School</th>
 	      <th width="100px">Indicator</th>
 	    </tr>
 	  </thead>
-	  <tbody>
+	  <tbody align="center">
 	    {% set count = 1 %}
-	    {% for school in fb %}
+	    {% for school in bfs %}
 	    <tr>
 	      <td width="20px">{{count}}</td>
 	      <td width="150px">{{school[0]}}</td>
@@ -77,19 +77,19 @@
 	</table>
 
       </div>
-      <div role="tabpanel" class="tab-pane" id="boysepee">
+      <div role="tabpanel" class="tab-pane" id="bes">
 
-	<table class="table homepage2">
-	  <thead>
+	<table class="table rankingpage">
+	  <thead align="center">
 	    <tr>
 	      <th width="20px">#</th>
 	      <th width="300px">School</th>
 	      <th width="100px">Indicator</th>
 	    </tr>
 	  </thead>
-	  <tbody>
+	  <tbody align="center">
 	    {% set count = 1 %}
-	    {% for school in eb %}
+	    {% for school in bes %}
 	    <tr>
 	      <td width="20px">{{count}}</td>
 	      <td width="150px">{{school[0]}}</td>
@@ -102,19 +102,19 @@
 
       </div>
 
-      <div role="tabpanel" class="tab-pane" id="girlsoverall">
+      <div role="tabpanel" class="tab-pane" id="gos">
 	
-	<table class="table homepage2">
-	  <thead>
+	<table class="table rankingpage">
+	  <thead align="center">
 	    <tr>
 	      <th width="20px">#</th>
 	      <th width="150px">School</th>
 	      <th width="50px">Indicator</th>
 	    </tr>
 	  </thead>
-	  <tbody>
+	  <tbody align="center">
 	    {% set count = 1 %}
-	    {% for school in ag %}
+	    {% for school in gos %}
 	    <tr>
 	      <td width="20px">{{count}}</td>
 	      <td width="150px">{{school[0]}}</td>
@@ -128,19 +128,19 @@
 
 
       </div>
-      <div role="tabpanel" class="tab-pane" id="girlsfoil">
+      <div role="tabpanel" class="tab-pane" id="gfs">
 
-	<table class="table homepage2">
-	  <thead>
+	<table class="table rankingpage">
+	  <thead align="center">
 	    <tr>
 	      <th width="20px">#</th>
 	      <th width="300px">School</th>
 	      <th width="100px">Indicator</th>
 	    </tr>
 	  </thead>
-	  <tbody>
+	  <tbody align="center">
 	    {% set count = 1 %}
-	    {% for school in fg %}
+	    {% for school in gfs %}
 	    <tr>
 	      <td width="20px">{{count}}</td>
 	      <td width="150px">{{school[0]}}</td>
@@ -153,18 +153,18 @@
 	</table>
 
       </div>
-      <div role="tabpanel" class="tab-pane" id="girlsepee">
-	<table class="table homepage2">
-	  <thead>
+      <div role="tabpanel" class="tab-pane" id="ges">
+	<table class="table rankingpage">
+	  <thead align="center">
 	    <tr>
 	      <th width="20px">#</th>
 	      <th width="300px">School</th>
 	      <th width="100px">Indicator</th>
 	    </tr>
 	  </thead>
-	  <tbody>
+	  <tbody align="center">
 	    {% set count = 1 %}
-	    {% for school in eg %}
+	    {% for school in ges %}
 	    <tr>
 	      <td width="20px">{{count}}</td>
 	      <td width="150px">{{school[0]}}</td>
@@ -183,17 +183,17 @@
       <div class="panel-heading"><b>Individual Rankings<b></div>
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
-	<li role="presentation" class="active"><a href="#boysfoil" aria-controls="foil" role="tab" data-toggle="tab">Boys Foil</a></li>
-	<li role="presentation"><a href="#boysepee" aria-controls="epee" role="tab" data-toggle="tab">Boys Epee</a></li>
-	<li role="presentation"><a href="#girlsfoil" aria-controls="foil" role="tab" data-toggle="tab">Girls Foil</a></li>
-	<li role="presentation"><a href="#girlsepee" aria-controls="epee" role="tab" data-toggle="tab">Girls Epee</a></li>
+	<li role="presentation" class="active"><a href="#bfp" role="tab" data-toggle="tab">Boys Foil</a></li>
+	<li role="presentation"><a href="#bep" role="tab" data-toggle="tab">Boys Epee</a></li>
+	<li role="presentation"><a href="#gfp" role="tab" data-toggle="tab">Girls Foil</a></li>
+	<li role="presentation"><a href="#gep" role="tab" data-toggle="tab">Girls Epee</a></li>
       </ul>
 
       <div class="tab-content">
-	<div role="tabpanel" class="tab-pane active" id="boysfoil">
+	<div role="tabpanel" class="tab-pane active" id="bfp">
 	  <!-- Table -->
 	  <table class="table rankingpage">
-	    <thead>
+	    <thead align="center">
 	      <tr>
 		<th width="50px">#</th>
 		<th width="200px">Player</th>
@@ -201,9 +201,9 @@
 		<th width="100px">Indicator</th>
 	      </tr>
 	    </thead>
-	    <tbody>
+	    <tbody align="center">
 	      {% set count = 1 %}
-	      {% for person in fb %}
+	      {% for person in bfp %}
 	      <tr>
 		<td width="50px">{{count}}</td>
 		<td width="200px">{{person[1]}}</td>
@@ -217,10 +217,10 @@
 	  </table>
 	</div>
 
-	<div role="tabpanel" class="tab-pane" id="boysepee">
+	<div role="tabpanel" class="tab-pane" id="bep">
 	  <!-- Table -->
 	  <table class="table rankingpage">
-	    <thead>
+	    <thead align="center">
 	      <tr>
 		<th width="50px">#</th>
 		<th width="200px">Player</th>
@@ -228,9 +228,9 @@
 		<th width="100px">Indicator</th>
 	      </tr>
 	    </thead>
-	    <tbody>
+	    <tbody align="center">
 	      {% set count = 1 %}
-	      {% for person in eb %}
+	      {% for person in bep %}
 	      <tr>
 		<td width="50px">{{count}}</td>
 		<td width="200px">{{person[1]}}</td>
@@ -244,10 +244,10 @@
 	  </table>
 	</div>
 
-	<div role="tabpanel" class="tab-pane" id="girlsfoil">
+	<div role="tabpanel" class="tab-pane" id="gfp">
 	  <!-- Table -->
 	  <table class="table rankingpage">
-	    <thead>
+	    <thead align="center">
 	      <tr>
 		<th width="50px">#</th>
 		<th width="200px">Player</th>
@@ -255,9 +255,9 @@
 		<th width="100px">Indicator</th>
 	      </tr>
 	    </thead>
-	    <tbody>
+	    <tbody align="center">
 	      {% set count = 1 %}
-	      {% for person in fg %}
+	      {% for person in gfp %}
 	      <tr>
 		<td width="50px">{{count}}</td>
 		<td width="200px">{{person[1]}}</td>
@@ -271,10 +271,10 @@
 	  </table>
 	</div>
 
-	<div role="tabpanel" class="tab-pane" id="girlsepee">
+	<div role="tabpanel" class="tab-pane" id="gep">
 	  <!-- Table -->
 	  <table class="table rankingpage">
-	    <thead>
+	    <thead align="center">
 	      <tr>
 		<th width="50px">#</th>
 		<th width="200px">Player</th>
@@ -282,9 +282,9 @@
 		<th width="100px">Indicator</th>
 	      </tr>
 	    </thead>
-	    <tbody>
+	    <tbody align="center">
 	      {% set count = 1 %}
-	      {% for person in eg %}
+	      {% for person in gep %}
 	      <tr>
 		<td width="50px">{{count}}</td>
 		<td width="200px">{{person[1]}}</td>
