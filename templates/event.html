@@ -17,7 +17,7 @@
     <div>
       <h1>Game {{game[4]}}: {{game[0]}} v. {{game[1]}}</h1>
     </div>
-    {% if game[0] == user_school and game[1] == user_school%}
+    {% if game[0] == user_school or game[1] == user_school%}
     <a href="/edit_event/{{game[0]}}" class="btn btn-default" role="button">Edit Profile</a>
     {% endif %}
   </center>

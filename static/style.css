@@ -132,8 +132,22 @@ tr:nth-child(even) {
     overflow-y: auto;
 }
 
+.homepage3 thead, .homepage3 tbody { display: block; }
+
+.homepage3 tbody {
+    height: 400px;
+    overflow-y: auto;
+}
+
+.rankingpage th {
+    text-align: center;
+}
+.rankings {
+    width: 750px;
+}
+
 .rankingpage tbody {
-    height: 500px;
+    height: 160px;
     overflow-y: auto;
 }
 
