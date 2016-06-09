@@ -139,8 +139,12 @@ tr:nth-child(even) {
     overflow-y: auto;
 }
 
-.rankingpage th {
-    text-align: center;
+.rankingpage th, .homepage th {
+    text-align: center !important;
+}
+
+tr.homepage {
+    text-align: center !important;
 }
 .rankings {
     width: 750px;
@@ -165,6 +169,13 @@ tr:nth-child(even) {
 
 .homepage th {
     border-bottom-width: 0px !important;
+}
+
+div.centerme, .centerme {
+    display: table !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+    float: none !important;
 }
 
 #colorstrip{
