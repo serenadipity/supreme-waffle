@@ -75,9 +75,9 @@ for i in range(30):
             playersH = get_team_players(2016,schoolH,gametype,"Boys")
             playersA = get_team_players(2016,schoolA,gametype,"Boys")
             gender = "Boys"
-        p1 = playersH[randint(1,len(playersH)-1)][1]
-        p2 = playersA[randint(1,len(playersA)-1)][1]
         for i in range(1,10):
+            p1 = playersH[randint(1,len(playersH)-1)][1]
+            p2 = playersA[randint(1,len(playersA)-1)][1]
             home_touches = randint(0,50)
             home_score = randint(0,30)
             away_touches = randint(0,50)
