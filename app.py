@@ -83,6 +83,7 @@ def register_school():
         return render_template("register_school.html", user=user)
     else:
         school_name = get_user_school(user)
+        print school_name
         street_address = request.form['street_address']
         borough = request.form['borough']
         zipcode = request.form['zipcode']
@@ -92,7 +93,7 @@ def register_school():
         manager = request.form['manager']
         gender = request.form['gender']
         result = create_school(school_name, street_address, borough, zipcode, team, division, coach, manager, gender)
-
+        print result
         if not request.files.get('file', None):
             pass
         elif result[0] == False:
@@ -456,6 +457,8 @@ def default_directory():
         session['user'] = 0
     user = session['user']
     all_schools = sorted(get_distinct_schools(), key = lambda item : item)
+    print all_schools
+    print "\n\n\n\n\n SCHOOLS \n\n\n"
     return render_template("directory.html", schools = all_schools, user=user)
 
 @app.route("/roster")

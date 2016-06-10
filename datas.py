@@ -21,38 +21,23 @@ def create_all_tables():
     
     q = 'CREATE TABLE IF NOT EXISTS users (id INT, username TEXT, password INT, salt INT, school_name TEXT)'
     c.execute(q)
-    conn.commit()
     q = 'CREATE TABLE IF NOT EXISTS schools (school_name TEXT, street_address TEXT, borough TEXT, zipcode TEXT, team TEXT, division TEXT, coach TEXT, manager TEXT, gender TEXT)'
     c.execute(q)
-    conn.commit()
     q = 'CREATE TABLE IF NOT EXISTS events (school_home TEXT, school_away TEXT, date TEXT, time TEXT, game_id INT, status TEXT, address TEXT, gender TEXT)'
     c.execute(q)
-    conn.commit()
     q = 'CREATE TABLE IF NOT EXISTS individual (school_home TEXT, p1id INT, p1touches INT, p1score INT, school_away TEXT, p2id INT, p2touches INT, p2score, date TEXT, gametype TEXT, game_id INT, bout_number INT, address TEXT, year INT, gender TEXT)'
     c.execute(q)
-    conn.commit()
     q = 'CREATE TABLE IF NOT EXISTS info (school TEXT, title TEXT, description TEXT, date TEXT)'
     c.execute(q)
-    conn.commit()
     q = 'CREATE TABLE IF NOT EXISTS images_schools (school_name TEXT, gender TEXT, filename TEXT)'
     c.execute(q)
-    conn.commit()
     q = 'CREATE TABLE IF NOT EXISTS images_players (player_id INT, year INT, filename TEXT)'
     c.execute(q)
-    conn.commit()
     for year in range(20):
         q = 'CREATE TABLE IF NOT EXISTS players_' + str(year + 2000) + ' (year INT, player_id INT, first_name TEXT, last_name TEXT, school TEXT, gender TEXT, grad_year INT, player_type TEXT, position TEXT)'
         c.execute(q)
-        conn.commit()
 
     conn.close()
-
-print os.path.dirname("data.db") + "data.db"
-create_all_tables()
-
-
-
-
     
 ###########################
 
@@ -90,7 +75,7 @@ def authenticate(username, password):
 
 def register(username, password,repeat_password, school_name):
     #set up connection
-    conn = sqlite3.connect(os.path.dirname("data.db"))
+    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
     c = conn.cursor()
 
     #create users table
@@ -111,6 +96,7 @@ def register(username, password,repeat_password, school_name):
         q = 'SELECT COUNT(*) FROM users'
         num_rows = c.execute(q).fetchone()[0]
         q = 'INSERT INTO users (id, username, password, salt, school_name) VALUES (?, ?, ?, ?, ?)'
+        print school_name
         c.execute(q, (num_rows + 1, username, hash_password, salt, school_name))
         conn.commit()
         conn.close()
@@ -229,8 +215,6 @@ def create_school(school_name, street_address, borough, zipcode, team, division,
     #set up connection
     conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
     c = conn.cursor()
-    print "SCHOOL NAME" + school_name
-    #create users table
     q = 'CREATE TABLE IF NOT EXISTS schools (school_name TEXT, street_address TEXT, borough TEXT, zipcode TEXT, team TEXT, division TEXT, coach TEXT, manager TEXT, gender TEXT)'
     c.execute(q)
     
@@ -281,11 +265,12 @@ def get_school(school_name):
 
 ######## GET USER'S SCHOOl ########
 def get_user_school(username):
+    print os.path.dirname("data.db") + "data.db"
     conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
     c = conn.cursor()
 
     #find user's school
-    q = """SELECT school_name 
+    q = """SELECT school_name
            FROM users
            WHERE username = ?"""
     school = c.execute(q, (username, )).fetchone()
@@ -293,6 +278,7 @@ def get_user_school(username):
         return ""
     conn.close()
     return school[0]
+
 
 ######## EDIT SCHOOL ########
 
