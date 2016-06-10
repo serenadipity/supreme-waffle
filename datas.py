@@ -1,7 +1,6 @@
 import sqlite3
 import os
 from validator import valid_user
-from confirmtest import confirm
 import time
 
 from hashlib import sha512
