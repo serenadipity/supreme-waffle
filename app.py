@@ -404,14 +404,24 @@ def register_event():
         else:
             school_home=request.form['school_home']
             school_away=request.form['school_away']
-            date=request.form['date']
+            date=request.form['date'].replace("-","/")
+            date = date[5:10] + "/" + date[:4]
             time=request.form['time']
+            hour = int(time[:2])
+            minutes = time[3:5]
+            if (hour >= 12):
+                hour -= 12
+                ampm = "PM"
+            else:
+                ampm = "AM"
+            time = str(hour) + ":" + minutes + " " + ampm
             game_id=request.form['game_id']
             status=request.form['status']
             address=request.form['address']
             gender=request.form['gender']
             result=create_event(school_home,school_away,date,time,game_id,status,address,gender)
-            return render_template("register_event.html",user=user,error=True,message=result[1])
+            schools = get_distinct_schools()
+            return render_template("register_event.html",user=user,error=True,message=result[1], schools = schools)
 
 @app.route("/edit_event/<game_id>", methods=['GET','POST'])
 def edit_event(game_id):
