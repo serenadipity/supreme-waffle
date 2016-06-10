@@ -379,15 +379,16 @@ def event(game_id):
     result = get_event_by_id(game_id)
     event = result[1]
     year = result[1][2][6:10]
-    players = []
+    playersH = []
+    playersA = []
     for i in data:
         player1 = get_player(year,i[1])
         player2 = get_player(year,i[5])
         player1name = player1[2]+' '+player1[3]
         player2name = player2[2]+' '+player2[3]
-        players.append(player1name)
-        players.append(player2name)
-    return render_template("event.html", user = user, user_school = user_school, data=data, game=event, players=players)
+        playersH.append(player1name)
+        playersA.append(player2name)
+    return render_template("event.html", user = user, user_school = user_school, data=data, game=event, playersH=playersH, playersA=playersA)
 
 
 @app.route("/register_event", methods=['GET','POST'])

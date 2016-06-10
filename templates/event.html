@@ -41,17 +41,16 @@
       <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#foil" role="tab" data-toggle="tab">Foil</a></li>
       <li role="presentation"><a href="#epee" role="tab" data-toggle="tab">Epee</a></li>
-
 <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="foil">
 	<table class="table rankingpage">
 	  {% for i in range(data|length) %}
-	  {% if data[i][9] == "Foil" and i % 2 == 0%}
+	  {% if data[i][9] == "Foil"%}
 	  <thead>
 	    <tr>
               <th width="300px">Bout {{data[i][11]}}: {{data[i][9]}}</th>
-              <th width="300px">Player 1: {{players[i*2]}}</th>
-              <th width="300px">Player 2: {{players[i*2-1]}}</th>
+              <th width="300px">Player 1: <a href="/player/{{data[i][8][6:10]}}/{{data[i][1]}}">{{playersH[i]}}</a></th>
+              <th width="300px">Player 2: <a href="/player/{{data[i][8][6:10]}}/{{data[i][5]}}">{{playersA[i]}}</a></th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -70,12 +69,12 @@
       <div role="tabpanel" class="tab-pane" id="epee">
 	<table class="table rankingpage">
 	  {% for i in range(data|length) %}
-	  {% if data[i][9] == "Epee" and i % 2 == 0%}
+	  {% if data[i][9] == "Epee"%}
 	  <thead>
 	    <tr>
               <th width="300px">Bout {{data[i][11]}}: {{data[i][9]}}</th>
-              <th width="300px">Player 1: {{players[i*2-1]}}</th>
-              <th width="300px">Player 2: {{players[i*2]}}</th>
+              <th width="300px">Player 1: <a href="/player/{{data[i][8][6:10]}}/{{data[i][1]}}">{{playersH[i]}}</a></th>
+              <th width="300px">Player 2: <a href="/player/{{data[i][8][6:10]}}/{{data[i][5]}}">{{playersA[i]}}</a></th>
 	    </tr>
 	  </thead>
 	  <tbody>
