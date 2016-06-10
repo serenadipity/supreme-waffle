@@ -4,10 +4,18 @@
 
 {% block contents %}
 
+<style>
+  body {
+  background: linear-gradient(white, black);
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  }
 
+</style>
 
 <div class="container" id="font2">
-  <br><br>
   {% if error %}
   <div class="alert alert-danger">
     <p id="error">{{data}}</p>
@@ -15,16 +23,74 @@
   {% else %}
   <center>
     <div>
-      <h1>Game {{game[4]}}: {{game[0]}} v. {{game[1]}}</h1>
+      <h1>{{game[0]}} v. {{game[1]}}</h1>
     </div>
     {% if game[0] == user_school or game[1] == user_school%}
     <a href="/edit_event/{{game[0]}}" class="btn btn-default" role="button">Edit Profile</a>
     {% endif %}
-  </center>
-  <p>{{game[7]}} Fencing</p>
-  <p>Date: {{game[2]}}</p>
-  <p>Time: {{game[3]}}</p>
-  <p>Location: {{game[6]}}</p>
+  <p>{{game[7]}} Fencing
+<br>Date: {{game[2]}}
+  <br>Time: {{game[3]}}
+  <br>Location: {{game[6]}}</p>
+    </center>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <center><b>Game {{game[4]}}</b></center>
+    </div>
+      <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#foil" role="tab" data-toggle="tab">Foil</a></li>
+      <li role="presentation"><a href="#epee" role="tab" data-toggle="tab">Epee</a></li>
+
+<div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="foil">
+
+  <table class="table rankingpage">
+    <thead>
+    {% for bout in data %}
+      <tr>
+        <th width="300px">Bout {{bout[11]}}: {{bout[9]}}</th>
+        <th width="300px">Player 1: {{players[bout[1]*2-1]}}</th>
+        <th width="300px">Player 2: {{players[bout[5]*2-1]}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td width="150px">Player 1 Touches: {{bout[2]}}</td>
+        <td width="150px">Score: {{bout[3]}}</td>
+        <td width="150px">Player 2 Touches: {{bout[6]}}</td>
+        <td width="150px">Score: {{bout[7]}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+      </div>
+      
+      <div role="tabpanel" class="tab-pane" id="epee">
+  <table class="table homepage2">
+    <thead>
+      <tr>
+        <th width="50px">#</th>
+        <th width="350px">School</th>
+        <th width="100px">Indicator</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td width="50px">b</td>
+        <td width="350px">a</td>
+        <td width="100px">c</td>
+      </tr>
+    </tbody>
+
+  </table>
+
+      </div>
+    </div>
+
+  </div>
+
   {% endif %}
   {% for bout in data %}
   <h3>Bout {{bout[11]}}: {{bout[9]}}</h3>
