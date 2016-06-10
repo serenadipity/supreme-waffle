@@ -29,10 +29,10 @@
     <a href="/edit_event/{{game[0]}}" class="btn btn-default" role="button">Edit Profile</a>
     {% endif %}
   <p>{{game[7]}} Fencing
-<br>Date: {{game[2]}}
-  <br>Time: {{game[3]}}
-  <br>Location: {{game[6]}}</p>
-    </center>
+    <br>Date: {{game[2]}}
+    <br>Time: {{game[3]}}
+    <br>Location: {{game[6]}}</p>
+  </center>
 
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -44,64 +44,54 @@
 
 <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="foil">
-
-  <table class="table rankingpage">
-    <thead>
-    {% for bout in data %}
-      <tr>
-        <th width="300px">Bout {{bout[11]}}: {{bout[9]}}</th>
-        <th width="300px">Player 1: {{players[bout[1]*2-1]}}</th>
-        <th width="300px">Player 2: {{players[bout[5]*2-1]}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td width="150px">Player 1 Touches: {{bout[2]}}</td>
-        <td width="150px">Score: {{bout[3]}}</td>
-        <td width="150px">Player 2 Touches: {{bout[6]}}</td>
-        <td width="150px">Score: {{bout[7]}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-
-  </table>
+	<table class="table rankingpage">
+	  {% for i in range(data|length) %}
+	  {% if data[i][9] == "Foil" and i % 2 == 0%}
+	  <thead>
+	    <tr>
+              <th width="300px">Bout {{data[i][11]}}: {{data[i][9]}}</th>
+              <th width="300px">Player 1: {{players[i*2]}}</th>
+              <th width="300px">Player 2: {{players[i*2-1]}}</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+              <td width="150px">Player 1 Touches: {{data[i][2]}}</td>
+              <td width="150px">Score: {{data[i][3]}}</td>
+              <td width="150px">Player 2 Touches: {{data[i][6]}}</td>
+              <td width="150px">Score: {{data[i][7]}}</td>
+	    </tr>
+	  </tbody>
+	  {% endif %}
+	  {% endfor %}
+	</table>
       </div>
       
       <div role="tabpanel" class="tab-pane" id="epee">
-  <table class="table rankingpage">
-    <thead>
-    {% for bout in data %}
-      <tr>
-        <th width="300px">Bout {{bout[11]}}: {{bout[9]}}</th>
-        <th width="300px">Player 1: {{players[bout[1]*2-1]}}</th>
-        <th width="300px">Player 2: {{players[bout[5]*2-1]}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td width="150px">Player 1 Touches: {{bout[2]}}</td>
-        <td width="150px">Score: {{bout[3]}}</td>
-        <td width="150px">Player 2 Touches: {{bout[6]}}</td>
-        <td width="150px">Score: {{bout[7]}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-
-  </table>
-
+	<table class="table rankingpage">
+	  {% for i in range(data|length) %}
+	  {% if data[i][9] == "Epee" and i % 2 == 0%}
+	  <thead>
+	    <tr>
+              <th width="300px">Bout {{data[i][11]}}: {{data[i][9]}}</th>
+              <th width="300px">Player 1: {{players[i*2-1]}}</th>
+              <th width="300px">Player 2: {{players[i*2]}}</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+              <td width="150px">Player 1 Touches: {{data[i][2]}}</td>
+              <td width="150px">Score: {{data[i][3]}}</td>
+              <td width="150px">Player 2 Touches: {{data[i][6]}}</td>
+              <td width="150px">Score: {{data[i][7]}}</td>
+	    </tr>
+	  </tbody>
+	  {% endif %}
+	  {% endfor %}
+	</table>
+	
       </div>
-    </div>
-
-  </div>
-
-  {% endif %}
-  {% for bout in data %}
-  <h3>Bout {{bout[11]}}: {{bout[9]}}</h3>
-  <p>{{players[bout[1]*2-1]}} Touches: {{bout[2]}}
-  <p>{{players[bout[1]*2-1]}}'s Score: {{bout[3]}}
-  <p>{{players[bout[5]*2-1]}}'s Touches: {{bout[6]}}
-  <p>{{players[bout[5]*2-1]}}'s Score: {{bout[7]}}
-  {% endfor %}
 </div>
+{% endif %}
 {% endblock %}
 

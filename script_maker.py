@@ -54,6 +54,7 @@ for i in range(30):
     time = "3:30 PM"
     address = schoolH
     game = randint(10000, 40000)
+    
     if randint(0, 100) == 0:
         status = "postponed to another time"
     else:
@@ -61,12 +62,12 @@ for i in range(30):
     gender = genders[randint(0, 1)]
     create_event(schoolH, schoolA, date, time, game, status, address, gender)
 
-    if randint(0, 100) < 50:
-        gametype = "Foil"
-    else:
-        gametype = "Epee"
-    for j in range(0,2):
-        if j == 0:
+    for k in range(0,2):
+        if k == 0:
+            gametype = "Foil"
+        else:
+            gametype = "Epee"
+        if gender == "Girls":
             playersH = get_team_players(2016,schoolH,gametype,"Girls")
             playersA = get_team_players(2016,schoolA,gametype,"Girls")
             gender = "Girls"
@@ -74,14 +75,12 @@ for i in range(30):
             playersH = get_team_players(2016,schoolH,gametype,"Boys")
             playersA = get_team_players(2016,schoolA,gametype,"Boys")
             gender = "Boys"
-        for p in range(0,len(playersH)):
-            playerH = playersH[p]
-            p1 = playerH[1]
-            p2 = randint(1,len(playersA)-1)
-            for i in range(1,10):
-                home_touches = randint(0,50)
-                home_score = randint(0,30)
-                away_touches = randint(0,50)
-                away_score = randint(0,30)
-                create_ind(schoolH, p1, home_touches, home_score, schoolA, p2, away_touches, away_score, date, gametype, game, i, address, 2016, gender)
-
+        p1 = playersH[randint(1,len(playersH)-1)][1]
+        p2 = playersA[randint(1,len(playersA)-1)][1]
+        for i in range(1,10):
+            home_touches = randint(0,50)
+            home_score = randint(0,30)
+            away_touches = randint(0,50)
+            away_score = randint(0,30)
+            create_ind(schoolH, p1, home_touches, home_score, schoolA, p2, away_touches, away_score, date, gametype, game, i, address, 2016, gender)
+    

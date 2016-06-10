@@ -383,8 +383,10 @@ def event(game_id):
     for i in data:
         player1 = get_player(year,i[1])
         player2 = get_player(year,i[5])
-        players.append(player1[2]+' '+player1[3])
-        players.append(player2[2]+' '+player2[3])
+        player1name = player1[2]+' '+player1[3]
+        player2name = player2[2]+' '+player2[3]
+        players.append(player1name)
+        players.append(player2name)
     return render_template("event.html", user = user, user_school = user_school, data=data, game=event, players=players)
 
 
