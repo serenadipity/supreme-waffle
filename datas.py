@@ -50,8 +50,8 @@ def create_all_tables():
 
 def authenticate(username, password):
     #initial connection to database
-    db = sqlite3.connect(os.path.dirname("data.db"))
-    c = db.cursor() 
+    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    c = conn.cursor() 
 
     #finds user database
     q = 'SELECT name FROM sqlite_master WHERE TYPE = "table" AND NAME = "users"'
@@ -265,7 +265,6 @@ def get_school(school_name):
 
 ######## GET USER'S SCHOOl ########
 def get_user_school(username):
-    print os.path.dirname("data.db") + "data.db"
     conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
     c = conn.cursor()
 
