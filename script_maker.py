@@ -78,8 +78,8 @@ for i in range(30):
         for i in range(1,10):
             p1 = playersH[randint(1,len(playersH)-1)][1]
             p2 = playersA[randint(1,len(playersA)-1)][1]
-            home_touches = randint(0,50)
-            home_score = randint(0,30)
+            home_touches = randint(0,9)
+            home_score = randint(0,9)
             away_touches = randint(0,50)
             away_score = randint(0,30)
             create_ind(schoolH, p1, home_touches, home_score, schoolA, p2, away_touches, away_score, date, gametype, game, i, address, 2016, gender)
