@@ -43,23 +43,29 @@
       <li role="presentation"><a href="#epee" role="tab" data-toggle="tab">Epee</a></li>
 <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="foil">
-	<table class="table">
-	  {% for i in range(data|length) %}
-	  {% if data[i][9] == "Foil"%}
+	<table class="table event">
 	  <thead>
 	    <tr>
-              <th width="300px">Bout {{data[i][11]}}: {{data[i][9]}}</th>
-              <th width="300px">Player 1: <a href="/player/{{playersH[i][0]}}/{{data[i][1]}}">{{playersH[i][2]}} {{playersH[i][3]}}</a></th>
-              <th width="300px">Player 2: <a href="/player/{{playersA[i][0]}}/{{data[i][5]}}">{{playersA[i][2]}} {{playersA[i][3]}}</a></th>
-	      <th width="300px">Score</th>
+	      <th width="75px">Bout #</th>
+	      <th width="200px">Home Player</th>
+	      <th width="60px">Touches</th>
+	      <th width="200px">Away Player</th>
+	      <th width="60px">Touches</th>
+	      <th id="left-border" width="100px">Home Total</th>
+	      <th id="left-border" width="100px">Away Total</th>
 	    </tr>
 	  </thead>
+	  {% for i in range(data|length) %}
+	  {% if data[i][9] == "Foil" %}
 	  <tbody>
 	    <tr>
-              <td width="200px">Player 1 Touches: {{data[i][2]}}</td>
-              <td width="200px">{{data[i][3]}}</td>
-              <td width="200px">Player 2 Touches: {{data[i][6]}}</td>
-              <td width="200px">{{data[i][7]}}</td>
+	      <td> {{data[i][11]}}</td>
+	      <td><a href="/player/{{playersH[i][0]}}/{{data[i][1]}}">{{playersH[i][2]}} {{playersH[i][3]}}</a></td>
+	      <td>{{data[i][2]}}</td>
+	      <td><a href="/player/{{playersA[i][0]}}/{{data[i][5]}}">{{playersA[i][2]}} {{playersA[i][3]}}</a></td>
+	      <td>{{data[i][6]}}</td>
+	      <td id="left-border">{{data[i][3]}}</td>
+	      <td id="left-border">{{data[i][7]}}</td>
 	    </tr>
 	  </tbody>
 	  {% endif %}
@@ -68,22 +74,29 @@
       </div>
       
       <div role="tabpanel" class="tab-pane" id="epee">
-	<table class="table">
-	  {% for i in range(data|length) %}
-	  {% if data[i][9] == "Epee"%}
-	  <thead>
+	<table class="table event">
+	   <thead>
 	    <tr>
-              <th width="300px">Bout {{data[i][11]}}: {{data[i][9]}}</th>
-              <th width="300px">Player 1: <a href="/player/{{playersH[i][0]}}/{{data[i][1]}}">{{playersH[i][2]}} {{playersA[i][3]}}</a></th>
-              <th width="300px">Player 2: <a href="/player/{{playersA[i][0]}}/{{data[i][5]}}">{{playersA[i][2]}} {{playersA[i][3]}}</a></th>
+	      <th width="75px">Bout #</th>
+	      <th width="200px">Home Player</th>
+	      <th width="60px">Touches</th>
+	      <th width="200px">Away Player</th>
+	      <th width="60px">Touches</th>
+	      <th id="left-border" width="100px">Home Total</th>
+	      <th id="left-border" width="100px">Away Total</th>
 	    </tr>
 	  </thead>
+	  {% for i in range(data|length) %}
+	  {% if data[i][9] == "Epee"%}
 	  <tbody>
 	    <tr>
-              <td width="200px">Player 1 Touches: {{data[i][2]}}</td>
-              <td width="200px">Score: {{data[i][3]}}</td>
-              <td width="200px">Player 2 Touches: {{data[i][6]}}</td>
-              <td width="200px">Score: {{data[i][7]}}</td>
+	      <td> {{data[i][11]}}</td>
+	      <td><a href="/player/{{playersH[i][0]}}/{{data[i][1]}}">{{playersH[i][2]}} {{playersH[i][3]}}</a></td>
+	      <td>{{data[i][2]}}</td>
+	      <td><a href="/player/{{playersA[i][0]}}/{{data[i][5]}}">{{playersA[i][2]}} {{playersA[i][3]}}</a></td>
+	      <td>{{data[i][6]}}</td>
+	      <td id="left-border">{{data[i][3]}}</td>
+	      <td id="left-border">{{data[i][7]}}</td>
 	    </tr>
 	  </tbody>
 	  {% endif %}

@@ -156,6 +156,15 @@ tr.homepage {
     font-weight: normal !important;
 }
 
+.event th, .event td {
+    background-color: #303136 !important;
+    text-align: center !important;
+}
+
+#left-border {
+    border-left-width: 2px !important;
+    border-left-style: solid !important;
+}
 
 .homepage2 thead, .homepage2 tbody { display: block; }
 
