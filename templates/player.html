@@ -12,57 +12,125 @@
     <p id="error">{{data}}</p>
   </div>
   {% endif %}
-  <div>
-    <div class="row">
-      <div class="col-md-4">
-	<center>
-          <br><br>
-	  <img src="/static/player/images/{{image}}" onerror="this.style.display='none';" class="img-thumbnail" id="thumbnail1" height="300">
-	  <br>
-	  {% if player[4] == user_school %}
-	  <a href="/edit_player/{{player[0]}}/{{player[1]}}" class="btn btn-default" role="button">Edit Profile</a>
-	  {% endif %}
-	</center>
-      </div>
-      <div class="col-md-8">
+  
+  <div class="row">
+    <div class="col-md-4">
+      <center>
+        <br><br>
+	<img src="/static/player/images/{{image}}" onerror="this.style.display='none';" class="img-thumbnail" id="thumbnail1" height="300">
 	<br>
-	<h2><b>{{player[2]}} {{player[3]}}</b></h2>
-	<table class="table">
-	  <tr>
-	    <td>School</td><td><a href="/school/{{player[4]}}">{{player[4]}}</a></td>
-	  </tr>
-	  <tr>
-	    <td>Year</td><td>{{player[0]}}</td>
-	  </tr>
-	  <tr>
-	    <td>Class of</td><td>{{player[6]}}</td>
-	  </tr>
-	  <tr>
-	    <td>Type</td><td>{{player[7]}}</td>
-	  </tr>
-	  <tr>
-	    <td>Indicator Score</td><td>{{indicator}}</td>
-	  </tr>
-	  <tr>
-	    <td>Matches</td><td>{{touches_info[0]}}</td>
-	  </tr>
-	  <tr>
-	    <td>Wins</td><td>{{touches_info[2]}}</td>
-	  </tr>
-	  <tr>
-	    <td>Losses</td><td>{{touches_info[3]}}</td>
-	  </tr>
-	  <tr>
-	    <td>Touches</td><td>{{touches_info[1]}}</td>
-	  </tr>
-	  <tr>
-	    <td>Position</td><td>{{player[8]}}</td>
-	  </tr>
-	</table>
-	<hr>
+	{% if player[4] == user_school %}
+	<a href="/edit_player/{{player[0]}}/{{player[1]}}" class="btn btn-default" role="button">Edit Profile</a>
+	{% endif %}
+      </center>
+    </div>
+    <div class="col-md-8">
+      <h2><b>{{player[2]}} {{player[3]}}</b></h2>
+      <div class="row">
+	<div class="col-md-5">
+	  <h3> Wins/Losses </h3>
+	  <canvas id="chart1" width="250" height="250"></canvas>
+	</div>
+	<div>
+	  <h3> Touches </h3>
+	  <canvas id="chart2" width="250" height="250"></canvas>
+	</div>
       </div>
+      <br>
+      <table class="table">
+	<tr>
+	  <td>School</td><td><a href="/school/{{player[4]}}">{{player[4]}}</a></td>
+	</tr>
+	<tr>
+	  <td>Year</td><td>{{player[0]}}</td>
+	</tr>
+	<tr>
+	  <td>Class of</td><td>{{player[6]}}</td>
+	</tr>
+	<tr>
+	  <td>Type</td><td>{{player[7]}}</td>
+	</tr>
+	<tr>
+	  <td>Indicator Score</td><td>{{indicator}}</td>
+	</tr>
+	<tr>
+	  <td>Matches</td><td>{{touches_info[0]}}</td>
+	</tr>
+	<tr>
+	  <td>Wins</td><td>{{touches_info[2]}}</td>
+	</tr>
+	<tr>
+	  <td>Losses</td><td>{{touches_info[3]}}</td>
+	</tr>
+	<tr>
+	  <td>Touches</td><td>{{touches_info[1]}}</td>
+	</tr>
+	<tr>
+	  <td>Position</td><td>{{player[8]}}</td>
+	</tr>
+      </table>
+      <hr>
     </div>
   </div>
 </div>
 
-  {% endblock %}
+{% endblock %}
+
+{% block script %}
+<script>
+  console.log("Hello");
+  var ctx = document.getElementById("chart1").getContext("2d");
+  var ctx2 = document.getElementById("chart2").getContext("2d");
+  var options = {
+    responsive: false,
+    maintainAspectRatio: true,
+}
+
+var data = {
+    datasets: [{
+        data: [
+            {{touches_info[2]}},
+            {{touches_info[3]}},
+        ],
+        backgroundColor: [
+            "#FAD100",
+            "#6917B5"
+        ],
+        label: 'My dataset' // for legend
+    }],
+    labels: [
+        "Wins",
+        "Losses"
+    ]
+};
+new Chart(ctx, {
+    data: data,
+    type: 'pie',
+    options: options
+  });
+
+ var data2 = {
+    datasets: [{
+        data: [
+            {{touches_info[4]}},
+            {{touches_info[5]}},
+        ],
+        backgroundColor: [
+            "#020C85",
+            "#B30700"
+        ],
+        label: 'My dataset' // for legend
+    }],
+    labels: [
+        "For",
+        "Against"
+    ]
+};
+new Chart(ctx2, {
+    data: data2,
+    type: 'pie',
+    options: options
+  });
+  
+</script>
+{% endblock %}

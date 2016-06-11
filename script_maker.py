@@ -51,7 +51,7 @@ for i in range(30):
     while (schoolA == schoolH):
         schoolA = school_names[randint(0, len(school_names) - 1)]
     date = "0" + str(randint(2, 6)) + "/" + str(randint(10, 31)) + "/2016"
-    time = "3:30 PM"
+    gtime = "3:30 PM"
     address = schoolH
     game = randint(10000, 40000)
     
@@ -60,7 +60,7 @@ for i in range(30):
     else:
         status = "on time"
     gender = genders[randint(0, 1)]
-    create_event(schoolH, schoolA, date, time, game, status, address, gender)
+    create_event(schoolH, schoolA, date, gtime, game, status, address, gender)
 
     for k in range(0,2):
         if k == 0:

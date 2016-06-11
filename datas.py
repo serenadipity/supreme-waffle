@@ -546,7 +546,8 @@ def get_player_touches_and_wins_and_losses(school, player_id, year):
     #get all instances of player on home 
     q = "SELECT p1touches, p2touches from individual WHERE school_home = ? AND p1id = ? AND year = ?"
     home_touches = c.execute(q, (school, player_id, year)).fetchall()
-
+    touches_for = [bout[0] for bout in home_touches]
+    touches_against = [bout[1] for bout in home_touches]
     #calculate wins and matches
     if home_touches != None:
         matches = len(home_touches)
@@ -555,6 +556,8 @@ def get_player_touches_and_wins_and_losses(school, player_id, year):
     #get all isntances of player on away
     q = "SELECT p1touches, p2touches from individual WHERE school_away = ? AND p2id = ? AND year = ?"
     away_touches = c.execute(q, (school, player_id, year)).fetchall()
+    touches_for += [bout[1] for bout in away_touches]
+    touches_against += [bout[0] for bout in away_touches]
 
     #calculate wins and matches
     if away_touches != None:
@@ -570,7 +573,10 @@ def get_player_touches_and_wins_and_losses(school, player_id, year):
     for bout in away_touches:
         touches += bout[1]
 
-    return [matches, touches, wins, losses]
+    tf = sum(touches_for)
+    ta = sum(touches_against)
+
+    return [matches, touches, wins, losses, tf, ta]
 
 #print get_player_touches("Stuyvesant High School", "Kevin Li", 2016)
 #print "expected: idk like 25???"
