@@ -247,6 +247,7 @@ def show_player_profile(year, id):
     image = get_player_image(id, year)
     indicator = get_player_indicator(player[4], id, year, player[7])
     touches_info = get_player_touches_and_wins_and_losses(player[4], id, year)
+    print player
     return render_template("player.html", user = user, user_school = user_school, error = False, player = player, image = image, indicator = indicator, touches_info = touches_info)
 
 @app.route("/edit_player/<year>/<id>", methods=['GET','POST'])
