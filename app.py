@@ -377,8 +377,11 @@ def event(game_id):
     user = session['user']
     user_school = get_user_school(user)
     data = get_ind(game_id)
+    print data
     result = get_event_by_id(game_id)
+    print result
     event = result[1]
+    print event
     year = result[1][2][6:10]
     playersH = []
     playersA = []

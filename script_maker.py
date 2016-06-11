@@ -75,12 +75,14 @@ for i in range(30):
             playersH = get_team_players(2016,schoolH,gametype,"Boys")
             playersA = get_team_players(2016,schoolA,gametype,"Boys")
             gender = "Boys"
+        away_score = 0
+        home_score = 0
         for i in range(1,10):
             p1 = playersH[randint(1,len(playersH)-1)][1]
             p2 = playersA[randint(1,len(playersA)-1)][1]
-            home_touches = randint(0,9)
-            home_score = randint(0,9)
-            away_touches = randint(0,50)
-            away_score = randint(0,30)
+            home_touches = randint(0, ((9 * i) - home_score))
+            home_score += home_touches
+            away_touches = randint(0, ((9 * i) - away_score))
+            away_score += away_touches
             create_ind(schoolH, p1, home_touches, home_score, schoolA, p2, away_touches, away_score, date, gametype, game, i, address, 2016, gender)
     
