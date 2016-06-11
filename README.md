@@ -56,5 +56,6 @@ Fencing Statistics Website
 11. Activate it by running <code>source venv/bin/activate</code>.
 12. In the virtual environment, pip install gunicorn, flask, and sql. 
 13. Do Issue #1 in <a href="https://blog.marksteve.com/deploy-a-flask-application-inside-a-digitalocean-droplet/">the guide that guided this guide.</a>
+14. Run script_maker.py
 14. Run <code>gunicorn -D app:app</code>
 15. Navigate to the droplet on your browser and check out the site!
