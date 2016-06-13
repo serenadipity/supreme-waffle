@@ -4,14 +4,25 @@
 
 {% block contents %}
 
-<div class="container">
+<style>
+  body {
+  background: linear-gradient(white, black);
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  }
+
+</style>
+
+<div class="container" id="font2">
   <center>
     <h1>User Profile for: {{user}}</h1>
   </center>
   {% if error %}
   <center>
-    <h1> No Teams Have Been Registered </h1>
-    <h1> Please create one <a href="/register_school">here</a>.</h1>
+    <h2> No Teams Have Been Registered </h2>
+    <h2> Please create one <a href="/register_school">here</a>.</h2>
   </center>
   {% else %}
   {% for school, street, borough, zip, team, division, coach, manager, gender in teams %}
