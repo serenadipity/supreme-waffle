@@ -307,12 +307,19 @@ def input_stats(username):
             return render_template("input_stats.html",user_school=user_school,schools=schools, user = user)
         else:
             current_page = request.form['input_page_num']
+    
             if current_page == "1":
-                school_home = request.form['school_home']
+                game_id = request.form['game_id']
+                if get_event_by_id(game_id)[0] == False:
+                    return render_template("input_stats.html",user_school=user_school,schools=schools, user = user, error = True, message = "Please Register This Event First" )
+
+                if len(get_ind(game_id)) > 0:
+                    return redirect("event/"+str(game_id))
+                
+                school_home = request.form['school_home3']
                 school_away = request.form['school_away']
                 weapon = request.form['weapon']
                 gender = request.form['gender']
-                game_id = request.form['game_id']
                 date = request.form['date']
                 address = request.form['location']
                 error = False
@@ -453,8 +460,19 @@ def edit_event(game_id):
         else:
             school_home=request.form['school_home']
             school_away=request.form['school_away']
-            date=request.form['date']
+            date=request.form['date'].replace("-","/")
+            date = date[5:10] + "/" + date[:4]
             time=request.form['time']
+            hour = int(time[:2])
+            minutes = time[3:5]
+            if (hour >= 12):
+                hour -= 12
+                ampm = "PM"
+            else:
+                ampm = "AM"
+            time = str(hour) + ":" + minutes + " " + ampm
+            print time
+            print "THIS IS THE TIME\n\n\n"
             game_id=request.form['game_id']
             status=request.form['status']
             address=request.form['address']
