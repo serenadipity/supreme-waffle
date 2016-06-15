@@ -526,6 +526,5 @@ create_all_tables()
 
 if __name__ == "__main__":
     app.debug = True
-    app.secret_key = "Password"
     create_all_tables()
     app.run(host='0.0.0.0', port=8000)
