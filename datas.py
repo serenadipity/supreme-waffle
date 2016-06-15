@@ -16,7 +16,7 @@ from uuid import uuid4
 
 #####CREATE ALL THE TABLES#########
 def create_all_tables():
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
     
     q = 'CREATE TABLE IF NOT EXISTS users (id INT, username TEXT, password INT, salt INT, school_name TEXT)'
@@ -50,7 +50,8 @@ def create_all_tables():
 
 def authenticate(username, password):
     #initial connection to database
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
+
     c = conn.cursor() 
 
     #finds user database
@@ -75,7 +76,8 @@ def authenticate(username, password):
 
 def register(username, password,repeat_password, school_name):
     #set up connection
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
+ 
     c = conn.cursor()
 
     #create users table
@@ -119,7 +121,7 @@ def register(username, password,repeat_password, school_name):
 
 ###### ADD SCHOOL IMAGE NAMES #######
 def add_school_image(school_name, gender, filename):
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     q = 'CREATE TABLE IF NOT EXISTS images_schools (school_name TEXT, gender TEXT, filename TEXT)'
@@ -135,7 +137,7 @@ def add_school_image(school_name, gender, filename):
 
 ###### GET SCHOOL IMAGE NAMES #####
 def get_school_image(school_name):
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
    
@@ -165,7 +167,7 @@ def get_school_image(school_name):
     
 ###### ADD PLAYER IMAGE NAMES ########
 def add_player_image_names(player_id, year, filename):
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     q = 'CREATE TABLE IF NOT EXISTS images_players (player_id INT, year INT, filename TEXT)'
@@ -180,7 +182,7 @@ def add_player_image_names(player_id, year, filename):
 
 ######## GET PLAYER IMAGE #######
 def get_player_image(player_id, year):
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     q = 'SELECT filename FROM images_players WHERE player_id = ? and year = ?'
@@ -213,7 +215,7 @@ def get_player_image(player_id, year):
 
 def create_school(school_name, street_address, borough, zipcode, team, division, coach, manager, gender):
     #set up connection
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
     q = 'CREATE TABLE IF NOT EXISTS schools (school_name TEXT, street_address TEXT, borough TEXT, zipcode TEXT, team TEXT, division TEXT, coach TEXT, manager TEXT, gender TEXT)'
     c.execute(q)
@@ -234,7 +236,7 @@ def create_school(school_name, street_address, borough, zipcode, team, division,
 
 ######## GET ALL SCHOOLS ##########
 def get_distinct_schools():
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     q = 'SELECT DISTINCT school_name FROM schools'
@@ -249,7 +251,7 @@ def get_distinct_schools():
 
 def get_school(school_name):
     #set up connection
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     #check data is valid
@@ -265,7 +267,7 @@ def get_school(school_name):
 
 ######## GET USER'S SCHOOl ########
 def get_user_school(username):
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     #find user's school
@@ -283,7 +285,7 @@ def get_user_school(username):
 
 def edit_school(school_name, street_address, borough, zipcode, girls_teamname, boys_teamname, division, g_coach, g_manager, b_coach, b_manager):
     #set up connection
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
     
     #update table
@@ -300,7 +302,7 @@ def edit_school(school_name, street_address, borough, zipcode, girls_teamname, b
 ######## GET ALL SCHOOL GAMES #########
 def get_school_games(school):
     #set up connection
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     #get array of each game 
@@ -314,7 +316,7 @@ def get_school_games(school):
 ######## GET ALL BOUTS ########
 def get_all_bouts(school):
     #set up connection
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
     return "" 
 
@@ -339,7 +341,7 @@ def get_all_bouts(school):
 
 def create_event(school_home, school_away, date, time, game_id, status, address, gender):
     #set up connection
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     #create events table
@@ -362,7 +364,7 @@ def create_event(school_home, school_away, date, time, game_id, status, address,
 ####### GET ALL EVENTS ########
 
 def get_all_events():
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
     
     #get all events
@@ -380,7 +382,7 @@ def get_all_events():
 
 ####### GET EVENT BY GAME ID #######
 def get_event_by_id(game_id):
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     q = 'SELECT * FROM events WHERE game_id = ?'
@@ -396,7 +398,7 @@ def get_event_by_id(game_id):
 
 ######## UPDATE EVENT ########
 def update_event(school_home, school_away, date, time, game_id, status, address, gender):
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
     q = 'UPDATE events SET school_home = ?, school_away = ?, date = ?, time = ?, status = ?, address = ?, gender = ? WHERE game_id = ?'
     new  = c.execute(q, (school_home, school_away, date, time, status, address, gender, game_id)).fetchone()
@@ -416,7 +418,7 @@ def update_event(school_home, school_away, date, time, game_id, status, address,
 
 def create_ind(school_home, p1id, p1touches, p1score, school_away, p2id, p2touches, p2score, date, gametype, game_id, bout_number, address, year, gender):
     #set up connection
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     #create table for individual scores
@@ -449,7 +451,7 @@ def create_ind(school_home, p1id, p1touches, p1score, school_away, p2id, p2touch
 
 ######### GET ALL BOUT DATA FOR ONE GAME #########
 def get_ind(game_id):
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
     q = "SELECT * FROM individual WHERE game_id = ?"
     results = c.execute(q, (game_id, )).fetchall()
@@ -470,7 +472,7 @@ def get_ind(game_id):
 ######## GET SCORES PER INDIVIDUAL IN 1 GAME ########
 def get_ind_scores(school, player_id, game_id):
     #set up connection
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     #find number touches made among all bouts
@@ -495,7 +497,7 @@ def get_ind_scores(school, player_id, game_id):
 ######## CALCULATE PLAYER INDICATOR #######
 def get_player_indicator(school, player_id, year, gametype):
     #set up connection
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     #find num touches player made
@@ -540,7 +542,7 @@ def get_player_touches_and_wins_and_losses(school, player_id, year):
     losses = 0
     
     #set up connection
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     #get all instances of player on home 
@@ -615,7 +617,7 @@ def get_all_team_indicators():
 ####### get specific team indicator ########
 def get_team_indicators(year, school, gender, gametype):
     #set up connection YET AGAIN
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     names = []
@@ -680,7 +682,7 @@ def get_all_player_indicators():
 ######## GET PLAYER BY YEAR, SCHOOL, TYPE, GENDER #######
 def get_team_players(year, school, gametype, gender):
     #set up connection..... again.....
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     q = "SELECT * FROM players_" + str(year) + " WHERE school = ? AND player_type = ? AND gender = ?"
@@ -694,7 +696,7 @@ def get_team_players(year, school, gametype, gender):
 
 ######## GET GAMESCORES BY SCHOOL ########
 """def get_gamescores_by_school_and_gender(school, gender):
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     q = "SELECT home_score from events WHERE school_home = ? AND gender = ?"
@@ -738,7 +740,7 @@ def get_team_players(year, school, gametype, gender):
 
 def create_player(year, first_name, last_name, school, gender, grad_year, player_type, position, check):
     #set up connection
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     #create players table
@@ -784,7 +786,7 @@ def create_player(year, first_name, last_name, school, gender, grad_year, player
 ######## GET PLAYER BY YEAR, SCHOOL, TYPE, GENDER #######
 def get_team_players(year, school, gametype, gender):
     #set up connection..... again.....
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     q = "SELECT * FROM players_" + str(year) + " WHERE school = ? AND player_type = ? AND gender = ?"
@@ -794,7 +796,7 @@ def get_team_players(year, school, gametype, gender):
 
 ######## GET PLAYER ########
 def get_player(year, id):
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     q = """SELECT * 
@@ -810,7 +812,7 @@ def get_player(year, id):
 
 ######## GET PLAYERS BY YEAR ########
 def get_players_by_year_and_gender(year, gender):
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     q = """SELECT * 
@@ -827,7 +829,7 @@ def get_players_by_year_and_gender(year, gender):
 
 ######## GET ALL PLAYERS BY YEAR AND GENDER ########
 def get_all_players_by_year_and_gender(year, gender):
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     q = """SELECT * 
@@ -841,7 +843,7 @@ def get_all_players_by_year_and_gender(year, gender):
 
 ######## GET PLAYERS BY YEAR, SCHOOL, and GENDER ########
 def get_players_by_year_and_school_and_gender(year, school, gender):
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
 
     q = """SELECT * 
@@ -858,7 +860,7 @@ def get_players_by_year_and_school_and_gender(year, school, gender):
 
 def edit_player(year, id, first_name, last_name, school, gender, grad_year, player_type, position):
     #set up connection
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
     c = conn.cursor()
     
     #update table
@@ -884,7 +886,7 @@ def edit_player(year, id, first_name, last_name, school, gender, grad_year, play
 
 def create_info(school, title, description, date):
     #set up connection
-    conn = sqlite3.connect(os.path.dirname("data.db") + "data.db")   
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")   
     c = conn.cursor()
 
     #create info table
