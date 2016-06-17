@@ -316,7 +316,7 @@ def input_stats(username):
                 if len(get_ind(game_id)) > 0:
                     return redirect("event/"+str(game_id))
                 
-                school_home = request.form['school_home3']
+                school_home = request.form['school_home']
                 school_away = request.form['school_away']
                 weapon = request.form['weapon']
                 gender = request.form['gender']
@@ -369,11 +369,10 @@ def input_stats(username):
                 date = request.form['date']
                 address = request.form['address']
                 year = now.year
-
-                for i in range(1,9):
+                for i in range(1,10):
                     p1 = request.form['b'+str(i)+'_home']
                     p2 = request.form['b'+str(i)+'_away']
-                    create_ind(school_home, p1, request.form['b'+str(i)+'_home_touches'], request.form['b'+str(i)+'_home_score'], school_away, p2, request.form['b'+str(i)+'_away_touches'], request.form['b'+str(i)+'_away_score'], date, gametype, game_id, 1, address, year, gender)
+                    create_ind(school_home, p1, request.form['b'+str(i)+'_home_touches'], request.form['b'+str(i)+'_home_score'], school_away, p2, request.form['b'+str(i)+'_away_touches'], request.form['b'+str(i)+'_away_score'], date, gametype, game_id, i, address, year, gender)
 
                 user_school = get_user_school(username)
                 return redirect("school/"+user_school)
@@ -385,11 +384,8 @@ def event(game_id):
     user = session['user']
     user_school = get_user_school(user)
     data = get_ind(game_id)
-    print data
     result = get_event_by_id(game_id)
-    print result
     event = result[1]
-    print event
     year = result[1][2][6:10]
     playersH = []
     playersA = []
@@ -456,7 +452,15 @@ def edit_event(game_id):
                 if event[0] != school and event[1] != school:
                     error = True
                     message = "You can only edit events for your own school."
-            return render_template("edit_event.html",user=user,error=error,message=message,game=event,schools=schools)
+            bout_data = get_ind(game_id)
+            home_starters = []
+            away_starters = []
+            for bout in bout_data:
+                home_starters.append(get_player(now.year,bout[1]))
+                away_starters.append(get_player(now.year,bout[5]))
+            home_players = get_players_by_year_and_school_and_gender(now.year,event[0],event[7])
+            away_players = get_players_by_year_and_school_and_gender(now.year,event[1],event[7])
+            return render_template("edit_event.html",user=user,error=error,message=message,game=event,schools=schools,home_players=home_players,away_players=away_players,data=bout_data,home_starters=home_starters,away_starters=away_starters)
         else:
             school_home=request.form['school_home']
             school_away=request.form['school_away']
@@ -474,10 +478,17 @@ def edit_event(game_id):
             print time
             print "THIS IS THE TIME\n\n\n"
             game_id=request.form['game_id']
+            gender=request.form['gender']
             status=request.form['status']
             address=request.form['address']
-            gender=request.form['gender']
-            result=update_event(school_home,school_away,date,time,game_id,status,address,gender)
+            gametype = request.form['weapon']
+            year = now.year
+            if get_ind(game_id) != []:
+                for i in range(1,10):
+                    p1 = request.form['b'+str(i)+'_home']
+                    p2 = request.form['b'+str(i)+'_away']
+                    update_ind(school_home, p1, request.form['b'+str(i)+'_home_touches'], request.form['b'+str(i)+'_home_score'], school_away, p2, request.form['b'+str(i)+'_away_touches'], request.form['b'+str(i)+'_away_score'], date, gametype, game_id, i, address, year, gender)
+                result=update_event(school_home,school_away,date,time,game_id,status,address,gender)
             return render_template("edit_event.html",user=user,error=True,message="Event updated.")
 
 

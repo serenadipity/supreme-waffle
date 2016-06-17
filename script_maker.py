@@ -1,4 +1,3 @@
-
 from datas import *
 from random import randint
 import time

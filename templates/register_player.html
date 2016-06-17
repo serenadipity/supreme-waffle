@@ -34,25 +34,15 @@
 	<input type="number" name="year" id="year" class="form-control input-lg" placeholder="Year of Input Season" tabindex="1" value="{{year}}" required>
       </div>
       <div class="radio">
-	{% if gender == "Boys" %}
-	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls">Girls Team</label>
-	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys" active checked>Boys Team</label>
-	{% else %}
-	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls" checked>Girls Team</label>
-	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys">Boys Team</label>
-	{% endif %}
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls" required>Girls Team</label>
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys" required>Boys Team</label>
       </div>
       <div class="form-group">
 	<input type="text" name="grad_year" id="grad_year" class="form-control input-lg" placeholder="Graduation Year" tabindex="2" value="{{grad_year}}" required>
       </div>
       <div class="radio">
-	{% if player_type == "Foil" %}
-	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Foil" checked>Foil</label>
-	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Epee">Epee</label>
-	{% else %}
-	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Foil">Foil</label>
-	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Epee" checked>Epee</label>
-	{% endif %}
+	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Foil" required>Foil</label>
+	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Epee" required>Epee</label>
       </div>
       <div class="form-group">
 	<input type="text" name="position" id="position" class="form-control input-lg" placeholder="Position" tabindex="2" value="{{position}}">
@@ -85,14 +75,14 @@
 	<input type="number" name="year" id="year" class="form-control input-lg" placeholder="Year of Input Season" tabindex="1" required>
       </div>
       <div class="radio">
-	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls" checked>Girls Team</label>
-	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys">Boys Team</label>
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Girls" required >Girls Team</label>
+	<label class="radio-inline"><input type="radio" name="gender" id="gender" value="Boys" required>Boys Team</label>
       </div>
       <div class="form-group">
 	<input type="text" name="grad_year" id="grad_year" class="form-control input-lg" placeholder="Graduation Year" tabindex="2" required>
       </div>
       <div class="radio">
-	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Foil" required checked>Foil</label>
+	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Foil" required>Foil</label>
 	<label class="radio-inline"><input type="radio" name="player_type" id="player_type" value="Epee" required>Epee</label>
       </div>
       <div class="form-group">

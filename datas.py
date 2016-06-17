@@ -223,7 +223,6 @@ def create_school(school_name, street_address, borough, zipcode, team, division,
     #check data is valid
     q = 'SELECT school_name FROM schools WHERE school_name = ? AND gender = ?'
     new  = c.execute(q, (school_name, gender)).fetchone()
-    print new
     if not(new is None):
         conn.close()
         return [True, "The " + gender + "' Team from " + school_name + " already exists."]
@@ -448,6 +447,19 @@ def create_ind(school_home, p1id, p1touches, p1score, school_away, p2id, p2touch
 #create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Absolutely Fake Fencer", 7, 2, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", "Boys Team")
 #create_ind("Stuyvesant High School", "Kevin Li", 1, 5, "Beacon High School", "Very Fake Fencer", 5, 0, "5/1/2016", "3pm", "Foil", 2, "345 Chambers St.", "Boys Team")
 
+######### UPDATE DATA FOR ONE BOUT #########
+
+def update_ind(school_home, p1id, p1touches, p1score, school_away, p2id, p2touches, p2score, date, gametype, game_id, bout_number, address, year, gender):
+    #set up connection
+    conn = sqlite3.connect(os.path.dirname(__file__) + "/data.db")
+    c = conn.cursor()
+
+    q = 'UPDATE individual SET school_home = ?, p1id = ?, p1touches = ?, p1score = ?, school_away = ?, p2id = ?, p2touches = ?, p2score = ?, date = ?, gametype = ?, address = ?, year = ?, gender = ? WHERE game_id = ? AND bout_number = ?'
+    new = c.execute(q, (school_home, p1id, p1touches, p1score, school_away, p2id, p2touches, p2score, date, gametype, address, year, gender, game_id, bout_number)).fetchone()
+    conn.commit()
+    conn.close()
+    return new
+
 
 ######### GET ALL BOUT DATA FOR ONE GAME #########
 def get_ind(game_id):
@@ -456,10 +468,7 @@ def get_ind(game_id):
     q = "SELECT * FROM individual WHERE game_id = ?"
     results = c.execute(q, (game_id, )).fetchall()
     conn.close()
-    for i in results:
-        print i[11]
     return results
-
 
 
 ###########################
