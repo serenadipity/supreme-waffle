@@ -55,6 +55,8 @@
 	      <th id="left-border" width="100px">Away Total</th>
 	    </tr>
 	  </thead>
+	  {% set h_total = 0 %}
+	  {% set a_total = 0 %}
 	  {% for i in range(data|length) %}
 	  {% if data[i][9] == "Foil" %}
 	  <tbody>
@@ -64,8 +66,10 @@
 	      <td>{{data[i][2]}}</td>
 	      <td><a href="/player/{{playersA[i][0]}}/{{data[i][5]}}">{{playersA[i][2]}} {{playersA[i][3]}}</a></td>
 	      <td>{{data[i][6]}}</td>
-	      <td id="left-border">{{data[i][3]}}</td>
-	      <td id="left-border">{{data[i][7]}}</td>
+	      {% set h_total = (data[i][2] + h_total) %}
+	      {% set a_total = (data[i][6] + a_total) %}
+	      <td id="left-border">{{h_total}}</td>
+	      <td id="left-border">{{a_total}}</td>
 	    </tr>
 	  </tbody>
 	  {% endif %}
@@ -85,7 +89,9 @@
 	      <th id="left-border" width="100px">Home Total</th>
 	      <th id="left-border" width="100px">Away Total</th>
 	    </tr>
-	  </thead>
+	   </thead>
+	   {% set h_total = 0 %}
+	  {% set a_total = 0 %}
 	  {% for i in range(data|length) %}
 	  {% if data[i][9] == "Epee"%}
 	  <tbody>
@@ -95,8 +101,10 @@
 	      <td>{{data[i][2]}}</td>
 	      <td><a href="/player/{{playersA[i][0]}}/{{data[i][5]}}">{{playersA[i][2]}} {{playersA[i][3]}}</a></td>
 	      <td>{{data[i][6]}}</td>
-	      <td id="left-border">{{data[i][3]}}</td>
-	      <td id="left-border">{{data[i][7]}}</td>
+	      {% set h_total = (data[i][2] + h_total) %}
+	      {% set a_total = (data[i][6] + a_total) %}
+	      <td id="left-border">{{h_total}}</td>
+	      <td id="left-border">{{a_total}}</td>
 	    </tr>
 	  </tbody>
 	  {% endif %}
