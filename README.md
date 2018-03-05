@@ -1,7 +1,7 @@
 # supreme-waffle
 Fencing Statistics Website
 
-#Members
+# Members
 | Member         | Github                                           | Role         |
 |----------------|--------------------------------------------------|--------------|
 | Serena Chan    | [@serenadipity](https://github.com/serenadipity) | front-end    |
@@ -9,11 +9,11 @@ Fencing Statistics Website
 | Sammi Wu Leung | [@sammiwl](https://github.com/sammiWL)           | middle-front |
 | Alice Xue      | [@alicexue](https://github.com/alicexue)         | middle-back  |
 
-#Things To Install
+# Things To Install
 * Flask
 * SQL
 
-#Log
+# Log
 |   Date   | Who | Description  |
 |----------|-----|--------------|
 |05/12/2016|Group|We met with our client, Nicholas Yang. |
@@ -42,7 +42,7 @@ Fencing Statistics Website
 |06/05/2016|AX| We finished inputting of stats from forms and inputted to the database.|
 |06/07/2016|SWL| Crunch Time. We added many things such as events input and indicator ranking. |
 
-#Deployment Guide 
+# Deployment Guide 
 1. Set up a DigitalOcean droplet to the desired size. 
 2. SSH into the IP of the droplet. 
 3. Create a new user on the droplet with <code>useradd -r -m -s [NAME OF USER]</code>.
